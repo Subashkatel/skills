@@ -1,5 +1,10 @@
 {
   "name": "skills",
+  "version": "1.0.0",
+  "description": "36 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts.",
+  "author": {
+    "name": "subashkatel"
+  },
   "skills": [
     "./skills/core/approximating-changes",
     "./skills/core/mapping-unknowns",

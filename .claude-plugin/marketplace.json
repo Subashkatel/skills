@@ -1,0 +1,16 @@
+{
+  "name": "skills",
+  "owner": {
+    "name": "subashkatel"
+  },
+  "metadata": {
+    "description": "Personal collection of Claude Code skills: core workflows, architecture, quantum systems, GPU, quality, memory, research docs, prompts, and skill maintenance."
+  },
+  "plugins": [
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "36 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts."
+    }
+  ]
+}
