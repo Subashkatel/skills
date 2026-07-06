@@ -1,0 +1,4 @@
+interface:
+  display_name: "Using Peer Agents"
+  short_description: "Using Peer Agents skill workflow"
+  default_prompt: "Use $using-peer-agents for this task."

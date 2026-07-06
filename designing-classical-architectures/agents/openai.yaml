@@ -1,0 +1,4 @@
+interface:
+  display_name: "Designing Classical Architectures"
+  short_description: "Designing Classical Architectures skill workflow"
+  default_prompt: "Use $designing-classical-architectures for this task."

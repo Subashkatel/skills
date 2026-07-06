@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Missing bar",
+    "input": "User says improve this skill but gives no cases.",
+    "expected_behavior": "Stops and asks for target skill, golden cases, and bars instead of inventing evals."
+  },
+  {
+    "id": "case-2",
+    "name": "Judgment eval",
+    "input": "A slicing skill must be evaluated for good granularity.",
+    "expected_behavior": "Uses a qualitative bar and a separate judge without showing expected slices to the runner."
+  },
+  {
+    "id": "case-3",
+    "name": "Regression risk",
+    "input": "A skill edit fixes one case.",
+    "expected_behavior": "Re-runs all cases and reports pass-rate movement, not only the fixed case."
+  }
+]

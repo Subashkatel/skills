@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "README inventory",
+    "input": "A README lists every command, file, and current constant.",
+    "expected_behavior": "Cuts rotting inventory and replaces it with principles plus pointers to source-of-truth files."
+  },
+  {
+    "id": "case-2",
+    "name": "QEC docs",
+    "input": "A QEC doc repeats simulator internals from code.",
+    "expected_behavior": "Keeps detector/logical semantics, assumptions, and evidence pointers without copying mechanics."
+  },
+  {
+    "id": "case-3",
+    "name": "Benchmark report",
+    "input": "A GPU benchmark evidence report includes current numbers.",
+    "expected_behavior": "Allows numbers because the artifact is evidence, while recording device/methodology/provenance."
+  }
+]

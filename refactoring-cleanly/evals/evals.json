@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Duplicated GPU layout",
+    "input": "Two kernels and a verifier each define a slightly different struct layout.",
+    "expected_behavior": "Finds owners, chooses one canonical layout, moves consumers, and avoids verifier re-derivation drift."
+  },
+  {
+    "id": "case-2",
+    "name": "QEC decoder wrapper",
+    "input": "A new decoder path adds an adapter beside an old one for unshipped code.",
+    "expected_behavior": "Collapses to one decoder contract unless an external compatibility boundary justifies a bridge."
+  },
+  {
+    "id": "case-3",
+    "name": "Different semantics",
+    "input": "Two similar modules look related but have legitimately different contracts.",
+    "expected_behavior": "Does not force reuse; documents the distinction after inspection."
+  }
+]

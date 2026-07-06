@@ -1,0 +1,4 @@
+interface:
+  display_name: "Planning Implementations"
+  short_description: "Creates reviewable implementation plans after recon or research"
+  default_prompt: "Use $planning-implementations for this task."

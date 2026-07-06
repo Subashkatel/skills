@@ -1,0 +1,34 @@
+[
+  {
+    "prompt": "We need a GPU QEC decoder.",
+    "checks": [
+      "selects QEC and GPU skills",
+      "includes verification",
+      "orders research/recon first"
+    ]
+  },
+  {
+    "prompt": "Refactor quantum runtime architecture.",
+    "checks": [
+      "selects recon and quantum architecture",
+      "includes architecture design",
+      "includes plan"
+    ]
+  },
+  {
+    "prompt": "Optimize code from a paper.",
+    "checks": [
+      "selects research before code",
+      "adds verification",
+      "avoids loading all skills"
+    ]
+  },
+  {
+    "prompt": "Plan a flaky QEC decoder investigation with many seeds and verifier checks.",
+    "checks": [
+      "uses running-task-harnesses",
+      "updates agent-state",
+      "defines stop condition and evidence"
+    ]
+  }
+]

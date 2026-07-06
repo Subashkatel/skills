@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refactoring Cleanly"
+  short_description: "Refactoring Cleanly skill workflow"
+  default_prompt: "Use $refactoring-cleanly for this task."

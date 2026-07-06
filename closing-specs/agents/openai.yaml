@@ -1,0 +1,4 @@
+interface:
+  display_name: "Closing Specs"
+  short_description: "Closing Specs skill workflow"
+  default_prompt: "Use $closing-specs for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Designing Architectures"
+  short_description: "Designing Architectures skill workflow"
+  default_prompt: "Use $designing-architectures for this task."

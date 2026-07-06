@@ -1,0 +1,4 @@
+interface:
+  display_name: "Programming GPUS"
+  short_description: "Programming GPUS skill workflow"
+  default_prompt: "Use $programming-gpus for this task."

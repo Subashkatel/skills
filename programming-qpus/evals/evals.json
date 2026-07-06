@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Write Qiskit code for a hardware backend using a circuit with mid-circuit measurement.",
+    "checks": [
+      "records backend target constraints",
+      "separates circuit construction, transpilation, execution, and result parsing",
+      "names qubit and classical bit ordering explicitly"
+    ]
+  },
+  {
+    "prompt": "Refactor this OpenQASM export path.",
+    "checks": [
+      "does not change measurement or bit ordering silently",
+      "uses readable names instead of abbreviations",
+      "adds verification against a small reference circuit"
+    ]
+  },
+  {
+    "prompt": "Build a variational QPU runtime loop.",
+    "checks": [
+      "separates parameter binding, execution, objective computation, and optimizer state",
+      "records shot count and statistical uncertainty",
+      "does not claim hardware validity without job evidence"
+    ]
+  }
+]

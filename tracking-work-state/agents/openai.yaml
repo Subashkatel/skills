@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tracking Work State"
+  short_description: "Tracking Work State skill workflow"
+  default_prompt: "Use $tracking-work-state for this task."

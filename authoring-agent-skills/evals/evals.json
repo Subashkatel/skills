@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "New QEC skill",
+    "input": "User asks to create a QEC decoder-review skill.",
+    "expected_behavior": "Produces a concise SKILL.md with trigger-rich description, domain workflow, support files, and evals."
+  },
+  {
+    "id": "case-2",
+    "name": "Bloated skill",
+    "input": "An existing skill has long background and stale file paths.",
+    "expected_behavior": "Prunes to durable operational rules and moves supporting detail out of SKILL.md."
+  },
+  {
+    "id": "case-3",
+    "name": "Overtriggering",
+    "input": "A skill fires on every coding task.",
+    "expected_behavior": "Narrows description triggers and boundaries rather than adding body-only caveats."
+  }
+]

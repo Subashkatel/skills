@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Remember that this QEC library orders detectors by round then stabilizer.",
+    "checks": [
+      "verifies source",
+      "updates or creates one lesson",
+      "adds revalidation condition"
+    ]
+  },
+  {
+    "prompt": "We keep correcting the agent for abbreviations in code.",
+    "checks": [
+      "mines repeated correction",
+      "distills rule into AGENTS or lesson",
+      "does not store raw chat"
+    ]
+  },
+  {
+    "prompt": "A previous benchmark lesson was invalidated by a new GPU.",
+    "checks": [
+      "updates or marks obsolete",
+      "does not duplicate",
+      "records replacement evidence"
+    ]
+  }
+]

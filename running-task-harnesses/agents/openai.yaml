@@ -1,0 +1,4 @@
+interface:
+  display_name: "Running Task Harnesses"
+  short_description: "Running Task Harnesses skill workflow"
+  default_prompt: "Use $running-task-harnesses for this task."

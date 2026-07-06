@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "GPU decoder plan",
+    "input": "User asks for a GPU-accelerated LDPC decoder rewrite with vague speed goals.",
+    "expected_behavior": "Creates slices for oracle, baseline, kernel seams, memory layout, benchmark gates, and correctness evidence before implementation."
+  },
+  {
+    "id": "case-2",
+    "name": "Quantum runtime refactor",
+    "input": "User asks to refactor a circuit runtime across transpiler, scheduler, and backend target layers.",
+    "expected_behavior": "Slices by ownership seams and verification gates rather than producing a monolithic refactor plan."
+  },
+  {
+    "id": "case-3",
+    "name": "Small bug",
+    "input": "User asks for a one-line typo or doc fix.",
+    "expected_behavior": "Does not force a spec folder; explains that a simple direct change is enough."
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verifying Scientific Code"
+  short_description: "Verifying Scientific Code skill workflow"
+  default_prompt: "Use $verifying-scientific-code for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Authoring Agent Skills"
+  short_description: "Authoring Agent Skills skill workflow"
+  default_prompt: "Use $authoring-agent-skills for this task."

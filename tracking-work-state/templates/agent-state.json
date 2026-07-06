@@ -1,0 +1,35 @@
+{
+  "goal": "",
+  "scope": [],
+  "non_goals": [],
+  "current_status": "not-started",
+  "current_action": "",
+  "plan": [
+    {
+      "id": "step-1",
+      "description": "",
+      "status": "pending",
+      "next_action": "",
+      "verification_gate": ""
+    }
+  ],
+  "todo": [],
+  "blockers": [],
+  "known_unknowns": [],
+  "assumptions": [],
+  "evidence": [
+    {
+      "claim": "",
+      "source": "command|file|commit|test|benchmark|simulation|citation",
+      "location": "",
+      "status": "verified|failed|skipped|unverified"
+    }
+  ],
+  "tests": {
+    "tests_json": "tests.json",
+    "required_gates": [],
+    "last_result": "not-run"
+  },
+  "last_updated_utc": "",
+  "next_agent_prompt": ""
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "prompt": "Start a new Codex session in a repo and prepare to continue prior GPU work.",
+    "expected": "Resolves a session ID, reviews recent git log with notes, and checks state files before making claims."
+  },
+  {
+    "prompt": "After a nontrivial QEC commit, record why a decoder design changed.",
+    "expected": "Adds a git notes context entry with rationale, alternatives, evidence, and open hypotheses without restating the diff."
+  },
+  {
+    "prompt": "After compaction, resume a long architecture task.",
+    "expected": "Reloads recent commits, git notes, and progress files, then grounds next steps in durable evidence."
+  }
+]

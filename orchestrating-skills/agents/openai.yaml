@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrating Skills"
+  short_description: "Orchestrating Skills skill workflow"
+  default_prompt: "Use $orchestrating-skills for this task."

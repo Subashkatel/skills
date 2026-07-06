@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reviewing Research"
+  short_description: "Reviewing Research skill workflow"
+  default_prompt: "Use $reviewing-research for this task."

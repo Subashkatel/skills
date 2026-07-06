@@ -1,0 +1,14 @@
+[
+  {
+    "prompt": "We want to add a new CUDA kernel and abstraction layer to speed up a small vector normalization routine.",
+    "expected": "Questions whether the work is needed, requests baseline/profiler/correctness evidence, and considers doing less before adding abstractions."
+  },
+  {
+    "prompt": "A QEC simulator uses exact matching but the user wants a faster approximate decoder.",
+    "expected": "Requires logical-error evidence, detector semantics, noise model assumptions, and refuses silent semantic approximation."
+  },
+  {
+    "prompt": "After implementation, review whether the architecture change was overbuilt.",
+    "expected": "Applies the seven-question pass, records rejected shortcuts, and recommends the smallest correct follow-up."
+  }
+]

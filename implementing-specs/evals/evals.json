@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Multi-slice implementation",
+    "input": "A spec has five slices, two independent and one red gate.",
+    "expected_behavior": "Chooses independent work safely, verifies each pass, updates handoff, and does not stop after the first green slice."
+  },
+  {
+    "id": "case-2",
+    "name": "QEC slice discovers bad assumption",
+    "input": "During implementation the detector semantics differ from the plan.",
+    "expected_behavior": "Stops broadening the patch, updates/reslices the spec, records the deviation, and verifies with QEC evidence."
+  },
+  {
+    "id": "case-3",
+    "name": "Scratch leak",
+    "input": "After a GPU pass, debug scripts and profiling dumps remain in the tree.",
+    "expected_behavior": "Identifies scratch artifacts, deletes or promotes them to evidence, and keeps the commit focused."
+  }
+]

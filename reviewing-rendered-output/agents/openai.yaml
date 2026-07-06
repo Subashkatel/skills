@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reviewing Rendered Output"
+  short_description: "Reviewing Rendered Output skill workflow"
+  default_prompt: "Use $reviewing-rendered-output for this task."

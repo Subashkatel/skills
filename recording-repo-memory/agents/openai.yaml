@@ -1,0 +1,4 @@
+interface:
+  display_name: "Recording Repo Memory"
+  short_description: "Recording Repo Memory skill workflow"
+  default_prompt: "Use $recording-repo-memory for this task."

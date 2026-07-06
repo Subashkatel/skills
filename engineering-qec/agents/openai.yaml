@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering QEC"
+  short_description: "Engineering QEC skill workflow"
+  default_prompt: "Use $engineering-qec for this task."

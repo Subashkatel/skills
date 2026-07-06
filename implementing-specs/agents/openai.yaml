@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementing Specs"
+  short_description: "Implementing Specs skill workflow"
+  default_prompt: "Use $implementing-specs for this task."

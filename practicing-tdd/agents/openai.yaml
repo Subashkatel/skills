@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practicing Tdd"
+  short_description: "Practicing Tdd skill workflow"
+  default_prompt: "Use $practicing-tdd for this task."

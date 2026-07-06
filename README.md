@@ -1,10 +1,18 @@
 # skills
 
-Portable AI agent skills for Codex and Claude.
+AI agent skills for Codex and Claude.
 
 ## Included skills
 
-- `claude-prompt-refiner`: turns rough prompts into structured, Claude-ready prompt packages.
+This repository currently contains 36 skills:
+
+- Core workflow: `mapping-unknowns`, `recon-codebases`, `orchestrating-skills`, `approximating-changes`
+- Architecture/spec work: `designing-architectures`, `designing-classical-architectures`, `planning-implementations`, `slicing-specs`, `implementing-specs`, `closing-specs`
+- Quantum systems: `programming-qpus`, `modeling-quantum-architectures`, `engineering-qec`, `engineering-qec-decoders`
+- GPU and visual output: `programming-gpus`, `debugging-gpu-renderers`, `reviewing-rendered-output`
+- Quality, testing, and state: `writing-readable-code`, `practicing-tdd`, `writing-behavior-tests`, `refactoring-cleanly`, `verifying-scientific-code`, `tracking-work-state`, `recording-repo-memory`, `maintaining-agent-state`, `managing-agent-memory`, `running-task-harnesses`
+- Research and docs: `reviewing-research`, `writing-durable-docs`, `explaining-changes`, `refining-prompts`, `claude-prompt-refiner`
+- Skill maintenance: `auditing-skills`, `authoring-agent-skills`, `evaluating-agent-skills`, `using-peer-agents`
 
 ## Add another skill
 
@@ -15,7 +23,7 @@ your-skill-name/
   SKILL.md
 ```
 
-Keep the folder name lowercase hyphen-case. Put detailed examples, templates, and larger docs in `references/`, reusable scripts in `scripts/`, and output assets in `assets/`.
+Keep the folder name lowercase hyphen-case. Put detailed examples, templates, and larger docs in `references/`, reusable skill helpers in the skill's own `scripts/`, and output assets in `assets/`.
 
 ## Repository layout
 
@@ -26,57 +34,37 @@ claude-prompt-refiner/
   references/
     examples.md
     prompt-template.md
-scripts/
-  install-local.sh
+programming-gpus/
+  SKILL.md
+  agents/openai.yaml
+  scripts/
+  reference/
+  templates/
+  evals/
+practicing-tdd/
+  SKILL.md
+  agents/openai.yaml
+  scripts/
+  templates/
+  evals/
 ```
 
-The canonical skill package is `claude-prompt-refiner/`. Its `SKILL.md` uses only shared frontmatter fields so it remains compatible with Codex and Claude.
+Each root-level directory containing `SKILL.md` is a canonical skill package. Skill frontmatter uses shared fields so packages remain compatible with Codex and Claude. Codex-specific UI metadata lives in `agents/openai.yaml`.
 
-## Install locally
+## Use Locally
 
-Run:
-
-```bash
-scripts/install-local.sh
-```
-
-That symlinks every skill folder in this repository into:
+Each root-level skill directory can be copied or symlinked into the standard skill location for the tool you use:
 
 - Codex: `$HOME/.agents/skills/<skill-name>`
 - Claude: `$HOME/.claude/skills/<skill-name>`
 
-Restart Codex after installing. Claude Code usually detects edits to existing skill files live.
-
-The installer will not overwrite an existing real directory. It also refuses to replace a symlink that points somewhere else unless you run:
-
-```bash
-scripts/install-local.sh --force
-```
-
-## Project use
-
-Claude Code discovers project skills from `.claude/skills/`. Codex discovers repository skills from `.agents/skills/`.
-
-This repository keeps canonical skill packages at the repository root and ignores project symlinks for portability. A fresh clone will not expose project skills until you run the local installer above or create local project symlinks:
-
-```bash
-mkdir -p .agents/skills
-mkdir -p .claude/skills
-for skill in */; do
-  test -f "$skill/SKILL.md" || continue
-  name="$(basename "$skill")"
-  ln -sfn "../../$name" ".agents/skills/$name"
-  ln -sfn "../../$name" ".claude/skills/$name"
-done
-```
-
-The symlinks are ignored in git because the canonical package already lives at the repository root.
+Restart Codex after adding new skills. Claude Code usually detects edits to existing skill files live.
 
 ## Codex install from GitHub
 
-After pushing this repo, install the skill from:
+After pushing this repo, install an individual skill from:
 
 ```text
 Subashkatel/skills
-claude-prompt-refiner
+<skill-name>
 ```

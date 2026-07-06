@@ -1,0 +1,34 @@
+[
+  {
+    "prompt": "Refactor Python code containing wm = self.window_manager, c = len(items), and cfg = load_config().",
+    "checks": [
+      "renames abbreviations to descriptive role names",
+      "preserves behavior",
+      "does not make unrelated style sweeps"
+    ]
+  },
+  {
+    "prompt": "Review code that returns decoder.graph().nodes()[map_detectors(detectors)[0]].p < tol.",
+    "checks": [
+      "splits dense expression into named intermediate values",
+      "renames p and tol to domain-specific names",
+      "comments only non-obvious scientific assumptions"
+    ]
+  },
+  {
+    "prompt": "Refactor a GPU/QEC module for readability without changing semantics.",
+    "checks": [
+      "spells out GPU/QEC domain names",
+      "preserves tests and scientific behavior",
+      "records any performance/readability tradeoff"
+    ]
+  },
+  {
+    "prompt": "Write a new Python helper where local conventions are unclear.",
+    "checks": [
+      "uses project style first",
+      "falls back to Python Guide, Google Python Style Guide, PEP 8, and PEP 257",
+      "keeps comments and docstrings concise and useful"
+    ]
+  }
+]

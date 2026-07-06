@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Write tests for a randomized QEC decoder.",
+    "checks": [
+      "uses distributions not one seed",
+      "records decoder assumptions",
+      "asserts logical outcomes"
+    ]
+  },
+  {
+    "prompt": "A refactor broke tests.",
+    "checks": [
+      "triages deleted semantics vs real bug",
+      "does not weaken tests casually",
+      "records evidence"
+    ]
+  },
+  {
+    "prompt": "Add GPU kernel tests.",
+    "checks": [
+      "uses CPU oracle",
+      "controls device/precision/seed",
+      "keeps tests readable"
+    ]
+  }
+]

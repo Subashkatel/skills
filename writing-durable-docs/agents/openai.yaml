@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing Durable Docs"
+  short_description: "Writing Durable Docs skill workflow"
+  default_prompt: "Use $writing-durable-docs for this task."

@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Build a surface-code threshold experiment.",
+    "checks": [
+      "requires distances and shots",
+      "specifies noise and decoder",
+      "requires confidence intervals"
+    ]
+  },
+  {
+    "prompt": "Review this stabilizer code.",
+    "checks": [
+      "checks commutation",
+      "checks logical operators",
+      "labels distance uncertainty"
+    ]
+  },
+  {
+    "prompt": "Use Stim and PyMatching for this QEC simulation.",
+    "checks": [
+      "uses DEM assumptions",
+      "validates logical observables",
+      "records seeds/results"
+    ]
+  }
+]

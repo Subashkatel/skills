@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Optimize this CUDA reduction.",
+    "checks": [
+      "sets tolerance",
+      "profiles before optimizing",
+      "mentions floating point order"
+    ]
+  },
+  {
+    "prompt": "Port CUDA kernel to HIP.",
+    "checks": [
+      "checks warp/wavefront assumptions",
+      "keeps correctness tests",
+      "documents vendor-specific code"
+    ]
+  },
+  {
+    "prompt": "Make this kernel faster.",
+    "checks": [
+      "requires baseline",
+      "identifies memory/occupancy hypotheses",
+      "does not claim speedup without data"
+    ]
+  }
+]

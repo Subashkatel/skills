@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "code": "",
+  "syndrome_schedule": "",
+  "detector_mapping": "",
+  "logical_observables": [],
+  "noise_model": "",
+  "decoder": "",
+  "distances": [],
+  "physical_error_rates": [],
+  "shots": 0,
+  "seeds": [],
+  "results": []
+}

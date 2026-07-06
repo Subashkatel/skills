@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refining Prompts"
+  short_description: "Refining Prompts skill workflow"
+  default_prompt: "Use $refining-prompts for this task."

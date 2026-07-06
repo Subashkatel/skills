@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Resume a half-finished GPU optimization after compaction.",
+    "checks": [
+      "reads state and git notes",
+      "reconciles stale memory with files",
+      "sets next action and verification gate"
+    ]
+  },
+  {
+    "prompt": "Long QEC decoder task with simulations still running.",
+    "checks": [
+      "records current action",
+      "tracks simulations and seeds",
+      "separates verified facts from assumptions"
+    ]
+  },
+  {
+    "prompt": "Agent says implementation is done.",
+    "checks": [
+      "checks evidence ledger",
+      "ensures remaining work is empty or explained",
+      "updates final status before reporting"
+    ]
+  }
+]

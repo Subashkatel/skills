@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Refactor this QEC experiment runner architecture.",
+    "checks": [
+      "inspects existing code before proposing",
+      "separates code definition, decoder, experiment aggregation, and reporting",
+      "avoids manager-style abstraction bloat"
+    ]
+  },
+  {
+    "prompt": "Design the classical architecture for a QPU runtime service.",
+    "checks": [
+      "separates circuit construction, transpilation, job execution, and result parsing",
+      "defines state and failure boundaries",
+      "includes verification and ADR plan"
+    ]
+  },
+  {
+    "prompt": "Clean up duplicate benchmark code.",
+    "checks": [
+      "finds one clear owner for benchmark records",
+      "preserves behavior with tests",
+      "does not create a framework for one-off code"
+    ]
+  }
+]

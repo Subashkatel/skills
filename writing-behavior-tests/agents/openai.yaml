@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing Behavior Tests"
+  short_description: "Writing Behavior Tests skill workflow"
+  default_prompt: "Use $writing-behavior-tests for this task."

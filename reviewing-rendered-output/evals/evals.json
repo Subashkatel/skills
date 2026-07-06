@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "GPU render diff",
+    "input": "A candidate image has lower diff but missing labels.",
+    "expected_behavior": "Uses target requirements and crops; does not accept based on score alone."
+  },
+  {
+    "id": "case-2",
+    "name": "Quantum circuit diagram",
+    "input": "A circuit render may have swapped measurement labels.",
+    "expected_behavior": "Inspects labels/order against circuit semantics and records evidence."
+  },
+  {
+    "id": "case-3",
+    "name": "Ambiguous plot",
+    "input": "A plot style choice is subjective and target is unclear.",
+    "expected_behavior": "Asks user to choose with artifact context rather than guessing silently."
+  }
+]

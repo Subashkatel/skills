@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Implement a PyMatching decoder for a distance 5 surface-code detector error model.",
+    "checks": [
+      "defines detector event and logical observable conventions",
+      "checks graphlike matching assumptions and weights",
+      "compares logical predictions against a reference sample"
+    ]
+  },
+  {
+    "prompt": "Optimize batch decoding on GPU.",
+    "checks": [
+      "keeps clear reference path",
+      "tests batched and single-shot agreement",
+      "reports hardware, batch size, latency, and memory"
+    ]
+  },
+  {
+    "prompt": "Review this neural QEC decoder paper and implementation plan.",
+    "checks": [
+      "states approximation and failure modes",
+      "requires logical-error confidence evidence",
+      "does not treat learned decoder as exact"
+    ]
+  }
+]

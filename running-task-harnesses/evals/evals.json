@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "A test fails one time in fifty; find the cause.",
+    "checks": [
+      "uses hypotheses and repeated runs",
+      "separates workers and verifiers",
+      "records stop condition and evidence"
+    ]
+  },
+  {
+    "prompt": "Verify every technical claim in a QEC decoder report.",
+    "checks": [
+      "extracts claims",
+      "fans out verification",
+      "synthesizes cited evidence and gaps"
+    ]
+  },
+  {
+    "prompt": "Check whether the diff follows AGENTS.md readability rules.",
+    "checks": [
+      "uses one verifier per rule or rubric section",
+      "records false positives",
+      "applies accepted fixes"
+    ]
+  }
+]

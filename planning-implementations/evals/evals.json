@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Plan the GPU port.",
+    "checks": [
+      "leads with data layout",
+      "includes correctness/benchmark",
+      "identifies portability"
+    ]
+  },
+  {
+    "prompt": "Plan QEC simulation implementation.",
+    "checks": [
+      "leads with code/noise/decoder",
+      "includes validation",
+      "states assumptions"
+    ]
+  },
+  {
+    "prompt": "Plan architecture refactor.",
+    "checks": [
+      "leads with interfaces",
+      "includes migration",
+      "defines tests"
+    ]
+  }
+]

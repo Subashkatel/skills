@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Design a quantum architecture for a logical memory experiment.",
+    "checks": [
+      "layers physical/control/QEC/decoder",
+      "asks for noise and timing",
+      "avoids hardware fabrication"
+    ]
+  },
+  {
+    "prompt": "How should we structure our quantum runtime IR?",
+    "checks": [
+      "maps circuit/IR/transpiler layers",
+      "identifies target constraints",
+      "adds validation plan"
+    ]
+  },
+  {
+    "prompt": "Add decoder latency into architecture review.",
+    "checks": [
+      "models feedback path",
+      "identifies timing assumptions",
+      "hands off QEC details"
+    ]
+  }
+]

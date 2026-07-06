@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Keep track of this GPU optimization.",
+    "checks": [
+      "updates agent-state and performance log",
+      "records deviations",
+      "records benchmark evidence"
+    ]
+  },
+  {
+    "prompt": "Long QEC simulation task.",
+    "checks": [
+      "creates qec-experiments.json",
+      "records seeds/results",
+      "updates current state"
+    ]
+  },
+  {
+    "prompt": "Architecture refactor over multiple sessions.",
+    "checks": [
+      "records ADRs",
+      "updates next action",
+      "tracks tests and handoff"
+    ]
+  }
+]

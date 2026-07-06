@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Audit this GPU skill.",
+    "checks": [
+      "checks trigger",
+      "checks profiling requirement",
+      "checks hidden-reasoning wording"
+    ]
+  },
+  {
+    "prompt": "Audit a QEC skill pack.",
+    "checks": [
+      "checks assumptions/algebra/decoder",
+      "checks evals",
+      "checks source grounding"
+    ]
+  },
+  {
+    "prompt": "Migrate old Claude skills.",
+    "checks": [
+      "removes overprompting",
+      "keeps concise",
+      "validates structure"
+    ]
+  }
+]

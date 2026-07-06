@@ -1,4 +1,4 @@
 interface:
   display_name: "Claude Prompt Refiner"
-  short_description: "Refine rough prompts for Claude models"
-  default_prompt: "Use $claude-prompt-refiner to turn this rough prompt into a Claude-ready prompt package."
+  short_description: "Use Claude Prompt Refiner workflows"
+  default_prompt: "Use $claude-prompt-refiner to help with this task."

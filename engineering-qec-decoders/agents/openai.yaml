@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering QEC Decoders"
+  short_description: "Engineering QEC Decoders skill workflow"
+  default_prompt: "Use $engineering-qec-decoders for this task."

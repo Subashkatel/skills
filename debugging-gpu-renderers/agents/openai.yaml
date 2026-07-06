@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debugging GPU Renderers"
+  short_description: "Debugging GPU Renderers skill workflow"
+  default_prompt: "Use $debugging-gpu-renderers for this task."

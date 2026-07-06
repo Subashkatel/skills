@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Design the architecture for a QEC simulation package.",
+    "checks": [
+      "separates code/noise/decoder/results",
+      "lists quality attributes",
+      "creates ADRs"
+    ]
+  },
+  {
+    "prompt": "Refactor GPU memory ownership.",
+    "checks": [
+      "maps host/device boundaries",
+      "analyzes transfers",
+      "plans validation"
+    ]
+  },
+  {
+    "prompt": "Review this quantum runtime architecture.",
+    "checks": [
+      "uses layered view",
+      "identifies ISA/target constraints",
+      "surfaces decoder latency risks"
+    ]
+  }
+]

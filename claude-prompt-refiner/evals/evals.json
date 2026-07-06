@@ -1,0 +1,17 @@
+[
+  {
+    "name": "business-writing-prompt",
+    "prompt": "Use claude-prompt-refiner to improve this rough prompt: Make this email sound better and less rude.",
+    "expected_behavior": "Returns a paste-ready Claude prompt with audience, tone, preservation constraints, and output format."
+  },
+  {
+    "name": "coding-agent-prompt",
+    "prompt": "Use claude-prompt-refiner to rewrite: Fix this bug in my app.",
+    "expected_behavior": "Adds codebase inspection, implementation scope, verification, safety boundaries, and final reporting requirements."
+  },
+  {
+    "name": "long-document-analysis-prompt",
+    "prompt": "Use claude-prompt-refiner to rewrite: Summarize all these PDFs and tell me what matters.",
+    "expected_behavior": "Structures source documents, task, grounding requirements, citations or source references, and decision-oriented output."
+  }
+]

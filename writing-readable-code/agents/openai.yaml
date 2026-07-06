@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing Readable Code"
+  short_description: "Writing Readable Code skill workflow"
+  default_prompt: "Use $writing-readable-code for this task."

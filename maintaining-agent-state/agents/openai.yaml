@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintaining Agent State"
+  short_description: "Maintaining Agent State skill workflow"
+  default_prompt: "Use $maintaining-agent-state for this task."

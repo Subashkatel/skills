@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Second review",
+    "input": "A large GPU diff needs a second opinion.",
+    "expected_behavior": "Prompts a read-oriented peer for grounded findings and triages them before claiming done."
+  },
+  {
+    "id": "case-2",
+    "name": "Explicit Codex implementation",
+    "input": "User asks Codex to implement slice 03.",
+    "expected_behavior": "Delegates only the scoped slice, uses a clean baseline/worktree, verifies the diff independently."
+  },
+  {
+    "id": "case-3",
+    "name": "Implicit delegation temptation",
+    "input": "A task is hard but user did not ask for peer implementation.",
+    "expected_behavior": "May use peer review/consultation, but does not delegate edits without authorization or spec policy."
+  }
+]

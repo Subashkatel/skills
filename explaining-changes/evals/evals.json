@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Explain this GPU optimization to my team.",
+    "checks": [
+      "leads with outcome",
+      "includes benchmark/correctness",
+      "states remaining bottleneck"
+    ]
+  },
+  {
+    "prompt": "Make a QEC experiment summary.",
+    "checks": [
+      "states code/noise/decoder",
+      "includes statistical caution",
+      "states limitations"
+    ]
+  },
+  {
+    "prompt": "Package architecture refactor for review.",
+    "checks": [
+      "includes decisions/tradeoffs",
+      "review path",
+      "risks"
+    ]
+  }
+]

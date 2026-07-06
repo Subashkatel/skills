@@ -1,0 +1,12 @@
+{
+  "contract": "",
+  "test_id": "",
+  "red": {"command": "", "status": "not-run", "evidence": "", "reason": ""},
+  "green": {"command": "", "status": "not-run", "evidence": "", "reason": ""},
+  "refactor": {"command": "", "status": "not-run", "evidence": "", "reason": ""},
+  "final_gate": {"command": "", "status": "not-run", "evidence": "", "reason": ""},
+  "environment": {},
+  "seed": null,
+  "tolerance": null,
+  "notes": ""
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Recon Codebases"
+  short_description: "Inspects repositories before codebase claims or edits"
+  default_prompt: "Use $recon-codebases for this task."

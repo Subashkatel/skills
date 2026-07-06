@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explaining Changes"
+  short_description: "Explaining Changes skill workflow"
+  default_prompt: "Use $explaining-changes for this task."

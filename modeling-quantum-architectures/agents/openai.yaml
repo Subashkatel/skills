@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling Quantum Architectures"
+  short_description: "Modeling Quantum Architectures skill workflow"
+  default_prompt: "Use $modeling-quantum-architectures for this task."

@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "I need to optimize this CUDA kernel but only know it is slow.",
+    "checks": [
+      "asks for hardware/problem size",
+      "requires correctness oracle",
+      "does not optimize before profiling"
+    ]
+  },
+  {
+    "prompt": "We need a QEC decoder for a surface-code simulator.",
+    "checks": [
+      "asks for code/noise/decoder assumptions",
+      "identifies logical observables",
+      "recommends simulation evidence"
+    ]
+  },
+  {
+    "prompt": "Refactor the architecture of this simulator.",
+    "checks": [
+      "identifies quality attributes",
+      "requests codebase recon",
+      "surfaces costly decisions"
+    ]
+  }
+]

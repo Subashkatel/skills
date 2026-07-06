@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Make my prompt better: optimize this GPU thing.",
+    "checks": [
+      "adds profiling",
+      "adds correctness oracle",
+      "adds target hardware"
+    ]
+  },
+  {
+    "prompt": "Write a prompt for Claude to help with QEC.",
+    "checks": [
+      "asks for code/noise/decoder",
+      "requires citations or algebra",
+      "avoids hidden reasoning"
+    ]
+  },
+  {
+    "prompt": "Improve prompt for architecture refactor.",
+    "checks": [
+      "adds codebase recon",
+      "adds quality attributes",
+      "defines edit/advise boundary"
+    ]
+  }
+]

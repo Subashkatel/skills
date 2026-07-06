@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Fix this decoder bug with TDD.",
+    "checks": [
+      "writes one failing behavior test",
+      "records detector/logical evidence",
+      "runs green and final gate"
+    ]
+  },
+  {
+    "prompt": "Add a new GPU kernel path test-first.",
+    "checks": [
+      "uses CPU oracle",
+      "records tolerance and device",
+      "runs red-green-refactor"
+    ]
+  },
+  {
+    "prompt": "Refactor architecture without changing behavior.",
+    "checks": [
+      "adds characterization tests first",
+      "keeps scope minimal",
+      "updates tests.json and agent-state"
+    ]
+  }
+]

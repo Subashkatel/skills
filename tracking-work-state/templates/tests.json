@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "summary": {
+    "status": "not-started",
+    "last_command": "",
+    "last_result": "not-run",
+    "remaining_required_gates": []
+  },
+  "tests": [
+    {
+      "id": "",
+      "name": "",
+      "purpose": "",
+      "contract": "",
+      "type": "unit|behavior|integration|property|benchmark|simulation|characterization|hardware",
+      "command": "",
+      "expected_red": "",
+      "red": {"status": "not-run", "evidence": "", "reason": ""},
+      "green": {"status": "not-run", "evidence": "", "reason": ""},
+      "refactor": {"status": "not-run", "evidence": "", "reason": ""},
+      "final_gate": {"status": "not-run", "evidence": "", "reason": ""},
+      "seed": null,
+      "tolerance": null,
+      "environment": {},
+      "blocked_reason": ""
+    }
+  ]
+}

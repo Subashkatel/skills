@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Read this QEC paper and make it implementable.",
+    "checks": [
+      "extracts code/noise/decoder",
+      "separates claims from inference",
+      "adds reproduction plan"
+    ]
+  },
+  {
+    "prompt": "Summarize CUDA docs for this kernel.",
+    "checks": [
+      "extracts relevant API/version",
+      "maps to profiler metrics",
+      "avoids generic advice"
+    ]
+  },
+  {
+    "prompt": "Compare two quantum architecture papers.",
+    "checks": [
+      "tracks assumptions",
+      "identifies conflicts",
+      "produces implementation implications"
+    ]
+  }
+]

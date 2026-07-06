@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Blank canvas",
+    "input": "Stats show instances but WebGPU canvas is black.",
+    "expected_behavior": "Treats validation warnings/pixels as source of truth and investigates pipeline/resource/depth contracts."
+  },
+  {
+    "id": "case-2",
+    "name": "Depth change",
+    "input": "A pass adds depth attachment and one pipeline fails.",
+    "expected_behavior": "Updates pass-wide attachment compatibility or splits phases; does not patch one pipeline blindly."
+  },
+  {
+    "id": "case-3",
+    "name": "Performance claim",
+    "input": "Renderer is faster under software fallback.",
+    "expected_behavior": "Rejects fallback as performance oracle and asks for hardware profiling evidence."
+  }
+]

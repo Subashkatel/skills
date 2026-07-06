@@ -1,0 +1,20 @@
+[
+  {
+    "id": "case-1",
+    "name": "Closed GPU spec",
+    "input": "A GPU optimization spec has shipped with benchmark evidence.",
+    "expected_behavior": "Rewrites build steps into rationale, preserves profiler/benchmark provenance, and points to code/tests."
+  },
+  {
+    "id": "case-2",
+    "name": "QEC experiment spec",
+    "input": "A QEC decoder experiment changed assumptions during implementation.",
+    "expected_behavior": "Records final assumptions, logical observables, detector semantics, evidence, and dropped alternatives."
+  },
+  {
+    "id": "case-3",
+    "name": "Unfinished spec",
+    "input": "Some slices remain red or unverified.",
+    "expected_behavior": "Refuses to close as done and identifies the remaining gates or decisions."
+  }
+]

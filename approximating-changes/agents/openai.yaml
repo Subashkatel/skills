@@ -1,0 +1,4 @@
+interface:
+  display_name: "Approximating Changes"
+  short_description: "Approximating Changes skill workflow"
+  default_prompt: "Use $approximating-changes for this task."

@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Verify a QEC threshold claim.",
+    "checks": [
+      "records shots/seeds/confidence intervals",
+      "separates hypothesis from verified claim",
+      "updates evidence logs"
+    ]
+  },
+  {
+    "prompt": "Verify GPU speedup.",
+    "checks": [
+      "uses baseline and repetitions",
+      "records device and profiler evidence",
+      "does not claim speedup from one run"
+    ]
+  },
+  {
+    "prompt": "Verify QPU circuit behavior.",
+    "checks": [
+      "records backend target and transpilation",
+      "uses simulator/hardware evidence",
+      "handles bit ordering and uncertainty"
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Managing Agent Memory"
+  short_description: "Managing Agent Memory skill workflow"
+  default_prompt: "Use $managing-agent-memory for this task."

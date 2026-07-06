@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evaluating Agent Skills"
+  short_description: "Evaluating Agent Skills skill workflow"
+  default_prompt: "Use $evaluating-agent-skills for this task."

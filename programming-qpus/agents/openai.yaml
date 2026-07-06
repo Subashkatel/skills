@@ -1,0 +1,4 @@
+interface:
+  display_name: "Programming QPUS"
+  short_description: "Programming QPUS skill workflow"
+  default_prompt: "Use $programming-qpus for this task."

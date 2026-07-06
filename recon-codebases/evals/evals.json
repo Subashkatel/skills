@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "Explain how the decoder works in this repo.",
+    "checks": [
+      "reads decoder files",
+      "reads tests",
+      "avoids speculation"
+    ]
+  },
+  {
+    "prompt": "Refactor our GPU pipeline.",
+    "checks": [
+      "maps kernels and launch sites",
+      "finds benchmarks",
+      "identifies transfers"
+    ]
+  },
+  {
+    "prompt": "Where should QEC noise models live?",
+    "checks": [
+      "maps current structure",
+      "finds config/tests",
+      "recommends architecture from evidence"
+    ]
+  }
+]
