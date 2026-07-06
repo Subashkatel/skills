@@ -25,6 +25,7 @@ skills/
       references/
 .claude-plugin/
   plugin.json
+  marketplace.json
 ```
 
 Each skill package contains its own `SKILL.md` and optional support files. Codex UI metadata lives in `agents/openai.yaml`.
@@ -103,9 +104,22 @@ Copy or symlink any `skills/<category>/<skill-name>/` folder into the standard s
 
 Restart Codex after adding new skills. Claude Code usually detects edits to existing skill files live.
 
-## Claude Plugin
+## Claude Plugin Install (recommended)
 
-Claude plugin metadata lives in `.claude-plugin/plugin.json` and indexes all skill package paths.
+The repo is an installable Claude Code plugin. On any machine, run:
+
+```sh
+claude plugin marketplace add Subashkatel/skills
+claude plugin install skills@skills
+```
+
+This installs all 36 skills at user scope, so they are available in every project. Pull the latest skills after editing this repo with:
+
+```sh
+claude plugin update skills@skills
+```
+
+Plugin metadata lives in `.claude-plugin/plugin.json` (indexes all skill package paths); `.claude-plugin/marketplace.json` makes the repo installable as a marketplace.
 
 ## Codex Install From GitHub
 
