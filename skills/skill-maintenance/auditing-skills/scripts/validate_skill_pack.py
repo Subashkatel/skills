@@ -85,7 +85,11 @@ def main() -> int:
         print(f'missing skills directory: {skills_dir}')
         return 1
     all_errors = {}
-    skill_dirs = sorted([p for p in skills_dir.iterdir() if p.is_dir() and (p / 'SKILL.md').exists()])
+    skill_dirs = sorted(
+        skill_file.parent
+        for skill_file in skills_dir.rglob('SKILL.md')
+        if '.git' not in skill_file.parts
+    )
     if not skill_dirs:
         print(f'no skill directories found in {skills_dir}')
         return 1
