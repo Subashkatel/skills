@@ -8,7 +8,7 @@
     ]
   },
   {
-    "prompt": "Write a prompt for Claude to help with QEC.",
+    "prompt": "Write a prompt for an agent to help with QEC.",
     "checks": [
       "asks for code/noise/decoder",
       "requires citations or algebra",

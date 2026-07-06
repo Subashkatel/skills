@@ -40,4 +40,4 @@ Review skills as operational instructions. A good skill should trigger at the ri
 
 ## Cross-agent audit
 
-When auditing skills intended for both Claude Code and Codex, check that the core workflow is model-agnostic, that Claude-specific session variables are paired with Codex equivalents, and that side-effecting startup or git-note behavior is safe, local, and append-only by default.
+When auditing skills intended for both Claude Code and Codex, check that the core workflow is model-agnostic, platform-specific session variables are paired with equivalents, and side-effecting startup or git-note behavior is safe, local, and append-only by default.

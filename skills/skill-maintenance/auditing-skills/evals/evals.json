@@ -16,7 +16,7 @@
     ]
   },
   {
-    "prompt": "Migrate old Claude skills.",
+    "prompt": "Migrate old agent skills.",
     "checks": [
       "removes overprompting",
       "keeps concise",

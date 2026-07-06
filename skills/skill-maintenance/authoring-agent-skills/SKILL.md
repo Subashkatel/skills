@@ -1,6 +1,6 @@
 ---
 name: authoring-agent-skills
-description: "Creates or revises Claude/Codex skills with concise triggers, operational steps, support-file boundaries, and eval cases. Use when adding or pruning skills."
+description: "Creates or revises agent skills with concise triggers, operational steps, support-file boundaries, and eval cases. Use when adding or pruning skills for Claude Code or Codex."
 ---
 
 # Authoring Agent Skills

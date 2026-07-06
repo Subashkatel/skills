@@ -4,7 +4,7 @@
 
 ```xml
 <task>
-What should Claude do?
+What should the target agent do?
 </task>
 
 <context>
@@ -12,7 +12,7 @@ Why this matters, who will use it, and what constraints apply.
 </context>
 
 <sources>
-Files, papers, logs, profiler outputs, or references Claude must inspect.
+Files, papers, logs, profiler outputs, or references the target agent must inspect.
 </sources>
 
 <requirements>
@@ -20,7 +20,7 @@ Functional, performance, correctness, architecture, and research requirements.
 </requirements>
 
 <verification>
-How Claude should prove the result is correct or honest about uncertainty.
+How the target agent should prove the result is correct or be honest about uncertainty.
 </verification>
 
 <deliverable>

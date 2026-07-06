@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a compact repository snapshot for Claude Code recon.
+"""Create a compact repository snapshot for agentic codebase recon.
 
 Usage:
   python repo_snapshot.py [root] [--max-files 500]

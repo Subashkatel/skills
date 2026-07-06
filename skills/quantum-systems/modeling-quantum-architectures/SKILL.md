@@ -7,7 +7,7 @@ description: "Models quantum architecture across hardware, control, circuit IR, 
 
 ## Purpose
 
-Help Claude reason about quantum architecture as a layered system, not as isolated circuits. Use this when decisions span hardware constraints, control timing, circuit representations, transpilation, QEC schedules, decoders, and logical resources.
+Help the coding agent reason about quantum architecture as a layered system, not as isolated circuits. Use this when decisions span hardware constraints, control timing, circuit representations, transpilation, QEC schedules, decoders, and logical resources.
 
 ## Layered workflow
 

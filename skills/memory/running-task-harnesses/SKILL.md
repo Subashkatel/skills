@@ -7,7 +7,7 @@ description: "Builds dynamic task harnesses for flaky tests, large refactors, de
 
 Use this skill when one context window is risky: flaky tests, large refactors, deep verification, rule adherence, root-cause investigation, broad research, skill evals, or parallel GPU/QPU/QEC experiments. Do not use it for simple single-file edits or routine questions.
 
-A harness is a temporary workflow with roles, state, verification, stop conditions, and a budget. It can use Claude workflows, Codex tasks, peer agents, shell scripts, or manual focused passes depending on the available tool harness.
+A harness is a temporary workflow with roles, state, verification, stop conditions, and a budget. It can use Claude Code workflows, Codex tasks, peer agents, shell scripts, or manual focused passes depending on the available tool harness.
 
 ## Harness contract
 

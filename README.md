@@ -68,13 +68,13 @@ Each skill package contains its own `SKILL.md` and optional support files. Codex
 - [`refactoring-cleanly`](skills/quality/refactoring-cleanly/SKILL.md)
 - [`verifying-scientific-code`](skills/quality/verifying-scientific-code/SKILL.md)
 
-### Memory And Testing
+### Memory
 
-- [`tracking-work-state`](skills/memory-testing/tracking-work-state/SKILL.md)
-- [`recording-repo-memory`](skills/memory-testing/recording-repo-memory/SKILL.md)
-- [`maintaining-agent-state`](skills/memory-testing/maintaining-agent-state/SKILL.md)
-- [`managing-agent-memory`](skills/memory-testing/managing-agent-memory/SKILL.md)
-- [`running-task-harnesses`](skills/memory-testing/running-task-harnesses/SKILL.md)
+- [`tracking-work-state`](skills/memory/tracking-work-state/SKILL.md)
+- [`recording-repo-memory`](skills/memory/recording-repo-memory/SKILL.md)
+- [`maintaining-agent-state`](skills/memory/maintaining-agent-state/SKILL.md)
+- [`managing-agent-memory`](skills/memory/managing-agent-memory/SKILL.md)
+- [`running-task-harnesses`](skills/memory/running-task-harnesses/SKILL.md)
 
 ### Research And Docs
 
@@ -98,7 +98,7 @@ Each skill package contains its own `SKILL.md` and optional support files. Codex
 
 Copy or symlink any `skills/<category>/<skill-name>/` folder into the standard skill location for your tool:
 
-- Codex: `$HOME/.agents/skills/<skill-name>`
+- Codex: `${CODEX_HOME:-$HOME/.codex}/skills/<skill-name>`
 - Claude: `$HOME/.claude/skills/<skill-name>`
 
 Restart Codex after adding new skills. Claude Code usually detects edits to existing skill files live.

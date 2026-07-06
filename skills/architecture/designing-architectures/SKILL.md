@@ -7,7 +7,7 @@ description: "Designs scientific system architecture across classical, GPU, QPU,
 
 ## Purpose
 
-Help Claude act as a careful software/systems architect for scientific and infrastructure-heavy code. The goal is not to draw a generic diagram; it is to expose decisions, constraints, tradeoffs, and verification paths.
+Help the coding agent act as a careful software/systems architect for scientific and infrastructure-heavy code. The goal is not to draw a generic diagram; it is to expose decisions, constraints, tradeoffs, and verification paths.
 
 ## Architecture workflow
 

@@ -7,7 +7,7 @@ description: "Designs, implements, reviews, and verifies QEC systems: codes, sta
 
 ## Purpose
 
-Help Claude work carefully on quantum error correction. The focus is on explicit assumptions, algebraic checks, simulator/decoder configuration, and honest interpretation of evidence.
+Help the coding agent work carefully on quantum error correction. The focus is on explicit assumptions, algebraic checks, simulator/decoder configuration, and honest interpretation of evidence.
 
 ## QEC workflow
 
