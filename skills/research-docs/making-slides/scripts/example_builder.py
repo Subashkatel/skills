@@ -119,48 +119,115 @@ def _rgb(hex_color):
 
 # ----------------------------------------------------------------- the run
 #
-# The deck is generated FROM a live simulation: build() runs decsim's
-# quickstart example and parses every number on the slides out of the
-# verbose trace. The frozen dict below is only a fallback so the builder
-# still renders on machines without decsim (values from the same run).
+# The deck is generated from the FULL pipeline: the logical circuit
+# (CX q0,q1; T q1; T q1; MZ q1) is compiled by QLX in the container
+# (tools/qlx_capture/capture_cnot_then_2t.py -> schedule JSON artifact),
+# decsim's qlx_frontend turns the compiled schedule into Operations, and
+# build() simulates them and parses every slide number out of the verbose
+# trace. Fallbacks: no QLX artifact -> decsim's hand-written quickstart
+# ops; no decsim -> a frozen copy of the QLX-compiled run.
 
 import os
 import re
 
 DECSIM_DIR = Path(os.environ.get(
     "DECSIM_PATH", Path(__file__).resolve().parents[1] / "decsim"))
+QLX_SCHEDULE = Path(os.environ.get(
+    "QLX_SCHEDULE",
+    Path(__file__).resolve().parent / "qlx_capture"
+    / "schedule_cnot_then_2t.json"))
 
-FROZEN = dict(
-    source="frozen copy of the 2026-07-12 run (decsim not found)",
-    distance=3, round_us=1.1, commit=3, buffer=3, tau_us=1.0,
-    timing=dict(qc=0.15, cd=2.0, dd=0.5, do=1.0, oc=4.0, cq=0.15),
-    ops=[("Op0 CNOT", 0.0, 6.6, 6), ("Op1 T", 6.6, 9.9, 3),
-         ("Op2 T", 32.9, 36.2, 3)],
-    windows=[("Op0 · W0", 8.75, 14.75), ("Op0 · W1", 15.25, 21.25),
-             ("Op1 · W0", 21.75, 27.75), ("Op2 · W0", 38.35, 44.35)],
-    first_fire=1.1, first_arrival=3.25,
-    op0_result=22.25, decision=28.75, ctrl_release=32.75, consumed=32.9,
-    chip_done=36.2, fully_done=45.35,
-    memory_rounds=20, peak_payloads=9, total_windows=4,
-)
+TAU_US = 0.5          # decoder speed: must sustain 6-round windows
+NUM_UNITS = 2         # one per distillation stream, shared with compute
+
+FRIENDLY = {"alloc": "alloc", "dealloc": "dealloc", "prep_z": "prep",
+            "h": "H", "cx": "CX", "transport": "move T",
+            "produce_resource": "distill T", "inject": "T inject",
+            "mz": "MZ", "measure_product": "MZZ"}
+
+
+def display(name):
+    """Short display label for a decsim op name (QLX or quickstart style)."""
+    if "[" in name:
+        return FRIENDLY.get(name.split("[")[0], name.split("[")[0])
+    if ":" in name:
+        prefix, rest = name.split(":", 1)
+        return f"{prefix} {rest.split('(')[0]}"
+    return name
+
+
+def merged_span(intervals):
+    """Total length of the union of (start, end) intervals."""
+    total, cursor = 0.0, None
+    for start, end in sorted(intervals):
+        if cursor is None or start > cursor:
+            total += end - start
+            cursor = end
+        elif end > cursor:
+            total += end - cursor
+            cursor = end
+    return total
+
+
+# snapshot of the last successful live run; the fallback when decsim (or
+# the QLX artifact) is unavailable on this machine
+FROZEN_PATH = Path(__file__).resolve().parent / "frozen_run.json"
+
+
+def load_qlx_operations():
+    """Compiled schedule artifact -> decsim Operations (+ feedback wiring)."""
+    import json
+
+    from decsim.frontends.qlx import qlx_frontend
+
+    payload = json.loads(QLX_SCHEDULE.read_text())
+    program = qlx_frontend(payload["entries"])
+    injections = [op for op in program.operations if op.consumes_magic_state]
+    if len(injections) >= 2:
+        # the second T may start only after the first T's decoded outcome
+        # (QLX's schedule does not mark classical conditioning; the caller
+        # wires it — see qlx_frontend's feedback_candidates contract)
+        injections[1].blocked_by = injections[0].id
+    blocked = (program.operations[injections[1].blocked_by].name,
+               injections[1].name) if len(injections) >= 2 else None
+    distill = max((program.rounds.rounds_by_op[op.id]
+                   for op in program.operations
+                   if op.name.startswith("produce_resource")), default=None)
+    cx_rounds = next((program.rounds.rounds_by_op[op.id]
+                      for op in program.operations
+                      if op.name.startswith("cx")), None)
+    return (program.operations, program.rounds, blocked, distill, cx_rounds,
+            payload.get("program", "qlx"))
 
 
 def run_simulation():
-    """Run the decsim example and extract the slide numbers from its trace."""
+    """Compile-from-QLX -> simulate -> extract the slide numbers."""
     import contextlib
     import io
 
     sys.path.insert(0, str(DECSIM_DIR))
     from decsim.run_spec import RunSpec, simulate
     from decsim.decoders import PerRoundDecoder
-    from decsim.frontends.circuit import cnot_plus_two_t_circuit
     from decsim.config import TimingConfig
 
-    tau_us = 1.0
+    rounds_policy, blocked, distill, cx_rounds = None, None, None, None
+    if QLX_SCHEDULE.exists():
+        (ops, rounds_policy, blocked, distill, cx_rounds,
+         program_name) = load_qlx_operations()
+        program_name += " · compiled by QLX"
+        source = f"QLX schedule {QLX_SCHEDULE.name} -> decsim at {DECSIM_DIR}"
+    else:
+        from decsim.frontends.circuit import cnot_plus_two_t_circuit
+        ops = cnot_plus_two_t_circuit()
+        blocked = (ops[1].name, ops[2].name)
+        program_name = "cnot_plus_two_t_circuit (hand-written ops)"
+        source = f"decsim quickstart at {DECSIM_DIR} (no QLX artifact)"
+
     buffer_out = io.StringIO()
     with contextlib.redirect_stdout(buffer_out):
-        result = simulate(RunSpec(ops=cnot_plus_two_t_circuit(),
-                                  decoder=PerRoundDecoder(tau_us=tau_us)),
+        result = simulate(RunSpec(ops=ops, rounds_policy=rounds_policy,
+                                  decoder=PerRoundDecoder(tau_us=TAU_US),
+                                  num_units=NUM_UNITS),
                           verbose=True)
     trace = buffer_out.getvalue()
     cluster = result["cluster"]
@@ -170,39 +237,43 @@ def run_simulation():
         return [(float(m.group(1)),) + m.groups()[1:]
                 for m in re.finditer(pattern, trace)]
 
-    short = lambda name: name.split(":")[0] + " " + \
-        name.split(":")[1].split("(")[0]
     starts = {op: t for t, op in
-              stamps(r"\[\s*([\d.]+) us\] Chip: START (Op\d+):")}
+              stamps(r"\[\s*([\d.]+) us\] Chip: START (\S+)")}
     dones = {op: t for t, op in
-             stamps(r"\[\s*([\d.]+) us\] Chip: (Op\d+):\S+ body done")}
-    rounds_of = {}
-    names = {}
-    for m in re.finditer(r"Chip: ((Op\d+):\S+) fires round \d+/(\d+)", trace):
-        names[m.group(2)] = short(m.group(1))
-        rounds_of[m.group(2)] = int(m.group(3))
-    ops = [(names[op], starts[op], dones[op], rounds_of[op])
-           for op in sorted(starts)]
+             stamps(r"\[\s*([\d.]+) us\] Chip: (\S+) body done")}
+    rounds_of = {op: int(n) for _t, op, n in
+                 stamps(r"\[\s*([\d.]+) us\] Chip: (\S+) fires round \d+/(\d+)")}
+    op_events = [dict(name=op, label=display(op), start=t,
+                      end=dones.get(op, t), rounds=rounds_of.get(op, 1))
+                 for op, t in sorted(starts.items(), key=lambda kv: kv[1])]
 
     decode_starts = stamps(
-        r"\[\s*([\d.]+) us\] DecoderCluster: START DECODE (Op\d+):\S+ (W\d+)")
+        r"\[\s*([\d.]+) us\] DecoderCluster: START DECODE (\S+) (W\d+)")
     decode_dones = {(op, w): t for t, op, w in stamps(
-        r"\[\s*([\d.]+) us\] DecoderCluster: DECODE DONE (Op\d+):\S+ (W\d+)")}
-    windows = [(f"{op} · {w}", t, decode_dones[(op, w)])
+        r"\[\s*([\d.]+) us\] DecoderCluster: DECODE DONE (\S+) (W\d+)")}
+    windows = [dict(name=op, w=w, label=f"{display(op)} · {w}",
+                    start=t, end=decode_dones[(op, w)])
                for t, op, w in decode_starts]
 
-    take = lambda pattern: stamps(pattern)[0][0]
+    def take(pattern):
+        found = stamps(pattern)
+        return found[0][0] if found else None
+
+    frame = stamps(r"\[\s*([\d.]+) us\] Orchestrator: result for (\S+): "
+                   r"Pauli-frame update")
     return dict(
-        source=f"live run (decsim at {DECSIM_DIR})",
+        source=source, program=program_name,
         distance=cluster.code.distance, round_us=cfg.round_us,
-        commit=cluster.commit, buffer=cluster.buffer, tau_us=tau_us,
+        commit=cluster.commit, buffer=cluster.buffer, tau_us=TAU_US,
+        num_units=NUM_UNITS,
         timing=dict(qc=cfg.t_qc_us, cd=cfg.t_cd_us, dd=cfg.t_dd_us,
                     do=cfg.t_do_us, oc=cfg.t_oc_us, cq=cfg.t_cq_us),
-        ops=ops, windows=windows,
-        first_fire=take(r"\[\s*([\d.]+) us\] Chip: Op0:\S+ fires round 1/"),
+        ops=op_events, windows=windows, blocked=blocked,
+        distill_rounds=distill, cx_rounds=cx_rounds,
+        first_fire=take(r"\[\s*([\d.]+) us\] Chip: \S+ fires round 1/"),
         first_arrival=take(
-            r"\[\s*([\d.]+) us\] DecoderCluster: round 1 of Op0"),
-        op0_result=take(r"\[\s*([\d.]+) us\] Orchestrator: result for Op0"),
+            r"\[\s*([\d.]+) us\] DecoderCluster: round 1 of"),
+        first_frame=frame[0] if frame else None,
         decision=take(
             r"\[\s*([\d.]+) us\] Orchestrator: DISPATCH conditional release"),
         ctrl_release=take(
@@ -217,11 +288,20 @@ def run_simulation():
 
 
 def get_data():
+    import json
     try:
-        return run_simulation()
+        data = run_simulation()
     except Exception as error:
-        print(f"note: falling back to frozen numbers ({error})")
-        return FROZEN
+        if not FROZEN_PATH.exists():
+            raise SystemExit(
+                f"cannot run the simulation ({error}) and no frozen "
+                f"snapshot exists at {FROZEN_PATH}")
+        print(f"note: falling back to the frozen snapshot ({error})")
+        data = json.loads(FROZEN_PATH.read_text())
+        data["source"] = f"frozen snapshot {FROZEN_PATH.name}"
+        return data
+    FROZEN_PATH.write_text(json.dumps(data, indent=1))
+    return data
 
 
 def dur(x):
@@ -504,26 +584,33 @@ def slide_example(c, d):
            "decoded outcome returns through the control loop", SIZE_S, INK_2,
            italic=True, align="center")
 
-    rounds = [op[3] for op in d["ops"]]
-    notes = [(CNOT_X, f"Op0 · Clifford\n{rounds[0]} rounds of syndrome data"),
-             (T1_X, f"Op1 · non-Clifford\n{rounds[1]} rounds + a magic state"),
-             (T2_X, "Op2 · may start only after\nOp1’s outcome is decoded")]
+    if d.get("distill_rounds"):
+        t_note = (f"consumes a T state\nfrom a {d['distill_rounds']}-round\n"
+                  "15-to-1 distillation")
+        cx_note = (f"lattice-surgery CX\n{d['cx_rounds']} round in the\n"
+                   "QLX schedule")
+    else:
+        t_note = "non-Clifford\nneeds a magic state"
+        cx_note = "Clifford\nsyndrome rounds"
+    notes = [(CNOT_X, cx_note), (T1_X, t_note),
+             (T2_X, "may start only after\nthe first outcome\nis decoded")]
     for gate_x, note in notes:
-        c.text(gate_x - 1.3, 4.85, 2.6, 0.6, note, SIZE_M, INK_2,
+        c.text(gate_x - 1.2, 4.85, 2.4, 0.85, note, SIZE_M, INK_2,
                align="center")
 
     window_us = (d["commit"] + d["buffer"]) * d["tau_us"]
     c.text(0.7, 6.0, 11.93, 0.7,
            f"d = {d['distance']} surface code   ·   QEC round "
            f"{dur(d['round_us'])} µs   ·   sliding window: commit "
-           f"{d['commit']} + buffer {d['buffer']} rounds\n1 decoder unit   ·  "
-           f" τ = {dur(d['tau_us'])} µs per round  →  {dur(window_us)} µs "
-           "per window",
+           f"{d['commit']} + buffer {d['buffer']} rounds\n"
+           f"{d['num_units']} decoder units   ·   τ = {dur(d['tau_us'])} µs "
+           f"per round  →  {dur(window_us)} µs per window",
            SIZE_L, INK, align="center")
 
     c.text(0.7, 7.0, 11.93, 0.3,
-           "simulate(RunSpec(ops=cnot_plus_two_t_circuit(), "
-           "decoder=PerRoundDecoder(tau_us=1.0)))",
+           "qlx.estimate.schedule(cnot_then_2t)  →  "
+           "schedule_cnot_then_2t.json  →  decsim.frontends.qlx  →  "
+           "simulate(RunSpec(...))",
            SIZE_XS, MUTED, italic=True, align="center")
 
 
@@ -590,20 +677,20 @@ def slide_diagram(c, d):
     c.tlabel(5.8, 5.61, "dd", size=SIZE_S)
 
     c.tlabel(9.55, 5.0, "dd", f"window → window handoff · {dur(t['dd'])} µs")
-    op0_w1_end = d["windows"][1][2]
-    op1_w0 = d["windows"][2]
     c.text(7.35, 5.28, 4.4, 0.28,
-           f"(Op1’s first window waits for Op0’s last: ready "
-           f"{us3(op0_w1_end)} + {dur(t['dd'])} = {us3(op1_w0[1])})",
+           "(dependent windows wait for their predecessor’s result)",
            SIZE_XS, INK_2, align="center")
 
     # the example's actual timestamps, directly under the loop
+    blocker = next(o for o in d["ops"] if o["name"] == d["blocked"][0])
+    final = max((w for w in d["windows"] if w["name"] == blocker["name"]),
+                key=lambda w: w["start"])
     c.text(0.7, 6.8, 11.93, 0.6,
            f"In the run:  a round fired at {us3(d['first_fire'])} reaches a "
            f"decode unit at {us3(d['first_arrival'])}."
-           f"\nOp1’s outcome:  decoded {us3(op1_w0[2])}  →  orchestrator "
-           f"{us3(d['decision'])}  →  controller {us3(d['ctrl_release'])}  →  "
-           f"QPU {us3(d['consumed'])}.",
+           f"\nThe first T’s outcome:  decoded {us3(final['end'])}  →  "
+           f"orchestrator {us3(d['decision'])}  →  controller "
+           f"{us3(d['ctrl_release'])}  →  QPU {us3(d['consumed'])}.",
            SIZE_M, INK_2, align="center")
 
 
@@ -620,59 +707,90 @@ def slide_timeline(c, d):
     LANES = [("QPU", 2.15), ("DECODER", 3.65), ("FEEDBACK", 5.05)]
     BAR_H = 0.42
 
+    step = next(s for s in (1, 2, 5, 10, 20, 25, 50)
+                if axis_max / s <= 12)
     axis_y = 6.0
-    for t in range(0, axis_max + 5, 5):
+    last_tick = 0
+    for t in range(0, axis_max + 1, step):
         x = tx(t)
         c.line(x, 1.85, x, axis_y, "#e9e7e0", 0.75)
         c.text(x - 0.3, axis_y + 0.06, 0.6, 0.25, str(t), SIZE_XS, MUTED,
                align="center")
-    c.text(tx(axis_max + 1.5), axis_y + 0.06, 0.7, 0.25, "µs", SIZE_XS, MUTED)
+        last_tick = t
+    c.text(tx(last_tick) + 0.35, axis_y + 0.06, 0.7, 0.25, "µs", SIZE_XS,
+           MUTED)
     for label, y in LANES:
         c.text(0.02, y, 1.02, BAR_H, label, SIZE_S, INK,
                align="right", valign="middle", tracking=CAPS_TRACKING)
 
-    # --- QPU lane: op bodies, and the stall between Op1's end and Op2's start
+    # --- QPU lane: stall first (so op bars paint over its edges)
     y = LANES[0][1]
-    for label, t1, t2, _rounds in d["ops"]:
-        c.box(tx(t1) + 0.015, y, tx(t2) - tx(t1) - 0.03, BAR_H, fill=BLUE,
-              edge=None, radius=0.04)
-        c.text(tx((t1 + t2) / 2) - 1.2, y - 0.30, 2.4, 0.25, label, SIZE_S,
-               INK, bold=True, align="center")
-    stall_from, stall_to = d["ops"][1][2], d["ops"][2][1]
-    stall = stall_to - stall_from
-    c.box(tx(stall_from) + 0.015, y, tx(stall_to) - tx(stall_from) - 0.03,
-          BAR_H, fill=STALL_FILL, edge=STALL_EDGE, edge_w=1.0, dash=True,
-          radius=0.04)
-    c.text(tx(stall_from), y + 0.08, tx(stall_to) - tx(stall_from), 0.28,
-           f"stalled {dur(stall)} µs — waiting for Op1’s decoded outcome",
-           SIZE_S, INK_2, align="center", italic=True)
+    stall = None
+    if d["blocked"]:
+        blocker = next(o for o in d["ops"] if o["name"] == d["blocked"][0])
+        waiter = next(o for o in d["ops"] if o["name"] == d["blocked"][1])
+        stall = waiter["start"] - blocker["end"]
+        c.box(tx(blocker["end"]) + 0.015, y,
+              tx(waiter["start"]) - tx(blocker["end"]) - 0.03,
+              BAR_H, fill=STALL_FILL, edge=STALL_EDGE, edge_w=1.0, dash=True,
+              radius=0.04)
+        c.text(tx(blocker["end"]), y + 0.08,
+               tx(waiter["start"]) - tx(blocker["end"]), 0.28,
+               f"stalled {dur(stall)} µs", SIZE_S, INK_2, align="center",
+               italic=True)
+    label_slots = []
+    for op in d["ops"]:
+        w = tx(op["end"]) - tx(op["start"])
+        c.box(tx(op["start"]) + 0.015, y, max(w - 0.03, 0.035), BAR_H,
+              fill=BLUE, edge=None, radius=0.04)
+        mid = tx((op["start"] + op["end"]) / 2)
+        # label wide bars inside; label narrow bars below, skipping collisions
+        if w > 0.9:
+            c.text(mid - w / 2, y + 0.08, w, 0.28, op["label"], SIZE_S,
+                   WHITE, bold=True, align="center")
+        elif all(abs(mid - taken) > 0.62 for taken in label_slots):
+            label_slots.append(mid)
+            c.text(mid - 0.6, y + BAR_H + 0.06, 1.2, 0.25, op["label"],
+                   SIZE_XS, INK_2, align="center")
 
     # --- decoder lane
     y = LANES[1][1]
-    for label, t1, t2 in d["windows"]:
-        c.box(tx(t1) + 0.015, y, tx(t2) - tx(t1) - 0.03, BAR_H, fill=AQUA,
-              edge=None, radius=0.04)
-        c.text(tx(t1), y + 0.08, tx(t2) - tx(t1), 0.28, label, SIZE_S, WHITE,
-               bold=True, align="center")
+    for win in d["windows"]:
+        w = tx(win["end"]) - tx(win["start"])
+        c.box(tx(win["start"]) + 0.015, y, max(w - 0.03, 0.035), BAR_H,
+              fill=AQUA, edge=None, radius=0.04)
+        if w > 1.15:
+            c.text(tx(win["start"]), y + 0.08, w, 0.28, win["label"], SIZE_S,
+                   WHITE, bold=True, align="center")
     window_rounds = d["commit"] + d["buffer"]
     window_us = window_rounds * d["tau_us"]
-    c.text(tx(d["windows"][0][1]), y - 0.30, 4.2, 0.25,
-           f"each window: {window_rounds} rounds × τ = {dur(window_us)} µs",
+    c.text(tx(0), y - 0.30, 5.5, 0.25,
+           f"{len(d['windows'])} windows · each {window_rounds} rounds × τ "
+           f"= {dur(window_us)} µs · {d['num_units']} units",
            SIZE_S, INK_2)
 
     # --- feedback lane
     y = LANES[2][1]
-    c.box(tx(d["decision"]) + 0.015, y,
-          tx(d["consumed"]) - tx(d["decision"]) - 0.03, BAR_H,
-          fill=YELLOW, edge=None, radius=0.04)
-    c.text(tx(d["consumed"]) - 8.0, y - 0.30, 7.9, 0.25,
-           f"decision travels {us3(d['decision'])} → {us3(d['consumed'])}",
-           SIZE_S, INK, bold=True, align="right")
-    c.line(tx(d["op0_result"]), y - 0.04, tx(d["op0_result"]),
-           y + BAR_H + 0.04, YELLOW, 2.5)
-    c.text(tx(d["op0_result"]) - 3.3, y + 0.52, 3.1, 0.5,
-           f"{us3(d['op0_result'])} · Op0 result:\nPauli-frame update only",
-           SIZE_S, INK_2, align="right")
+    if d["decision"] and d["consumed"]:
+        c.box(tx(d["decision"]) + 0.015, y,
+              tx(d["consumed"]) - tx(d["decision"]) - 0.03, BAR_H,
+              fill=YELLOW, edge=None, radius=0.04)
+        c.text(tx(d["consumed"]) - 8.0, y - 0.30, 7.9, 0.25,
+               f"decision travels {us3(d['decision'])} → "
+               f"{us3(d['consumed'])}",
+               SIZE_S, INK, bold=True, align="right")
+    if d["first_frame"]:
+        frame_t = d["first_frame"][0]
+        c.line(tx(frame_t), y - 0.04, tx(frame_t), y + BAR_H + 0.04,
+               YELLOW, 2.5)
+        note = (f"{us3(frame_t)} · first Clifford result:\n"
+                "Pauli-frame update only")
+        if tx(frame_t) - 3.3 > 0.1:
+            c.text(tx(frame_t) - 3.3, y + 0.52, 3.1, 0.5, note, SIZE_S,
+                   INK_2, align="right")
+        else:
+            c.text(tx(frame_t) + 0.15, y + 0.52, 3.1, 0.5, note, SIZE_S,
+                   INK_2)
 
     # markers (the colored dashed lines carry identity; the labels stay in ink)
     c.line(tx(d["chip_done"]), 1.85, tx(d["chip_done"]), axis_y, BLUE, 1.5,
@@ -682,26 +800,35 @@ def slide_timeline(c, d):
            bold=True, align="right")
     c.line(tx(d["fully_done"]), 1.85, tx(d["fully_done"]), axis_y, AQUA, 1.5,
            dash=True)
-    c.text(tx(d["fully_done"]) - 1.95, 1.55, 1.9, 0.25,
+    c.text(tx(d["fully_done"]) - 1.95, 1.25, 1.9, 0.25,
            f"all decoded {us3(d['fully_done'])}", SIZE_S,
            INK, bold=True, align="right")
 
-    busy = sum(t2 - t1 for _label, t1, t2, _rounds in d["ops"])
-    c.text(0.7, 6.75, 11.93, 0.35,
-           f"The QPU computes for {dur(busy)} of its {dur(d['chip_done'])} µs"
-           f" — one stall is {stall / d['chip_done']:.0%} of its schedule.",
-           SIZE_L, INK, italic=True, align="center")
+    busy = merged_span([(o["start"], o["end"]) for o in d["ops"]])
+    summary = (f"The QPU computes for {dur(busy)} of its "
+               f"{dur(d['chip_done'])} µs")
+    if stall is not None:
+        summary += (f" — the T-gate feedback stall is {dur(stall)} µs of "
+                    "that schedule.")
+    else:
+        summary += "."
+    c.text(0.7, 6.75, 11.93, 0.35, summary, SIZE_L, INK, italic=True,
+           align="center")
 
 
 # ---------------------------------------------------------------- slide 4
 
 def slide_stall(c, d):
-    op1_done, op2_start = d["ops"][1][2], d["ops"][2][1]
-    op1_w0_start, op1_w0_end = d["windows"][2][1], d["windows"][2][2]
+    blocker = next(o for o in d["ops"] if o["name"] == d["blocked"][0])
+    waiter = next(o for o in d["ops"] if o["name"] == d["blocked"][1])
+    # the decision-triggering decode: the blocker's final window
+    final = max((w for w in d["windows"] if w["name"] == blocker["name"]),
+                key=lambda w: w["start"])
+    op1_done, op2_start = blocker["end"], waiter["start"]
     stall = op2_start - op1_done
-    wait = op1_w0_start - op1_done
-    decode = op1_w0_end - op1_w0_start
-    t_do = d["decision"] - op1_w0_end
+    wait = final["start"] - op1_done
+    decode = final["end"] - final["start"]
+    t_do = d["decision"] - final["end"]
     t_oc = d["ctrl_release"] - d["decision"]
     t_cq = d["consumed"] - d["ctrl_release"]
 
@@ -723,9 +850,15 @@ def slide_stall(c, d):
 
     c.text(seg_x[0][0], by + 0.15, seg_x[0][1], 0.3,
            f"waiting  {dur(wait)} µs", SIZE_M, INK_2, align="center")
-    c.text(seg_x[1][0], by + 0.15, seg_x[1][1], 0.3,
-           f"decode  {dur(decode)} µs", SIZE_M, WHITE, bold=True,
-           align="center")
+    decode_mid = seg_x[1][0] + seg_x[1][1] / 2
+    if seg_x[1][1] > 1.4:
+        c.text(seg_x[1][0], by + 0.15, seg_x[1][1], 0.3,
+               f"decode  {dur(decode)} µs", SIZE_M, WHITE, bold=True,
+               align="center")
+    else:
+        c.line(decode_mid, by - 0.28, decode_mid, by - 0.04, MUTED, 1.0)
+        c.text(decode_mid - 1.1, by - 0.56, 2.2, 0.25,
+               f"decode  {dur(decode)}", SIZE_S, INK_2, align="center")
     c.text(seg_x[3][0], by + 0.15, seg_x[3][1], 0.3, f"t_oc  {dur(t_oc)}",
            SIZE_M, INK, bold=True, align="center")
     mid2 = seg_x[2][0] + seg_x[2][1] / 2
@@ -736,20 +869,21 @@ def slide_stall(c, d):
     c.line(mid4, by - 0.28, mid4, by - 0.04, MUTED, 1.0)
     c.text(mid4 - 1.1, by - 0.56, 2.2, 0.25, f"t_cq  {dur(t_cq)}", SIZE_S,
            INK_2, align="center")
-    c.text(bx0, by + bh + 0.12, 3.0, 0.25,
-           f"{us3(op1_done)} µs · Op1 body done", SIZE_S, INK_2)
-    c.text(bx0 + 11.0 - 3.0, by + bh + 0.12, 3.0, 0.25,
-           f"{us3(op2_start)} µs · Op2 starts", SIZE_S, INK_2, align="right")
+    c.text(bx0, by + bh + 0.12, 3.4, 0.25,
+           f"{us3(op1_done)} µs · first T done", SIZE_S, INK_2)
+    c.text(bx0 + 11.0 - 3.4, by + bh + 0.12, 3.4, 0.25,
+           f"{us3(op2_start)} µs · second T starts", SIZE_S, INK_2,
+           align="right")
 
     # sparse breakdown with the numbers (Dally-style)
     window_rounds = d["commit"] + d["buffer"]
     comm = t_do + t_oc + t_cq
     bullets = [
         (f"{dur(wait)} µs",
-         "waiting — the one decoder unit is busy with Op0’s two windows, "
-         f"then a {dur(d['timing']['dd'])} µs window handoff (t_dd)"),
+         "waiting — the first T’s stream pads its decode window "
+         f"(memory rounds) and queues for a unit"),
         (f"{dur(decode)} µs",
-         f"decoding Op1’s window ({window_rounds} rounds × τ "
+         f"decoding the first T’s final window ({window_rounds} rounds × τ "
          f"{dur(d['tau_us'])} µs)"),
         (f"{dur(comm)} µs",
          f"communication — publish {dur(t_do)} (t_do) + decision return "

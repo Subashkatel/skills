@@ -1,0 +1,756 @@
+{
+ "source": "QLX schedule schedule_cnot_then_2t.json -> decsim at /scratch/gpfs/MARTONOSI/sk2415/qlx-qec-sandbox/decsim",
+ "program": "cnot_then_2t \u00b7 compiled by QLX",
+ "distance": 3,
+ "round_us": 1.1,
+ "commit": 3,
+ "buffer": 3,
+ "tau_us": 0.5,
+ "num_units": 2,
+ "timing": {
+  "qc": 0.15,
+  "cd": 2.0,
+  "dd": 0.5,
+  "do": 1.0,
+  "oc": 4.0,
+  "cq": 0.15
+ },
+ "ops": [
+  {
+   "name": "alloc[alloc_0]",
+   "label": "alloc",
+   "start": 0.0,
+   "end": 1.1,
+   "rounds": 1
+  },
+  {
+   "name": "alloc[alloc_1]",
+   "label": "alloc",
+   "start": 0.0,
+   "end": 1.1,
+   "rounds": 1
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "label": "distill T",
+   "start": 0.0,
+   "end": 132.0,
+   "rounds": 120
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "label": "distill T",
+   "start": 0.0,
+   "end": 132.0,
+   "rounds": 120
+  },
+  {
+   "name": "cx[cx_0]",
+   "label": "CX",
+   "start": 1.1,
+   "end": 2.2,
+   "rounds": 1
+  },
+  {
+   "name": "dealloc[dealloc_0]",
+   "label": "dealloc",
+   "start": 2.2,
+   "end": 3.3,
+   "rounds": 1
+  },
+  {
+   "name": "transport[transport_0]",
+   "label": "move T",
+   "start": 132.0,
+   "end": 133.1,
+   "rounds": 1
+  },
+  {
+   "name": "transport[transport_1]",
+   "label": "move T",
+   "start": 132.0,
+   "end": 133.1,
+   "rounds": 1
+  },
+  {
+   "name": "inject[inject_0]",
+   "label": "T inject",
+   "start": 133.1,
+   "end": 134.2,
+   "rounds": 1
+  },
+  {
+   "name": "inject[inject_1]",
+   "label": "T inject",
+   "start": 159.4,
+   "end": 160.5,
+   "rounds": 1
+  },
+  {
+   "name": "mz[mz_0]",
+   "label": "MZ",
+   "start": 160.5,
+   "end": 161.6,
+   "rounds": 1
+  },
+  {
+   "name": "dealloc[dealloc_1]",
+   "label": "dealloc",
+   "start": 161.6,
+   "end": 162.7,
+   "rounds": 1
+  }
+ ],
+ "windows": [
+  {
+   "name": "alloc[alloc_0]",
+   "w": "W0",
+   "label": "alloc \u00b7 W0",
+   "start": 4.35,
+   "end": 6.35
+  },
+  {
+   "name": "alloc[alloc_1]",
+   "w": "W0",
+   "label": "alloc \u00b7 W0",
+   "start": 4.35,
+   "end": 6.35
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W0",
+   "label": "distill T \u00b7 W0",
+   "start": 8.75,
+   "end": 11.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W0",
+   "label": "distill T \u00b7 W0",
+   "start": 8.75,
+   "end": 11.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W1",
+   "label": "distill T \u00b7 W1",
+   "start": 12.25,
+   "end": 15.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W1",
+   "label": "distill T \u00b7 W1",
+   "start": 12.25,
+   "end": 15.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W2",
+   "label": "distill T \u00b7 W2",
+   "start": 15.75,
+   "end": 18.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W2",
+   "label": "distill T \u00b7 W2",
+   "start": 15.75,
+   "end": 18.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W3",
+   "label": "distill T \u00b7 W3",
+   "start": 19.25,
+   "end": 22.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W3",
+   "label": "distill T \u00b7 W3",
+   "start": 19.25,
+   "end": 22.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W4",
+   "label": "distill T \u00b7 W4",
+   "start": 22.75,
+   "end": 25.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W4",
+   "label": "distill T \u00b7 W4",
+   "start": 22.75,
+   "end": 25.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W5",
+   "label": "distill T \u00b7 W5",
+   "start": 26.25,
+   "end": 29.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W5",
+   "label": "distill T \u00b7 W5",
+   "start": 26.25,
+   "end": 29.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W6",
+   "label": "distill T \u00b7 W6",
+   "start": 29.75,
+   "end": 32.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W6",
+   "label": "distill T \u00b7 W6",
+   "start": 29.75,
+   "end": 32.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W7",
+   "label": "distill T \u00b7 W7",
+   "start": 33.25,
+   "end": 36.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W7",
+   "label": "distill T \u00b7 W7",
+   "start": 33.25,
+   "end": 36.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W8",
+   "label": "distill T \u00b7 W8",
+   "start": 36.75,
+   "end": 39.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W8",
+   "label": "distill T \u00b7 W8",
+   "start": 36.75,
+   "end": 39.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W9",
+   "label": "distill T \u00b7 W9",
+   "start": 40.25,
+   "end": 43.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W9",
+   "label": "distill T \u00b7 W9",
+   "start": 40.25,
+   "end": 43.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W10",
+   "label": "distill T \u00b7 W10",
+   "start": 43.75,
+   "end": 46.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W10",
+   "label": "distill T \u00b7 W10",
+   "start": 43.75,
+   "end": 46.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W11",
+   "label": "distill T \u00b7 W11",
+   "start": 47.25,
+   "end": 50.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W11",
+   "label": "distill T \u00b7 W11",
+   "start": 47.25,
+   "end": 50.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W12",
+   "label": "distill T \u00b7 W12",
+   "start": 50.75,
+   "end": 53.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W12",
+   "label": "distill T \u00b7 W12",
+   "start": 50.75,
+   "end": 53.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W13",
+   "label": "distill T \u00b7 W13",
+   "start": 54.25,
+   "end": 57.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W13",
+   "label": "distill T \u00b7 W13",
+   "start": 54.25,
+   "end": 57.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W14",
+   "label": "distill T \u00b7 W14",
+   "start": 57.75,
+   "end": 60.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W14",
+   "label": "distill T \u00b7 W14",
+   "start": 57.75,
+   "end": 60.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W15",
+   "label": "distill T \u00b7 W15",
+   "start": 61.25,
+   "end": 64.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W15",
+   "label": "distill T \u00b7 W15",
+   "start": 61.25,
+   "end": 64.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W16",
+   "label": "distill T \u00b7 W16",
+   "start": 64.75,
+   "end": 67.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W16",
+   "label": "distill T \u00b7 W16",
+   "start": 64.75,
+   "end": 67.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W17",
+   "label": "distill T \u00b7 W17",
+   "start": 68.25,
+   "end": 71.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W17",
+   "label": "distill T \u00b7 W17",
+   "start": 68.25,
+   "end": 71.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W18",
+   "label": "distill T \u00b7 W18",
+   "start": 71.75,
+   "end": 74.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W18",
+   "label": "distill T \u00b7 W18",
+   "start": 71.75,
+   "end": 74.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W19",
+   "label": "distill T \u00b7 W19",
+   "start": 75.25,
+   "end": 78.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W19",
+   "label": "distill T \u00b7 W19",
+   "start": 75.25,
+   "end": 78.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W20",
+   "label": "distill T \u00b7 W20",
+   "start": 78.75,
+   "end": 81.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W20",
+   "label": "distill T \u00b7 W20",
+   "start": 78.75,
+   "end": 81.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W21",
+   "label": "distill T \u00b7 W21",
+   "start": 82.25,
+   "end": 85.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W21",
+   "label": "distill T \u00b7 W21",
+   "start": 82.25,
+   "end": 85.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W22",
+   "label": "distill T \u00b7 W22",
+   "start": 85.75,
+   "end": 88.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W22",
+   "label": "distill T \u00b7 W22",
+   "start": 85.75,
+   "end": 88.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W23",
+   "label": "distill T \u00b7 W23",
+   "start": 89.25,
+   "end": 92.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W23",
+   "label": "distill T \u00b7 W23",
+   "start": 89.25,
+   "end": 92.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W24",
+   "label": "distill T \u00b7 W24",
+   "start": 92.75,
+   "end": 95.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W24",
+   "label": "distill T \u00b7 W24",
+   "start": 92.75,
+   "end": 95.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W25",
+   "label": "distill T \u00b7 W25",
+   "start": 96.25,
+   "end": 99.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W25",
+   "label": "distill T \u00b7 W25",
+   "start": 96.25,
+   "end": 99.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W26",
+   "label": "distill T \u00b7 W26",
+   "start": 99.75,
+   "end": 102.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W26",
+   "label": "distill T \u00b7 W26",
+   "start": 99.75,
+   "end": 102.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W27",
+   "label": "distill T \u00b7 W27",
+   "start": 103.25,
+   "end": 106.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W27",
+   "label": "distill T \u00b7 W27",
+   "start": 103.25,
+   "end": 106.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W28",
+   "label": "distill T \u00b7 W28",
+   "start": 106.75,
+   "end": 109.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W28",
+   "label": "distill T \u00b7 W28",
+   "start": 106.75,
+   "end": 109.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W29",
+   "label": "distill T \u00b7 W29",
+   "start": 110.25,
+   "end": 113.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W29",
+   "label": "distill T \u00b7 W29",
+   "start": 110.25,
+   "end": 113.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W30",
+   "label": "distill T \u00b7 W30",
+   "start": 113.75,
+   "end": 116.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W30",
+   "label": "distill T \u00b7 W30",
+   "start": 113.75,
+   "end": 116.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W31",
+   "label": "distill T \u00b7 W31",
+   "start": 117.25,
+   "end": 120.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W31",
+   "label": "distill T \u00b7 W31",
+   "start": 117.25,
+   "end": 120.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W32",
+   "label": "distill T \u00b7 W32",
+   "start": 120.75,
+   "end": 123.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W32",
+   "label": "distill T \u00b7 W32",
+   "start": 120.75,
+   "end": 123.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W33",
+   "label": "distill T \u00b7 W33",
+   "start": 124.25,
+   "end": 127.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W33",
+   "label": "distill T \u00b7 W33",
+   "start": 124.25,
+   "end": 127.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W34",
+   "label": "distill T \u00b7 W34",
+   "start": 127.75,
+   "end": 130.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W34",
+   "label": "distill T \u00b7 W34",
+   "start": 127.75,
+   "end": 130.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W35",
+   "label": "distill T \u00b7 W35",
+   "start": 131.25,
+   "end": 134.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W35",
+   "label": "distill T \u00b7 W35",
+   "start": 131.25,
+   "end": 134.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W36",
+   "label": "distill T \u00b7 W36",
+   "start": 134.75,
+   "end": 137.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W36",
+   "label": "distill T \u00b7 W36",
+   "start": 134.75,
+   "end": 137.75
+  },
+  {
+   "name": "cx[cx_0]",
+   "w": "W0",
+   "label": "CX \u00b7 W0",
+   "start": 137.75,
+   "end": 139.75
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W37",
+   "label": "distill T \u00b7 W37",
+   "start": 138.25,
+   "end": 141.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W37",
+   "label": "distill T \u00b7 W37",
+   "start": 139.75,
+   "end": 142.75
+  },
+  {
+   "name": "dealloc[dealloc_0]",
+   "w": "W0",
+   "label": "dealloc \u00b7 W0",
+   "start": 141.25,
+   "end": 143.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W38",
+   "label": "distill T \u00b7 W38",
+   "start": 142.75,
+   "end": 145.75
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W38",
+   "label": "distill T \u00b7 W38",
+   "start": 143.25,
+   "end": 146.25
+  },
+  {
+   "name": "produce_resource[produce_resource_0]",
+   "w": "W39",
+   "label": "distill T \u00b7 W39",
+   "start": 146.25,
+   "end": 149.25
+  },
+  {
+   "name": "produce_resource[produce_resource_1]",
+   "w": "W39",
+   "label": "distill T \u00b7 W39",
+   "start": 146.75,
+   "end": 149.75
+  },
+  {
+   "name": "transport[transport_0]",
+   "w": "W0",
+   "label": "move T \u00b7 W0",
+   "start": 149.75,
+   "end": 151.75
+  },
+  {
+   "name": "transport[transport_1]",
+   "w": "W0",
+   "label": "move T \u00b7 W0",
+   "start": 150.25,
+   "end": 152.25
+  },
+  {
+   "name": "inject[inject_0]",
+   "w": "W0",
+   "label": "T inject \u00b7 W0",
+   "start": 152.25,
+   "end": 154.25
+  },
+  {
+   "name": "inject[inject_1]",
+   "w": "W0",
+   "label": "T inject \u00b7 W0",
+   "start": 163.75,
+   "end": 165.75
+  },
+  {
+   "name": "mz[mz_0]",
+   "w": "W0",
+   "label": "MZ \u00b7 W0",
+   "start": 166.25,
+   "end": 168.25
+  },
+  {
+   "name": "dealloc[dealloc_1]",
+   "w": "W0",
+   "label": "dealloc \u00b7 W0",
+   "start": 168.75,
+   "end": 170.75
+  }
+ ],
+ "blocked": [
+  "inject[inject_0]",
+  "inject[inject_1]"
+ ],
+ "distill_rounds": 120,
+ "cx_rounds": 1,
+ "first_fire": 1.1,
+ "first_arrival": 3.25,
+ "first_frame": [
+  7.35,
+  "alloc[alloc_0]"
+ ],
+ "decision": 155.25,
+ "ctrl_release": 159.25,
+ "consumed": 159.4,
+ "chip_done": 162.7,
+ "fully_done": 171.75,
+ "memory_rounds": 45,
+ "peak_payloads": 32,
+ "total_windows": 90
+}
