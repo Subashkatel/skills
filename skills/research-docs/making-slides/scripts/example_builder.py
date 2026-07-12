@@ -264,8 +264,30 @@ class SlideCanvas:
                             shrinkA=0, shrinkB=0, mutation_scale=11))
         annotation.arrow_patch.set_zorder(self._next_z())
 
-    def tlabel(self, cx, cy, sub, rest="", size=SIZE_S, rot=0, color=INK):
-        """Math-style latency label 't_sub: rest' centered on (cx, cy)."""
+    def circle(self, cx, cy, r, fill=None, edge=INK, edge_w=1.5):
+        shape = self.shapes.add_shape(
+            MSO_SHAPE.OVAL, Inches(cx - r), Inches(cy - r),
+            Inches(2 * r), Inches(2 * r))
+        shape.shadow.inherit = False
+        if fill is None:
+            shape.fill.background()
+        else:
+            shape.fill.solid()
+            shape.fill.fore_color.rgb = _rgb(fill)
+        if edge is None:
+            shape.line.fill.background()
+        else:
+            shape.line.color.rgb = _rgb(edge)
+            shape.line.width = Pt(edge_w)
+        patch = plt.Circle((cx, cy), r,
+                           facecolor=fill if fill else "none",
+                           edgecolor=edge if edge else "none",
+                           linewidth=edge_w, zorder=self._next_z())
+        self.ax.add_patch(patch)
+
+    def tlabel(self, cx, cy, sub, rest="", size=SIZE_S, rot=0, color=INK,
+               base="t"):
+        """Math-style label 'base_sub: rest' centered on (cx, cy)."""
         w, h = 4.2, 0.3
         tb = self.shapes.add_textbox(Inches(cx - w / 2), Inches(cy - h / 2),
                                      Inches(w), Inches(h))
@@ -279,7 +301,7 @@ class SlideCanvas:
         para = tf.paragraphs[0]
         para.alignment = PP_ALIGN.CENTER
         para.line_spacing = 1.0
-        pieces = [("t", size, True, None),
+        pieces = [(base, size, True, None),
                   (sub, size * 0.7, False, "-25000")]
         if rest:
             pieces.append((f":  {rest}", size, False, None))
@@ -293,7 +315,7 @@ class SlideCanvas:
             if baseline:
                 run._r.get_or_add_rPr().set("baseline", baseline)
 
-        mathtext = f"$t_{{\\mathrm{{{sub}}}}}$"
+        mathtext = f"${base}_{{\\mathrm{{{sub}}}}}$"
         if rest:
             mathtext += f":  {rest}"
         self.ax.text(cx, cy, mathtext, fontsize=size, color=color,
@@ -333,32 +355,51 @@ class SlideCanvas:
 def slide_example(c):
     c.title("THE EXAMPLE: A CNOT AND TWO DEPENDENT T GATES")
 
-    # the three-operation circuit, centered, with per-op annotations below
-    BOX_W, BOX_H, y = 2.6, 1.0, 2.5
-    xs = [1.5, 5.35, 9.2]
-    c.component(xs[0], y, BOX_W, BOX_H, "Op0 · CNOT(q0, q1)", BLUE)
-    c.component(xs[1], y, BOX_W, BOX_H, "Op1 · T(q1)", BLUE)
-    c.component(xs[2], y, BOX_W, BOX_H, "Op2 · T(q1)", YELLOW, text_color=INK)
+    # the circuit itself: two qubit wires, a CNOT, and two T gates on q1
+    WIRE_X0, WIRE_X1 = 2.4, 11.0
+    Q0_Y, Q1_Y = 2.55, 3.45
+    CNOT_X, T1_X, T2_X = 4.2, 6.7, 9.2
 
-    c.arrow(xs[0] + BOX_W, y + BOX_H / 2, xs[1] - 0.06, y + BOX_H / 2, INK_2, 2.0)
-    c.arrow(xs[1] + BOX_W, y + BOX_H / 2, xs[2] - 0.06, y + BOX_H / 2, YELLOW, 2.25)
-    c.text(xs[1] + BOX_W - 0.3, y - 0.42, 1.85, 0.3, "blocked", SIZE_S, INK,
-           bold=True, align="center")
+    c.line(WIRE_X0, Q0_Y, WIRE_X1, Q0_Y, INK, 1.5)
+    c.line(WIRE_X0, Q1_Y, WIRE_X1, Q1_Y, INK, 1.5)
+    c.tlabel(2.0, Q0_Y, "0", base="q", size=SIZE_L)
+    c.tlabel(2.0, Q1_Y, "1", base="q", size=SIZE_L)
 
-    notes = ["Clifford\n6 rounds of syndrome data",
-             "non-Clifford\n3 rounds + a magic state",
-             "may start only after Op1’s\noutcome is decoded"]
-    for x, note in zip(xs, notes):
-        c.text(x - 0.3, y + BOX_H + 0.25, BOX_W + 0.6, 0.6, note, SIZE_M,
-               INK_2, align="center")
+    # CNOT: control on q0, target on q1
+    c.circle(CNOT_X, Q0_Y, 0.06, fill=INK, edge=None)
+    c.circle(CNOT_X, Q1_Y, 0.15, fill=None, edge=INK, edge_w=1.5)
+    c.line(CNOT_X, Q0_Y, CNOT_X, Q1_Y + 0.15, INK, 1.5)
+    c.line(CNOT_X - 0.15, Q1_Y, CNOT_X + 0.15, Q1_Y, INK, 1.5)
 
-    c.text(0.7, 5.2, 11.93, 0.7,
+    # T gates on q1
+    for gate_x in (T1_X, T2_X):
+        c.box(gate_x - 0.25, Q1_Y - 0.25, 0.5, 0.5, fill=WHITE, edge=INK,
+              edge_w=1.5, radius=0.02)
+        c.text(gate_x - 0.25, Q1_Y - 0.25, 0.5, 0.5, "T", SIZE_L, INK,
+               italic=True, align="center", valign="middle")
+
+    # classical dependency: Op2 waits for Op1's decoded outcome
+    c.line(T1_X, Q1_Y + 0.25, T1_X, 4.15, INK, 1.25, dash=True)
+    c.line(T1_X, 4.15, T2_X, 4.15, INK, 1.25, dash=True)
+    c.line(T2_X, 4.15, T2_X, Q1_Y + 0.27, INK, 1.25, dash=True, arrow=True)
+    c.text(T1_X - 1.0, 4.28, T2_X - T1_X + 2.0, 0.28,
+           "decoded outcome returns through the control loop", SIZE_S, INK_2,
+           italic=True, align="center")
+
+    notes = [(CNOT_X, "Op0 · Clifford\n6 rounds of syndrome data"),
+             (T1_X, "Op1 · non-Clifford\n3 rounds + a magic state"),
+             (T2_X, "Op2 · may start only after\nOp1’s outcome is decoded")]
+    for gate_x, note in notes:
+        c.text(gate_x - 1.3, 4.85, 2.6, 0.6, note, SIZE_M, INK_2,
+               align="center")
+
+    c.text(0.7, 6.0, 11.93, 0.7,
            "d = 3 surface code   ·   QEC round 1.1 µs   ·   sliding window: "
            "commit 3 + buffer 3 rounds\n1 decoder unit   ·   "
            "τ = 1.0 µs per round  →  6.0 µs per window",
            SIZE_L, INK, align="center")
 
-    c.text(0.7, 6.8, 11.93, 0.3,
+    c.text(0.7, 7.0, 11.93, 0.3,
            "simulate(RunSpec(ops=cnot_plus_two_t_circuit(), "
            "decoder=PerRoundDecoder(tau_us=1.0)))",
            SIZE_XS, MUTED, italic=True, align="center")
