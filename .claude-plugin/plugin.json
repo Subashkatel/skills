@@ -1,7 +1,7 @@
 {
   "name": "skills",
-  "version": "1.0.0",
-  "description": "36 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts.",
+  "version": "1.1.0",
+  "description": "37 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts.",
   "author": {
     "name": "subashkatel"
   },
@@ -37,6 +37,7 @@
     "./skills/research-docs/refining-prompts",
     "./skills/research-docs/reviewing-research",
     "./skills/research-docs/writing-durable-docs",
+    "./skills/research-docs/making-slides",
     "./skills/skill-maintenance/auditing-skills",
     "./skills/skill-maintenance/authoring-agent-skills",
     "./skills/skill-maintenance/evaluating-agent-skills",
