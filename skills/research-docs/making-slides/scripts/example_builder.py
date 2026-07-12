@@ -77,6 +77,7 @@ def _register_preview_serif():
 
 
 matplotlib.rcParams["font.family"] = _register_preview_serif()
+matplotlib.rcParams["mathtext.fontset"] = "stix"   # serif math for t-labels
 
 OUT_PPTX = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("slides.pptx")
 PREVIEW_DIR = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("slide_previews")
@@ -93,6 +94,12 @@ MUTED = "#8a887f"
 STALL_FILL = "#f1f0ec"
 STALL_EDGE = "#9b998f"
 WHITE = "#ffffff"
+
+# pastel component fills for the architecture diagram (reference figure)
+GREEN_P = "#c9d7b4"
+BLUE_P = "#aac5e6"
+ORANGE_P = "#e0a26b"
+PURPLE_P = "#d4b7cb"
 
 # One versatile family (Bringhurst 6.5.1; Proportional Web §1.1.1): Palatino.
 # Office renders Palatino Linotype; Linux substitutes URW P052 by metrics.
@@ -159,10 +166,14 @@ class SlideCanvas:
 
     def text(self, x, y, w, h, content, size, color=INK, bold=False,
              italic=False, align="left", valign="top", leading=1.2,
-             tracking=None):
+             tracking=None, rot=0):
         tb = self.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
         tf = tb.text_frame
-        tf.word_wrap = True
+        # no auto-wrap: line breaks are explicit (\n), so layout cannot drift
+        # when the viewer's font metrics differ from the preview face
+        tf.word_wrap = False
+        if rot:
+            tb.rotation = -rot          # pptx rotates clockwise-positive
         for side in ("margin_left", "margin_right", "margin_top", "margin_bottom"):
             setattr(tf, side, 0)
         tf.vertical_anchor = {"top": MSO_ANCHOR.TOP, "middle": MSO_ANCHOR.MIDDLE,
@@ -198,7 +209,8 @@ class SlideCanvas:
                      style="italic" if italic else "normal",
                      ha=align, va={"top": "top", "middle": "center",
                                    "bottom": "bottom"}[valign],
-                     linespacing=leading + 0.15)
+                     linespacing=leading + 0.15,
+                     rotation=rot, rotation_mode="anchor")
 
     def line(self, x1, y1, x2, y2, color, width=1.5, dash=None, arrow=False):
         conn = self.shapes.add_connector(
@@ -232,6 +244,61 @@ class SlideCanvas:
 
     def arrow(self, x1, y1, x2, y2, color, width=1.75):
         self.line(x1, y1, x2, y2, color, width, arrow=True)
+
+    def double_arrow(self, x1, y1, x2, y2, color=INK, width=1.25):
+        conn = self.shapes.add_connector(
+            MSO_CONNECTOR.STRAIGHT, Inches(x1), Inches(y1),
+            Inches(x2), Inches(y2))
+        conn.shadow.inherit = False
+        conn.line.color.rgb = _rgb(color)
+        conn.line.width = Pt(width)
+        ln = conn.line._get_or_add_ln()
+        for end in ("a:headEnd", "a:tailEnd"):
+            e = etree.SubElement(ln, qn(end))
+            e.set("type", "triangle")
+            e.set("w", "med")
+            e.set("len", "med")
+        annotation = self.ax.annotate(
+            "", xy=(x2, y2), xytext=(x1, y1),
+            arrowprops=dict(arrowstyle="<|-|>", color=color, lw=width,
+                            shrinkA=0, shrinkB=0, mutation_scale=11))
+        annotation.arrow_patch.set_zorder(self._next_z())
+
+    def tlabel(self, cx, cy, sub, rest="", size=SIZE_S, rot=0, color=INK):
+        """Math-style latency label 't_sub: rest' centered on (cx, cy)."""
+        w, h = 4.2, 0.3
+        tb = self.shapes.add_textbox(Inches(cx - w / 2), Inches(cy - h / 2),
+                                     Inches(w), Inches(h))
+        tf = tb.text_frame
+        tf.word_wrap = False
+        for side in ("margin_left", "margin_right", "margin_top", "margin_bottom"):
+            setattr(tf, side, 0)
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        if rot:
+            tb.rotation = -rot
+        para = tf.paragraphs[0]
+        para.alignment = PP_ALIGN.CENTER
+        para.line_spacing = 1.0
+        pieces = [("t", size, True, None),
+                  (sub, size * 0.7, False, "-25000")]
+        if rest:
+            pieces.append((f":  {rest}", size, False, None))
+        for content, run_size, run_italic, baseline in pieces:
+            run = para.add_run()
+            run.text = content
+            run.font.name = FONT
+            run.font.size = Pt(run_size)
+            run.font.italic = run_italic
+            run.font.color.rgb = _rgb(color)
+            if baseline:
+                run._r.get_or_add_rPr().set("baseline", baseline)
+
+        mathtext = f"$t_{{\\mathrm{{{sub}}}}}$"
+        if rest:
+            mathtext += f":  {rest}"
+        self.ax.text(cx, cy, mathtext, fontsize=size, color=color,
+                     ha="center", va="center",
+                     rotation=rot, rotation_mode="anchor")
 
     def elbow_arrow(self, points, color, width=1.75):
         """Polyline with an arrowhead on the final segment."""
@@ -300,42 +367,74 @@ def slide_example(c):
 # ---------------------------------------------------------------- slide 2
 
 def slide_diagram(c):
-    c.title("ONE TIMED LOOP: EVERY HOP HAS A PRICE")
+    c.title("THE SIMULATOR: ONE TIMED CONTROL LOOP")
 
-    BOX_W, BOX_H, y = 2.05, 1.05, 2.35
-    gap = (12.63 - 0.7 - 5 * BOX_W) / 4          # five boxes, even gaps
-    xs = [0.7 + i * (BOX_W + gap) for i in range(5)]
-    parts = [("QPU", "1 round / 1.1 µs", BLUE, WHITE),
-             ("Controller", "routes packets", BLUE, WHITE),
-             ("Window mgr", "commit 3 + buffer 3", BLUE, WHITE),
-             ("Decoder", "1 unit · 6.0 µs/window", AQUA, WHITE),
-             ("Orchestrator", "Pauli frame · decisions", YELLOW, INK)]
-    for x, (name, sub, fill, tc) in zip(xs, parts):
-        c.component(x, y, BOX_W, BOX_H, name, fill, sub=sub, text_color=tc)
+    # pastel components (reference architecture figure)
+    orch = (0.9, 2.3, 2.15, 0.95)
+    ctrl = (6.9, 2.3, 1.8, 0.95)
+    qpu = (10.9, 2.15, 1.73, 1.25)
+    clus = (4.55, 4.2, 2.5, 2.4)
+    c.box(*orch, fill=GREEN_P, edge=None, radius=0.12)
+    c.text(orch[0], orch[1], orch[2], orch[3], "Orchestrator", SIZE_L, INK,
+           align="center", valign="middle")
+    c.box(*ctrl, fill=BLUE_P, edge=None, radius=0.12)
+    c.text(ctrl[0], ctrl[1], ctrl[2], ctrl[3], "Controller", SIZE_L, INK,
+           align="center", valign="middle")
+    c.box(*qpu, fill=ORANGE_P, edge=None, radius=0.12)
+    c.text(qpu[0], qpu[1], qpu[2], qpu[3], "Quantum\nprocessing unit",
+           SIZE_L, INK, align="center", valign="middle")
+    c.box(*clus, fill=PURPLE_P, edge=None, radius=0.12)
+    c.text(clus[0], clus[1] + 0.12, clus[2], 0.35, "Decoder cluster",
+           SIZE_L, INK, align="center")
 
-    hop_labels = ["t_qc  0.15 µs", "t_cd  2.0 µs", "enqueue", "t_do  1.0 µs"]
-    mid = y + BOX_H / 2
-    for i, label in enumerate(hop_labels):
-        x1, x2 = xs[i] + BOX_W, xs[i + 1]
-        c.arrow(x1, mid, x2 - 0.05, mid, INK_2, 2.0)
-        c.text(x1 - 0.5, y + BOX_H + 0.18, (x2 - x1) + 1.0, 0.28, label,
-               SIZE_S, INK, align="center")
+    # workload feeds the orchestrator
+    c.text(0.9, 1.25, 2.15, 0.28, "operation stream", SIZE_S, INK,
+           align="center")
+    c.arrow(1.97, 1.55, 1.97, 2.28, INK, 1.5)
 
-    # the return path: orchestrator -> (controller) -> QPU
-    ry = y + BOX_H + 0.85
-    c.elbow_arrow([(xs[4] + BOX_W / 2, y + BOX_H), (xs[4] + BOX_W / 2, ry),
-                   (xs[0] + BOX_W / 2, ry), (xs[0] + BOX_W / 2, y + BOX_H)],
-                  YELLOW, 2.25)
-    c.text(0.7, ry + 0.12, 11.93, 0.32,
-           "decision returns via the controller:  t_oc 4.0 µs  +  t_cq 0.15 µs",
-           SIZE_M, INK, align="center")
+    # orchestrator -> controller
+    c.arrow(3.05, 2.62, 6.88, 2.62, INK, 1.5)
+    c.tlabel(4.96, 2.4, "oc", "decisions · 4.0 µs")
+
+    # controller <-> QPU
+    c.arrow(8.72, 2.5, 10.88, 2.5, INK, 1.5)
+    c.tlabel(9.8, 2.25, "cq", "control signals · 0.15 µs", size=SIZE_XS)
+    c.arrow(10.88, 2.95, 8.74, 2.95, INK, 1.5)
+    c.tlabel(9.8, 3.22, "qc", "syndromes · 0.15 µs", size=SIZE_XS)
+
+    # controller -> decoder cluster (syndromes travel down-left)
+    c.arrow(7.7, 3.27, 6.82, 4.18, INK, 1.5)
+    c.tlabel(7.85, 4.02, "cd", "syndromes · 2.0 µs", rot=46)
+
+    # orchestrator <-> decoder cluster (jobs down, results up)
+    c.arrow(2.72, 3.27, 4.68, 4.52, INK, 1.5)
+    c.text(2.9, 3.45, 2.2, 0.28, "decoding jobs", SIZE_S, INK,
+           align="center", valign="middle", rot=-31)
+    c.arrow(4.5, 4.75, 2.54, 3.5, INK, 1.5)
+    c.tlabel(3.15, 4.45, "do", "results · 1.0 µs", rot=-31)
+
+    # decode units inside the cluster, exchanging window boundaries
+    sq = 0.42
+    units = [(5.0, 4.85), (6.18, 4.85), (5.0, 5.95), (6.18, 5.95)]
+    for ux, uy in units:
+        c.box(ux, uy, sq, sq, fill=WHITE, edge=INK, edge_w=1.0, radius=0.02)
+    c.double_arrow(5.46, 5.06, 6.14, 5.06)
+    c.double_arrow(5.46, 6.16, 6.14, 6.16)
+    c.double_arrow(5.21, 5.31, 5.21, 5.91)
+    c.double_arrow(6.39, 5.31, 6.39, 5.91)
+    c.tlabel(5.8, 5.61, "dd", size=SIZE_S)
+
+    c.tlabel(9.55, 5.0, "dd", "window → window handoff · 0.5 µs")
+    c.text(7.35, 5.28, 4.4, 0.28, "(Op1’s first window waits for Op0’s"
+           " last: ready 21.250 + 0.5 = 21.750)", SIZE_XS, INK_2,
+           align="center")
 
     # the example's actual timestamps, directly under the loop
-    c.text(0.7, 5.8, 11.93, 0.9,
-           "In the run:  a round fired at 1.100 reaches the decoder at 3.250."
+    c.text(0.7, 6.8, 11.93, 0.6,
+           "In the run:  a round fired at 1.100 reaches a decode unit at 3.250."
            "\nOp1’s outcome:  decoded 27.750  →  orchestrator 28.750  →  "
            "controller 32.750  →  QPU 32.900.",
-           SIZE_L, INK_2, align="center")
+           SIZE_M, INK_2, align="center")
 
 
 # ---------------------------------------------------------------- slide 3
@@ -361,8 +460,8 @@ def slide_timeline(c):
                align="center")
     c.text(tx(46.5), axis_y + 0.06, 0.7, 0.25, "µs", SIZE_XS, MUTED)
     for label, y in LANES:
-        c.text(0.02, y + BAR_H / 2 - 0.1, 1.02, 0.3, label, SIZE_S, INK,
-               align="right", tracking=CAPS_TRACKING)
+        c.text(0.02, y, 1.02, BAR_H, label, SIZE_S, INK,
+               align="right", valign="middle", tracking=CAPS_TRACKING)
 
     # --- QPU lane
     y = LANES[0][1]
@@ -400,9 +499,8 @@ def slide_timeline(c):
            "decision travels 28.750 → 32.900", SIZE_S, INK, bold=True,
            align="right")
     c.line(tx(22.25), y - 0.04, tx(22.25), y + BAR_H + 0.04, YELLOW, 2.5)
-    c.text(tx(22.25) - 3.3, y + 0.5, 3.1, 0.25, "22.250 · Op0 result:",
-           SIZE_S, INK_2, align="right")
-    c.text(tx(22.25) - 3.3, y + 0.74, 3.1, 0.25, "Pauli-frame update only",
+    c.text(tx(22.25) - 3.3, y + 0.52, 3.1, 0.5,
+           "22.250 · Op0 result:\nPauli-frame update only",
            SIZE_S, INK_2, align="right")
 
     # markers (the colored dashed lines carry identity; the labels stay in ink)
