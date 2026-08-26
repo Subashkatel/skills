@@ -11,6 +11,8 @@ Use this skill when work spans many steps, tools, agents, context compaction, or
 
 Use `agent-state.json` as the canonical current state for long tasks. Use `progress.md` for human-readable notes, `implementation-notes.md` for decisions and deviations, `tests.json` for test evidence, and domain logs for GPU, QPU, QEC, decoder, or benchmark evidence.
 
+When creating or replacing `agent-state.json`, follow `templates/agent-state.json` exactly and run `scripts/check_agent_state.py`. Plan statuses are `pending`, `in-progress`, `blocked`, `done`, or `skipped`; the checker requires `current_status`, `current_action`, and each step's `description`.
+
 ## Startup and resume
 
 1. Read `AGENTS.md` or `CLAUDE.md`, then relevant local state files.
