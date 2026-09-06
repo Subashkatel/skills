@@ -13,7 +13,7 @@ Use this skill whenever correctness, performance, numerical accuracy, hardware v
 2. Choose evidence: tests, reference implementation, invariants, algebra checks, benchmark/profiler output, simulator or hardware runs, confidence intervals, or source citations.
 3. Run checks or provide exact commands when tools are unavailable.
 4. Separate verified facts, failed checks, plausible hypotheses, skipped checks, and unverified assumptions.
-5. Record reproducibility: command, seed, hardware, backend target, dependency versions, compiler flags, data, precision, simulator, and environment.
+5. Record reproducibility: command, seed, hardware, backend target, dependency versions, compiler flags, data, precision, simulator, and environment. For Slurm, keep launch scripts on a shared filesystem and verify headers, libraries, and ABI inside the compute allocation; login-node availability is not evidence of compute-node availability.
 6. Update `tests.json`, `agent-state.json`, and domain logs when the verification result changes status or plan.
 7. Produce a short verification report that leads with the outcome and then gives evidence.
 
