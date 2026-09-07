@@ -28,6 +28,9 @@ Prompt a peer like an operator:
 
 1. Define the diff or question scope.
 2. Ask for grounded findings, not expected conclusions.
+   For an independent scientific review, use a fresh context containing the
+   claim, assumptions, artifact, and evidence. Omit the author's rationale and
+   preferred verdict; a reused collaborator is not an independent fresh review.
 3. Triage each finding against the code and evidence.
 4. Fix accepted issues, dismiss others with a reason, and rerun affected gates.
 5. Report what the peer flagged, what changed, what was dismissed, and what evidence remains.

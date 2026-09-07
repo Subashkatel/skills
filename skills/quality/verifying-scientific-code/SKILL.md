@@ -33,6 +33,14 @@ Architecture: scenario checks against quality attributes, migration safety, comp
 
 For high-risk claims, pair with `running-task-harnesses` or `using-peer-agents`. Give verifiers the spec, rubric, and evidence, not the desired conclusion.
 
+For a consequential derivation, give each nontrivial claim an ID, assumptions,
+dependencies, evidence, and status. Expand disputed steps instead of repeatedly
+asking for a verdict on the whole argument. Verify that the theorem, test, or
+formal statement still expresses the original scientific claim; a passing check
+can certify the wrong statement. Label sketches, unchecked axioms, and proof
+placeholders explicitly. Independent reviews can share errors, so agreement is
+not a substitute for a counterexample search or an external check.
+
 ## Approximation evidence
 
 If a change uses approximation, lookup tables, bounded buffers, or narrower constraints, verify the declared error budget or invariant directly. Distinguish exact equivalence, tolerance-bounded agreement, statistical confidence, and unverified assumptions.
