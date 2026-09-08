@@ -18,6 +18,10 @@ A good test fails when real behavior breaks and survives refactors that preserve
 7. Falsify important tests. For a regression test written after a fix, break or revert the production path once and confirm red for the expected reason, then restore and confirm green.
 8. Promote useful probes. Delete scratch probes after use or turn them into durable tests when they guard real behavior.
 
+## Clocked RTL protocols
+
+Drive stimulus away from the sampling edge to avoid testbench races. Check valid and payload at the acceptance edge before nonblocking updates. After any stalled cycle, require valid and unchanged payload on the next edge even when ready becomes high. Reject unknown control values and unknown payload whenever valid is asserted, including stalled cycles. Falsify the monitor with a result that changes only on stall release.
+
 ## What not to assert
 
 - Type guarantees the compiler already enforces.

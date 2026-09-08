@@ -22,5 +22,14 @@
       "controls device/precision/seed",
       "keeps tests readable"
     ]
+  },
+  {
+    "prompt": "Verify an RTL ready/valid output that survives stalls but changes on the ready-release edge.",
+    "checks": [
+      "drives away from sampling edge and checks before nonblocking updates",
+      "asserts prior-stall stability regardless of current ready",
+      "rejects unknown valid payload during stalls and acceptance",
+      "release-edge mutation fails for the expected reason"
+    ]
   }
 ]
