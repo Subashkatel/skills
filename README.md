@@ -2,7 +2,7 @@
 
 AI agent skills for Codex and Claude.
 
-This repository contains 36 skills organized by domain under `skills/<category>/<skill-name>/`.
+This repository contains 39 skills organized by domain under `skills/<category>/<skill-name>/`.
 
 ## Layout
 
@@ -41,6 +41,7 @@ Each skill package contains its own `SKILL.md` and optional support files. Codex
 
 ### Architecture
 
+- [`applying-system-design-principles`](skills/architecture/applying-system-design-principles/SKILL.md)
 - [`designing-architectures`](skills/architecture/designing-architectures/SKILL.md)
 - [`designing-classical-architectures`](skills/architecture/designing-classical-architectures/SKILL.md)
 - [`planning-implementations`](skills/architecture/planning-implementations/SKILL.md)
@@ -83,6 +84,8 @@ Each skill package contains its own `SKILL.md` and optional support files. Codex
 - [`writing-durable-docs`](skills/research-docs/writing-durable-docs/SKILL.md)
 - [`explaining-changes`](skills/research-docs/explaining-changes/SKILL.md)
 - [`refining-prompts`](skills/research-docs/refining-prompts/SKILL.md)
+- [`making-slides`](skills/research-docs/making-slides/SKILL.md)
+- [`applying-design-principles`](skills/research-docs/applying-design-principles/SKILL.md)
 
 ### Skill Maintenance
 

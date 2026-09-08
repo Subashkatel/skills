@@ -1,7 +1,7 @@
 {
   "name": "skills",
-  "version": "1.2.0",
-  "description": "37 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts.",
+  "version": "1.3.0",
+  "description": "39 skills across core, architecture, quantum-systems, gpu, quality, memory, research-docs, skill-maintenance, and prompts.",
   "author": {
     "name": "subashkatel"
   },
@@ -12,6 +12,7 @@
     "./skills/core/recon-codebases",
     "./skills/architecture/closing-specs",
     "./skills/architecture/designing-architectures",
+    "./skills/architecture/applying-system-design-principles",
     "./skills/architecture/designing-classical-architectures",
     "./skills/architecture/implementing-specs",
     "./skills/architecture/planning-implementations",
@@ -38,6 +39,7 @@
     "./skills/research-docs/reviewing-research",
     "./skills/research-docs/writing-durable-docs",
     "./skills/research-docs/making-slides",
+    "./skills/research-docs/applying-design-principles",
     "./skills/skill-maintenance/auditing-skills",
     "./skills/skill-maintenance/authoring-agent-skills",
     "./skills/skill-maintenance/evaluating-agent-skills",
