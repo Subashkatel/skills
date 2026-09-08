@@ -20,6 +20,8 @@ A good test fails when real behavior breaks and survives refactors that preserve
 
 ## Clocked RTL protocols
 
+Compile every conditional testbench variant, including negative monitor modes, before expensive builds. A passing positive variant does not establish that the negative mode elaborates; keep these checks in the permitted compute environment.
+
 Drive stimulus away from the sampling edge to avoid testbench races. Check valid and payload at the acceptance edge before nonblocking updates. After any stalled cycle, require valid and unchanged payload on the next edge even when ready becomes high. Reject unknown control values and unknown payload whenever valid is asserted, including stalled cycles. Falsify the monitor with a result that changes only on stall release.
 
 ## What not to assert
