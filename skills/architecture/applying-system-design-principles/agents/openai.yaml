@@ -1,0 +1,4 @@
+interface:
+  display_name: "Applying System Design Principles"
+  short_description: "Check abstractions against Parnas, Dijkstra, Lampson, gem5, Brooks, Conway, Hyrum, Waldo"
+  default_prompt: "Use $applying-system-design-principles for this task."

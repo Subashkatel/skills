@@ -22,5 +22,13 @@
       "review path",
       "risks"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "What is two plus two?",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

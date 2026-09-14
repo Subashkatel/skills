@@ -22,5 +22,13 @@
       "identifies timing assumptions",
       "hands off QEC details"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Format an OpenQASM string without changing circuit semantics.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

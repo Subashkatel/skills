@@ -7,7 +7,7 @@ description: "Select a small set of skills for a task spanning multiple scientif
 
 ## Purpose
 
-Choose the right skills and order for complex work. Do not load every skill. Pick the smallest sequence that reduces risk. For large work, prefer a factory loop: map unknowns, slice a living spec, implement verified slices, close the spec into durable rationale.
+Choose the right skills and order for complex work. Do not load every skill. Pick the smallest sequence that reduces risk. Choose according to the next unresolved task, not a fixed chain.
 
 ## Select by the next unresolved job
 

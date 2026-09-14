@@ -22,5 +22,13 @@
       "records false positives",
       "applies accepted fixes"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Run one already-configured focused test once.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

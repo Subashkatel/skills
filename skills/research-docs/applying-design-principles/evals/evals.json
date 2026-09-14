@@ -1,0 +1,34 @@
+[
+  {
+    "prompt": "Critique the layout of this results figure.",
+    "checks": [
+      "checks alignment, hierarchy, direct labels and meaningful grouping",
+      "applies quantitative heuristics with context",
+      "does not assert accessibility compliance from generic contrast percentages"
+    ]
+  },
+  {
+    "prompt": "This slide feels empty.",
+    "checks": [
+      "enlarges and aligns the focal element",
+      "adds only content that answers a missing question",
+      "preserves deliberate whitespace"
+    ]
+  },
+  {
+    "prompt": "Design a dense backup table for lookup during questions.",
+    "checks": [
+      "allows useful lookup density",
+      "does not force memory chunk limits onto a reference table",
+      "keeps labels legible"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Refactor a Python function without changing a visual artifact.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  }
+]

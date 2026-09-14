@@ -1,0 +1,34 @@
+[
+  {
+    "prompt": "Make three research slides from the supplied measured CSV.",
+    "checks": [
+      "uses traceable CSV values without requiring a new experiment",
+      "native editable pptx text, owner typography and one focal idea",
+      "inspects actual deck renders or discloses mirror-only limits"
+    ]
+  },
+  {
+    "prompt": "The deck has too much empty space; improve its layout.",
+    "checks": [
+      "scales the focal content and type",
+      "does not add filler boxes or icons",
+      "keeps data and claims unchanged"
+    ]
+  },
+  {
+    "prompt": "Fix the serif font and wrapping in this existing deck.",
+    "checks": [
+      "does not rerun the scientific experiment",
+      "checks actual font availability and rendered wrapping",
+      "uses no em dashes"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Plot benchmark data as a standalone publication figure, not slides.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  }
+]

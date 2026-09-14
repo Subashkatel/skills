@@ -2,7 +2,7 @@
   {
     "prompt": "Keep track of this GPU optimization.",
     "checks": [
-      "updates agent-state and performance log",
+      "updates the existing task record and performance log",
       "records deviations",
       "records benchmark evidence"
     ]
@@ -10,7 +10,7 @@
   {
     "prompt": "Long QEC simulation task.",
     "checks": [
-      "creates qec-experiments.json",
+      "records the experiment evidence in the existing suitable ledger",
       "records seeds/results",
       "updates current state"
     ]
@@ -21,6 +21,14 @@
       "records ADRs",
       "updates next action",
       "tracks tests and handoff"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Fix a one-line typo without creating tracking files.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
     ]
   }
 ]

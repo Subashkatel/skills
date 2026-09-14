@@ -22,5 +22,13 @@
       "identifies memory/occupancy hypotheses",
       "does not claim speedup without data"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain this CPU-only Python function.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

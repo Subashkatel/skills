@@ -16,5 +16,13 @@
     "name": "Performance claim",
     "input": "Renderer is faster under software fallback.",
     "expected_behavior": "Rejects fallback as performance oracle and asks for hardware profiling evidence."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Change the caption below an otherwise correct image.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

@@ -48,3 +48,11 @@ If a change uses approximation, lookup tables, bounded buffers, or narrower cons
 ## Readability gate
 
 Changed code is not verified if it is hard to audit. Check for unexplained abbreviations, dense expressions, copy-paste blocks, unclear comments, and unnecessary abstractions. Record any justified tradeoff.
+
+## Model and source credibility
+
+For simulation validation or source-derived cost models, read
+`references/source-credibility.md`. Define intended use; distinguish verification
+from empirical validation, measured values from surrogates, and timing-model
+results from logical-error evidence. Use the `reviewing-research` source index
+for the owner's local corpus. No checklist by itself establishes NASA compliance.

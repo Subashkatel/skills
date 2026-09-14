@@ -10,30 +10,30 @@ style), not consulting decks, and that hold up typographically.
 
 ## Before drawing anything
 
-1. If example decks or style PDFs exist in the workspace (filenames like
-   "slide example ..."), read them first and match them.
-2. Get the numbers from a real run of the system being presented: run the
-   simulator/experiment, capture the trace, and use only values you
-   observed. Never invent illustrative numbers.
-3. If a `dataviz` skill is available, load it before any chart/timeline
-   slide; either way use the validated palette (blue `#2a78d6`, aqua
-   `#1baf7a`, yellow `#eda100` on white) in fixed slot order.
-4. For layout, emphasis, and white-space decisions, load
-   `applying-design-principles` (the Universal Principles of Design
-   synthesis); it governs when space is composition and when it is vacancy.
+1. Use supplied examples when available. The original example decks and
+   typography books are not on disk in the indexed collection; their distilled
+   preferences survive in `references/typography.md` and the rules below.
+2. Use traceable existing runs, supplied data, or cited source numbers. Run a
+   new experiment only when the requested content needs it and resources are
+   authorized. A font or layout fix does not require rerunning the science.
+   Label a hypothetical example explicitly and never present it as measurement.
+3. Use the owner palette (blue `#2a78d6`, aqua `#1baf7a`, yellow `#eda100`
+   on white) consistently. A chart skill is optional when chart design needs it.
+4. For a difficult layout decision, use `applying-design-principles` or its
+   reference. Do not load a second skill solely because the output is visual.
 
 ## Layout rules (one idea per slide)
 
 - Plain white background. One centered title set in LETTERSPACED CAPITALS
   at text weight (never bold; weight decreases as size increases). ONE
   focal element per slide (a diagram, a timeline, a breakdown).
-- **Fill the frame by scale, not by count** (owner feedback 2026-07-12):
+- **Fill the frame by scale, not by count** (owner preference):
   size the focal element and the type so the slide is occupied; undersized
   content floating in empty space reads as accidental. Whitespace stays,
   but as deliberate composition around large content. Never add boxes,
   icons, or filler bullets to occupy space.
 - One serif family throughout: name "Palatino Linotype" in the pptx
-  (Office has it; Linux substitutes URW P052). The typography must be
+  (check availability; URW P052 is a possible Linux substitute). The typography must be
   VISIBLE; a generic sans deck that merely follows the rules numerically
   reads as "plain" and gets rejected.
 - Italic serif for commentary, captions, and takeaway lines; bold reserved
@@ -50,7 +50,7 @@ style), not consulting decks, and that hold up typographically.
   `#52514e`). Never color a text label when a colored mark already
   identifies it.
 
-## Typography rules (non-negotiable)
+## Owner typography rules
 
 - Compose on a modular scale; never use off-scale sizes. Root scale (13.33
   by 7.5 in pages): 10.5, 12, 13.5, 15, 18, 24, 30, 36 pt. For projected
@@ -71,8 +71,9 @@ style), not consulting decks, and that hold up typographically.
 
 - Write native pptx text and shapes with python-pptx (vector text: crisp
   and editable; never raster text through PIL/matplotlib into the deck).
-- Mirror the same layout calls to matplotlib to render preview PNGs, from
-  one layout spec, so previews match the deck. Working pattern:
+- Prefer rendering the actual pptx for acceptance. A matplotlib mirror from
+  one layout spec can provide fast draft previews, but cannot prove Office
+  font substitution, line wrapping, or animation playback. Working pattern:
   `references/build-pattern.md`; a runnable self-contained example ships
   with this skill at `scripts/example_builder.py`
   (`python example_builder.py out.pptx preview_dir`; deps:
@@ -85,19 +86,20 @@ style), not consulting decks, and that hold up typographically.
 
 ## Visual QA (required before declaring done)
 
-1. Render preview PNGs and actually read every slide image.
+1. Render and inspect every changed slide and a whole-deck overview. Inspect
+   every slide for a new deck or a change to shared layout or typography.
 2. Hunt for: text overlapping boxes/lines, labels crossing markers,
    off-center bar labels, text overflowing its box or the page edge, sizes
    off the scale, em dashes, undersized content adrift in empty space.
-3. Fix and re-render until a pass is clean. A deck is done only when every
-   preview has been viewed clean and the pptx opens with the expected
-   slide/shape counts.
+3. Fix visual defects and re-render affected slides. Confirm the pptx opens
+   and text remains editable. If only mirror previews are available, report
+   that viewer-specific layout and playback remain unverified.
 
 ## Eval cases
 
-- "Make 3 slides explaining the decoder pipeline with an example" → runs
-  the simulator for real numbers, builds pptx via the dual-backend
-  pattern, QAs previews.
+- "Make 3 slides explaining the decoder pipeline with an example" → uses
+  traceable results or runs a needed authorized experiment, builds editable
+  pptx, and checks rendered slides.
 - "The fonts on these slides are illegible, redo them" → switches raster
   text to native pptx text, applies the modular scale one step up,
   re-verifies renders.

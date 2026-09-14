@@ -59,3 +59,7 @@ For nontrivial architecture work, produce:
 - Migration plan with small safe steps.
 - Verification plan.
 - ADR if the decision is durable.
+
+For decsim modeling decisions, read the active worktree's decision record.
+Use `reviewing-research` and its owner source index only when a cited referent
+is needed; distinguish the proposed architecture from implemented behavior.

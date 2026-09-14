@@ -22,5 +22,13 @@
       "includes migration",
       "defines tests"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Replace this heading with the exact supplied text.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

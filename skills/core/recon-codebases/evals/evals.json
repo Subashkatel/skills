@@ -22,5 +22,13 @@
       "finds config/tests",
       "recommends architecture from evidence"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain the difference between a list and tuple without referring to this repository.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

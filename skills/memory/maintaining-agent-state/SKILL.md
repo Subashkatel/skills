@@ -36,8 +36,8 @@ Update at meaningful milestones, changes of direction, and handoff or compaction
 
 ## Fresh-agent test
 
-State is good when a fresh agent can read `AGENTS.md`, `agent-state.json`, `tests.json`, the relevant spec, and git notes, then choose the same next action without conversation history.
+State is good when a fresh agent can read the current task record and its relevant evidence links, then choose the same next action without conversation history.
 
 ## Templates and checks
 
-Start from `templates/agent-state.json`. Run `scripts/check_agent_state.py` with `agent-state.json` when available before handoff or after compaction.
+If using `agent-state.json`, start from `templates/agent-state.json` and validate schema changes with `scripts/check_agent_state.py`. An existing spec handoff does not need conversion.

@@ -28,7 +28,7 @@ Convert research papers, specifications, and technical documentation into implem
    - Required libraries/tools.
    - Tests or reproduction steps.
 5. Track confidence and conflicts between sources.
-6. Provide citations or exact source references when the environment supports them.
+6. Cite title/version and the exact supporting section or page. Preserve units, conditions, and distinctions between measurement, proxy, proposal, and implementation. Treat missing corpus evidence as a search limit.
 
 ## Domain emphasis
 
@@ -41,3 +41,11 @@ QEC papers: extract code construction, noise model, decoder, metrics, threshold/
 ## Output
 
 Use `templates/research-implementation-brief.md`. Avoid turning a paper into vague advice; produce implementable structure and explicit uncertainty.
+
+## Source routes
+
+For decsim or the owner's architecture study, use
+`references/owner-source-index.md` to find the relevant local source. For
+calibration, uncertainty, or validation claims, use the
+[scientific credibility reference](../../quality/verifying-scientific-code/references/source-credibility.md).
+The index is navigation, not a reading checklist or proof of a claim.

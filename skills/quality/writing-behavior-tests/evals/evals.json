@@ -31,5 +31,13 @@
       "rejects unknown valid payload during stalls and acceptance",
       "release-edge mutation fails for the expected reason"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Format an existing Markdown table; no code behavior changes.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

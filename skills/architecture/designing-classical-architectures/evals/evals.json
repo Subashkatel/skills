@@ -22,5 +22,13 @@
       "preserves behavior with tests",
       "does not create a framework for one-off code"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain the physical connectivity of this QPU; no software design is requested.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

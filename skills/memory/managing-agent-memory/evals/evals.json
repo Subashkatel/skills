@@ -22,5 +22,13 @@
       "does not duplicate",
       "records replacement evidence"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Report the current command status; do not save a lesson.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

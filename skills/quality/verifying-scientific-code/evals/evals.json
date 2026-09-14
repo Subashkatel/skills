@@ -22,5 +22,21 @@
       "uses simulator/hardware evidence",
       "handles bit ordering and uncertainty"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Correct the spelling of a plot title; the plotted results are unchanged.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "Our decoder hop uses a published cache latency; can we call this validated hardware performance?",
+    "checks": [
+      "labels surrogate calibration",
+      "separates software verification from empirical model validation",
+      "requires relevant validation evidence and uncertainty before the claim"
+    ]
   }
 ]

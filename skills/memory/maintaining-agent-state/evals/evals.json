@@ -22,5 +22,13 @@
       "ensures remaining work is empty or explained",
       "updates final status before reporting"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Make a single known typo correction and finish.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

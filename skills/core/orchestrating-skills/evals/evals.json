@@ -4,7 +4,7 @@
     "checks": [
       "selects QEC and GPU skills",
       "includes verification",
-      "orders research/recon first"
+      "inspects unresolved source or code questions without a mandatory reading chain"
     ]
   },
   {
@@ -27,8 +27,16 @@
     "prompt": "Plan a flaky QEC decoder investigation with many seeds and verifier checks.",
     "checks": [
       "uses running-task-harnesses",
-      "updates agent-state",
+      "updates the existing task record",
       "defines stop condition and evidence"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Correct one typo in an existing README.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
     ]
   }
 ]

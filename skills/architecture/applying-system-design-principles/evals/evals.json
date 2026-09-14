@@ -1,0 +1,51 @@
+[
+  {
+    "prompt": "Does our simulator have good abstractions? Check the design before the final pass.",
+    "checks": [
+      "writes the changeability list from the system's purpose and names one owner per decision",
+      "runs the uses graph and reports cycles and levels",
+      "classifies class-recognition hits against the plug-in contract and exemptions before reporting failures",
+      "cites a source line for every principle applied"
+    ]
+  },
+  {
+    "prompt": "Our golden test keeps failing with no code change on the same point.",
+    "checks": [
+      "suspects an interface or golden that promises an order the design does not (Parnas, Hyrum) before suspecting the code",
+      "preserves duplicates with a multiset when order alone is incidental",
+      "does not add a retry, sleep, or tolerance"
+    ]
+  },
+  {
+    "prompt": "Add a new decoder kind to the pipeline.",
+    "checks": [
+      "checks the active repository plug-in contract and confines changes to justified owners and wiring",
+      "reports class recognition that violates the plug-in contract, considering local exemptions",
+      "classifies any new cross-package import as port, record, or reach-in"
+    ]
+  },
+  {
+    "prompt": "Should the weak decoder read the syndrome buffer directly instead of through the link?",
+    "checks": [
+      "identifies which latency, memory, failure, and concurrency differences actually apply to this modeled boundary",
+      "does not treat the difference as a tuning parameter",
+      "expresses the required boundary contract without forcing a new object or interface"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Rename a local loop variable for readability.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "The absolute-import scanner found no edges but the package uses relative imports. Is layering proven?",
+    "checks": [
+      "states incomplete scanner coverage",
+      "inspects actual dependencies",
+      "does not equate imports with semantic uses or declare success"
+    ]
+  }
+]

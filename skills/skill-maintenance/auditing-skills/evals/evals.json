@@ -22,5 +22,13 @@
       "keeps concise",
       "validates structure"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Implement a function in an application that happens to use Codex.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

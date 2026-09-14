@@ -18,9 +18,17 @@
   {
     "prompt": "Refactor architecture without changing behavior.",
     "checks": [
-      "adds characterization tests first",
+      "uses existing contract coverage, adding a characterization test only for an uncovered risk",
       "keeps scope minimal",
-      "updates tests.json and agent-state"
+      "records relevant results without requiring new state files"
+    ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Change only punctuation in a README.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
     ]
   }
 ]

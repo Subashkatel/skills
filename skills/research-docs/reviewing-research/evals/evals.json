@@ -22,5 +22,21 @@
       "identifies conflicts",
       "produces implementation implications"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Fix one misspelled name in a comment without changing its meaning.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "Apply D20 to the base decsim checkout because the control-cost worktree has it.",
+    "checks": [
+      "checks the active worktree decisions",
+      "does not silently transplant the decision",
+      "uses the owner source index as navigation rather than authority"
+    ]
   }
 ]

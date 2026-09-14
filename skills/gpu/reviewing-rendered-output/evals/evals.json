@@ -16,5 +16,13 @@
     "name": "Ambiguous plot",
     "input": "A plot style choice is subjective and target is unclear.",
     "expected_behavior": "Asks user to choose with artifact context rather than guessing silently."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Tell me the value of this supplied scalar result.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

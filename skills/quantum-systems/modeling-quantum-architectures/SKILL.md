@@ -44,3 +44,7 @@ Help the coding agent reason about quantum architecture as a layered system, not
 ## Quantum architecture readability rules
 
 Architecture code and docs must use names that reveal the layer and contract: physical qubit, logical qubit, control pulse, backend target, circuit instruction, transpiler pass, runtime job, syndrome schedule, decoder latency, and logical-resource estimate. Avoid generic adapters and managers unless the specific role is named at the boundary.
+
+For decsim modeling decisions, read the active worktree's decision record.
+Use `reviewing-research` and its owner source index only when a cited referent
+is needed; distinguish the proposed architecture from implemented behavior.

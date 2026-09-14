@@ -22,5 +22,13 @@
       "identifies ISA/target constraints",
       "surfaces decoder latency risks"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Fix a local arithmetic typo without changing interfaces.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

@@ -9,6 +9,14 @@
   },
   {
     "prompt": "After implementation, review whether the architecture change was overbuilt.",
-    "expected": "Applies the seven-question pass, records rejected shortcuts, and recommends the smallest correct follow-up."
+    "expected": "Considers applicable simplifications, preserves invariants, and recommends a justified follow-up without seven mandatory stages."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Fix the spelling of a variable in a comment; no behavior change.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

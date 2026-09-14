@@ -13,5 +13,13 @@
     "name": "long-document-analysis-prompt",
     "prompt": "Use claude-prompt-refiner to rewrite: Summarize all these PDFs and tell me what matters.",
     "expected_behavior": "Structures source documents, task, grounding requirements, citations or source references, and decision-oriented output."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Rewrite this prompt for Codex, not Claude.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

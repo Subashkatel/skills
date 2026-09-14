@@ -16,5 +16,21 @@
     "name": "Overtriggering",
     "input": "A skill fires on every coding task.",
     "expected_behavior": "Narrows description triggers and boundaries rather than adding body-only caveats."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain what a decoder is without creating a skill.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "Modernize all skills, using these repository documents as read-only references.",
+    "checks": [
+      "resolves symlinks and preserves divergent clone additions",
+      "changes only skill package files",
+      "preserves owner constraints while narrowing triggers"
+    ]
   }
 ]

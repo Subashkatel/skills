@@ -16,5 +16,20 @@
     "name": "Benchmark report",
     "input": "A GPU benchmark evidence report includes current numbers.",
     "expected_behavior": "Allows numbers because the artifact is evidence, while recording device/methodology/provenance."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Run a local test and report its exit status.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "Prune an API contract containing units, failure behavior, lifecycle and scientific scope limits.",
+    "checks": [
+      "preserves all necessary caller-facing contracts",
+      "does not replace essential content with a vague pointer"
+    ]
   }
 ]

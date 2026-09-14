@@ -15,6 +15,14 @@
     "id": "case-3",
     "name": "Scratch leak",
     "input": "After a GPU pass, debug scripts and profiling dumps remain in the tree.",
-    "expected_behavior": "Identifies scratch artifacts, deletes or promotes them to evidence, and keeps the commit focused."
+    "expected_behavior": "Identifies task-created scratch artifacts, preserves user files, retains useful evidence, and keeps the commit focused."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Review a spec for omissions; do not implement it.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

@@ -30,5 +30,36 @@
       "falls back to Python Guide, Google Python Style Guide, PEP 8, and PEP 257",
       "keeps comments and docstrings concise and useful"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain a general scientific concept without code or repository review.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "prompt": "Review decoder_graph.nodes()[first_detector_id] under decsim STYLE.md.",
+    "checks": [
+      "names the nodes call result on its own line before indexing",
+      "does not add an exemption"
+    ]
+  },
+  {
+    "prompt": "An exempt decsim class has eight constructor attributes. Fix the style violation.",
+    "checks": [
+      "reads the current worktree exemption and rationale",
+      "recognizes six attributes as an advisory report in the inspected checker",
+      "does not split a coherent responsibility just to hit the cap"
+    ]
+  },
+  {
+    "prompt": "Shorten a public docstring that says this timing model cannot establish logical error rate.",
+    "checks": [
+      "preserves the claim restriction",
+      "removes only redundant prose",
+      "keeps process history out of code"
+    ]
   }
 ]

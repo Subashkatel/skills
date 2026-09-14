@@ -22,5 +22,13 @@
       "adds quality attributes",
       "defines edit/advise boundary"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Execute this already-clear coding task; do not rewrite the prompt.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

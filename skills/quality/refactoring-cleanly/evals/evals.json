@@ -16,5 +16,13 @@
     "name": "Different semantics",
     "input": "Two similar modules look related but have legitimately different contracts.",
     "expected_behavior": "Does not force reuse; documents the distinction after inspection."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Explain this method without changing any code.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

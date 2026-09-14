@@ -9,7 +9,7 @@ A good test fails when real behavior breaks and survives refactors that preserve
 
 ## Workflow
 
-1. Write one tracer test at a time. Assert the contract, see it fail when possible, make the code earn green, then choose the next test from what you learned.
+1. Name the plausible wrong implementation a new test catches that existing tests miss. Prefer a property or metamorphic check when it captures the law. Write one tracer test at a time. Assert the contract, see it fail when possible, make the code earn green, then choose the next test from what you learned.
 2. Use the focused runner, then required repository gates. Broaden or repeat checks when changes, failures, or unresolved risk justify it.
 3. Assert observable behavior through the outermost practical surface: return values, persisted state, command output, CPU/GPU oracle comparison, circuit output, syndrome stream, detector model, logical outcome, or benchmark metric.
 4. Control variables: seed, data size, device, precision mode, noise model, circuit, decoder, and configuration unless that variable is the subject.
@@ -43,3 +43,8 @@ Tests must be as readable as production code. Name fixtures, seeds, tolerances, 
 ## State integration
 
 For TDD, pair with `practicing-tdd`. Record the evidence in the existing task record or report; update the plan only when results change it.
+
+For decsim tests, read the active worktree's `STYLE.md`: assertions for maintained
+internal invariants do not need dedicated tests, and unreachable invalid states
+are not new requirements. Keep meaningful values in the test and histories in
+reports. Preserve required regression coverage when pruning duplicate tests.

@@ -1,7 +1,7 @@
 [
   {
     "prompt": "Start a new Codex session in a repo and prepare to continue prior GPU work.",
-    "expected": "Resolves a session ID, reviews recent git log with notes, and checks state files before making claims."
+    "expected": "Reads relevant existing handoff and history, uses a session ID if available, and avoids creating an ID-only startup file."
   },
   {
     "prompt": "After a nontrivial QEC commit, record why a decoder design changed.",
@@ -10,5 +10,13 @@
   {
     "prompt": "After compaction, resume a long architecture task.",
     "expected": "Reloads recent commits, git notes, and progress files, then grounds next steps in durable evidence."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Answer a simple code question without editing files or git metadata.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

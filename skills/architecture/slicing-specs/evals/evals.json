@@ -16,5 +16,13 @@
     "name": "Small bug",
     "input": "User asks for a one-line typo or doc fix.",
     "expected_behavior": "Does not force a spec folder; explains that a simple direct change is enough."
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Fix this one-line documentation typo.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

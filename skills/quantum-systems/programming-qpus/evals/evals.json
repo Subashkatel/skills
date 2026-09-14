@@ -22,5 +22,13 @@
       "records shot count and statistical uncertainty",
       "does not claim hardware validity without job evidence"
     ]
+  },
+  {
+    "name": "selection-near-miss",
+    "prompt": "Summarize the layout of a QPU photo; no circuit or execution task.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
   }
 ]

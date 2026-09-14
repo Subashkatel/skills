@@ -5,23 +5,23 @@ description: "Apply the owner's naming, one-action, comment, and simplicity rule
 
 # Writing Readable Code
 
-Use this skill whenever you write, edit, review, or refactor code. The goal is code that a careful reader can understand without decoding abbreviations, hidden side effects, clever expression chains, or copy-pasted variants.
+Use this skill for code changes and readability reviews that need the owner's conventions. A question asking what code does authorizes an answer, not edits. The goal is code that a careful reader can understand without decoding abbreviations, hidden side effects, clever expression chains, or copy-pasted variants.
 
 ## Readability contract
 
 1. **Every line does one clear thing.** Avoid dense lines that call multiple functions, index into the result, transform it again, and branch on it. Split them into named intermediate values.
-2. **Use intermediate variables as documentation.** Prefer `window_manager = self.window_manager`, `decoded_observable_count = len(decoded_observables)`, and `syndrome_column = syndrome_matrix[:, detector_index]` over abbreviation or expression nesting.
+2. **Use intermediate variables as documentation.** Prefer `decoded_observable_count = len(decoded_observables)` and `syndrome_column = syndrome_matrix[:, detector_index]` over abbreviation or expression nesting.
 3. **No unexplained abbreviations.** Names must say what the thing is or does. Avoid `c`, `cnt`, `cou`, `wm`, `cfg`, `arr`, `buf`, `tmp`, `res`, `val`, `obj`, `ctx`, and similar shortcuts unless the project has a strong local convention and the scope is tiny. When in doubt, spell it out.
 4. **Names reflect role, not vague type.** Prefer `detector_error_probability`, `logical_observable_index`, `window_manager`, `sample_count`, and `launch_configuration` over `data`, `item`, `manager`, `dict`, or `result` when the role is known.
 5. **No copy-paste blocks.** If two blocks are the same concept, create one clear owner. If they differ in meaningful scientific semantics, keep them separate and name the distinction explicitly.
-6. **Comments explain why, not what.** Add short comments or docstrings for invariants, units, coordinate frames, memory layout, numerical tolerance, noise model, decoder assumption, QPU backend constraint, hardware constraint, or non-obvious performance tradeoff. Do not narrate obvious syntax.
+6. **Comments explain why, not what.** Add short comments or docstrings for invariants, units, coordinate frames, memory layout, numerical tolerance, noise model, decoder assumption, QPU backend constraint, hardware constraint, or non-obvious performance tradeoff. Do not narrate syntax or defect history. State invariants in the present tense, at their owner; keep finding IDs, review rounds, dates, and report references out of source and tests. Preserve necessary API scope and claim restrictions.
 7. **Prefer simple control flow.** Use guard clauses, small scopes, and named predicates. Avoid deeply nested conditionals, multi-purpose variables, and clever one-liners.
 8. **Refactoring must follow the same contract.** When asked to refactor existing code, improve names, break dense expressions, remove copy-paste, and preserve behavior with tests. Do not make unrelated style sweeps unless requested.
 
 ## Language guide policy
 
-- **Project style wins first.** Read local `AGENTS.md`, `CLAUDE.md`, README, formatter config, lint config, and nearby code before choosing style.
-- **Python:** follow the Python Guide, Google Python Style Guide, PEP 8, and PEP 257. Use `references/python-readable-code.md` when writing or reviewing Python.
+- **Project style wins first.** Read the applicable local instructions, style rules, and nearby code needed for the change. For decsim, read the active worktree's `STYLE.md`; use `references/decsim-style.md` for its checker and source-navigation details.
+- **Python:** follow the Python Guide, Google Python Style Guide, PEP 8, and PEP 257. Use `references/python-readable-code.md` when local Python conventions leave a question unresolved.
 - **C, C++, CUDA, HIP, SYCL, Triton, Rust, Go, Java, TypeScript, shell, or other languages:** use `references/language-style-guide-index.md` to pick the appropriate official or widely accepted style guide. If internet access is available and the project does not define a style, consult the current guide before making broad edits.
 - **Scientific notation exception:** Short names such as `x`, `y`, `z`, `i`, `j`, `k`, `m`, `n`, or `p` are acceptable only for standard mathematical notation, tiny loop scopes, paper-matching formulas, or conventional GPU indices. Prefer descriptive variants like `row_index`, `sample_index`, `thread_index_x`, `qubit_count`, and `detector_count` when the value survives beyond a few lines.
 
@@ -69,7 +69,8 @@ Better:
 detector_ids = self.map_detectors_to_ids(detectors)
 first_detector_id = detector_ids[0]
 decoder_graph = self.decoder.graph()
-first_detector_node = decoder_graph.nodes()[first_detector_id]
+detector_nodes = decoder_graph.nodes()
+first_detector_node = detector_nodes[first_detector_id]
 
 return first_detector_node.error_probability < tolerance
 ```
@@ -94,4 +95,6 @@ Readability is still required in hot paths. If a dense construct is necessary fo
 
 ## Done
 
-The code is done only when it is correct, verified, minimal, and readable. A reviewer should be able to identify the purpose of each variable, understand each nontrivial line, and see why comments/docstrings exist.
+The change is complete when the requested behavior and applicable checks pass and the touched code is readable. Do not add tests for prose or formatting changes, or repeat passed checks without new cause. A reviewer should be able to identify the purpose of each variable, understand each nontrivial line, and see why comments/docstrings exist.
+
+Use no em dashes in code comments, documentation, or reports for this owner.
