@@ -2,14 +2,14 @@
 
 AI agent skills for Codex and Claude.
 
-This repository contains 39 skills organized by domain under `skills/<category>/<skill-name>/`.
+This repository contains 24 skills organized by domain under `skills/<category>/<skill-name>/`.
 
 ## Layout
 
 ```text
 skills/
   core/
-    mapping-unknowns/
+    assessing-changes/
       SKILL.md
       agents/openai.yaml
       evals/evals.json
@@ -19,10 +19,12 @@ skills/
       scripts/
       reference/
       templates/
-  prompts/
-    claude-prompt-refiner/
+  memory/
+    keeping-work-records/
       SKILL.md
       references/
+      scripts/
+      templates/
 .claude-plugin/
   plugin.json
   marketplace.json
@@ -30,73 +32,59 @@ skills/
 
 Each skill package contains its own `SKILL.md` and optional support files. Codex UI metadata lives in `agents/openai.yaml`.
 
+Do not load every skill. Pick the smallest set that reduces risk for the job in
+front of you, chosen from the descriptions below, and add another only when the
+next job crosses its boundary.
+
 ## Skills
 
 ### Core
 
-- [`mapping-unknowns`](skills/core/mapping-unknowns/SKILL.md)
-- [`recon-codebases`](skills/core/recon-codebases/SKILL.md)
-- [`orchestrating-skills`](skills/core/orchestrating-skills/SKILL.md)
-- [`approximating-changes`](skills/core/approximating-changes/SKILL.md)
+- [`assessing-changes`](skills/core/assessing-changes/SKILL.md): unknowns and simpler alternatives before a costly change.
+- [`recon-codebases`](skills/core/recon-codebases/SKILL.md): inspect a repository before making claims or edits.
 
 ### Architecture
 
-- [`applying-system-design-principles`](skills/architecture/applying-system-design-principles/SKILL.md)
-- [`designing-architectures`](skills/architecture/designing-architectures/SKILL.md)
-- [`designing-classical-architectures`](skills/architecture/designing-classical-architectures/SKILL.md)
-- [`planning-implementations`](skills/architecture/planning-implementations/SKILL.md)
-- [`slicing-specs`](skills/architecture/slicing-specs/SKILL.md)
-- [`implementing-specs`](skills/architecture/implementing-specs/SKILL.md)
-- [`closing-specs`](skills/architecture/closing-specs/SKILL.md)
+- [`applying-system-design-principles`](skills/architecture/applying-system-design-principles/SKILL.md): module boundaries and plug-in contracts against the design principles.
+- [`designing-architectures`](skills/architecture/designing-architectures/SKILL.md): cross-layer boundaries plus classical ownership and data flow.
+- [`working-with-specs`](skills/architecture/working-with-specs/SKILL.md): plan, slice, implement and close a multi-pass spec.
 
 ### Quantum Systems
 
-- [`programming-qpus`](skills/quantum-systems/programming-qpus/SKILL.md)
-- [`modeling-quantum-architectures`](skills/quantum-systems/modeling-quantum-architectures/SKILL.md)
-- [`engineering-qec`](skills/quantum-systems/engineering-qec/SKILL.md)
-- [`engineering-qec-decoders`](skills/quantum-systems/engineering-qec-decoders/SKILL.md)
+- [`programming-qpus`](skills/quantum-systems/programming-qpus/SKILL.md): QPU programs, transpilation, shots and runtime jobs.
+- [`modeling-quantum-architectures`](skills/quantum-systems/modeling-quantum-architectures/SKILL.md): the quantum stack from hardware to application.
+- [`engineering-qec`](skills/quantum-systems/engineering-qec/SKILL.md): codes, stabilizers, schedules, detector models and simulations.
+- [`engineering-qec-decoders`](skills/quantum-systems/engineering-qec-decoders/SKILL.md): decoder design, semantics and benchmarks.
 
 ### GPU
 
-- [`programming-gpus`](skills/gpu/programming-gpus/SKILL.md)
-- [`debugging-gpu-renderers`](skills/gpu/debugging-gpu-renderers/SKILL.md)
-- [`reviewing-rendered-output`](skills/gpu/reviewing-rendered-output/SKILL.md)
+- [`programming-gpus`](skills/gpu/programming-gpus/SKILL.md): kernels, data movement and renderer debugging with measurements.
+- [`reviewing-rendered-output`](skills/gpu/reviewing-rendered-output/SKILL.md): accept plots, diagrams and images on visual evidence.
 
 ### Quality
 
-- [`writing-readable-code`](skills/quality/writing-readable-code/SKILL.md)
-- [`practicing-tdd`](skills/quality/practicing-tdd/SKILL.md)
-- [`writing-behavior-tests`](skills/quality/writing-behavior-tests/SKILL.md)
-- [`refactoring-cleanly`](skills/quality/refactoring-cleanly/SKILL.md)
-- [`verifying-scientific-code`](skills/quality/verifying-scientific-code/SKILL.md)
+- [`writing-readable-code`](skills/quality/writing-readable-code/SKILL.md): the owner's naming, one-action, comment and simplicity rules.
+- [`writing-tests`](skills/quality/writing-tests/SKILL.md): behavior tests and the test-first loop.
+- [`refactoring-cleanly`](skills/quality/refactoring-cleanly/SKILL.md): one owner per concept, no compatibility sediment.
+- [`verifying-scientific-code`](skills/quality/verifying-scientific-code/SKILL.md): evidence, uncertainty and repeated-run harnesses.
 
 ### Memory
 
-- [`tracking-work-state`](skills/memory/tracking-work-state/SKILL.md)
-- [`recording-repo-memory`](skills/memory/recording-repo-memory/SKILL.md)
-- [`maintaining-agent-state`](skills/memory/maintaining-agent-state/SKILL.md)
-- [`managing-agent-memory`](skills/memory/managing-agent-memory/SKILL.md)
-- [`running-task-harnesses`](skills/memory/running-task-harnesses/SKILL.md)
+- [`keeping-work-records`](skills/memory/keeping-work-records/SKILL.md): task record, repository handoff and durable lessons.
 
 ### Research And Docs
 
-- [`reviewing-research`](skills/research-docs/reviewing-research/SKILL.md)
-- [`writing-durable-docs`](skills/research-docs/writing-durable-docs/SKILL.md)
-- [`explaining-changes`](skills/research-docs/explaining-changes/SKILL.md)
-- [`refining-prompts`](skills/research-docs/refining-prompts/SKILL.md)
-- [`making-slides`](skills/research-docs/making-slides/SKILL.md)
-- [`applying-design-principles`](skills/research-docs/applying-design-principles/SKILL.md)
+- [`reviewing-research`](skills/research-docs/reviewing-research/SKILL.md): papers and benchmarks into grounded assumptions.
+- [`writing-durable-docs`](skills/research-docs/writing-durable-docs/SKILL.md): why a system exists, and its invariants.
+- [`explaining-changes`](skills/research-docs/explaining-changes/SKILL.md): reviewer-ready summaries, evidence and risks.
+- [`refining-prompts`](skills/research-docs/refining-prompts/SKILL.md): rough prompts into agent prompts, Claude included.
+- [`making-slides`](skills/research-docs/making-slides/SKILL.md): the owner's slide style and typography.
+- [`applying-design-principles`](skills/research-docs/applying-design-principles/SKILL.md): hierarchy, spacing and emphasis in figures and decks.
 
 ### Skill Maintenance
 
-- [`auditing-skills`](skills/skill-maintenance/auditing-skills/SKILL.md)
-- [`authoring-agent-skills`](skills/skill-maintenance/authoring-agent-skills/SKILL.md)
-- [`evaluating-agent-skills`](skills/skill-maintenance/evaluating-agent-skills/SKILL.md)
-- [`using-peer-agents`](skills/skill-maintenance/using-peer-agents/SKILL.md)
-
-### Prompts
-
-- [`claude-prompt-refiner`](skills/prompts/claude-prompt-refiner/SKILL.md)
+- [`maintaining-skills`](skills/skill-maintenance/maintaining-skills/SKILL.md): author, audit and evaluate the skills in this pack.
+- [`using-peer-agents`](skills/skill-maintenance/using-peer-agents/SKILL.md): scope and verify delegated agent work.
 
 ## Use Locally
 
@@ -116,7 +104,7 @@ claude plugin marketplace add Subashkatel/skills
 claude plugin install skills@skills
 ```
 
-This installs all 36 skills at user scope, so they are available in every project. Pull the latest skills after editing this repo with:
+This installs all 24 skills at user scope, so they are available in every project. Pull the latest skills after editing this repo with:
 
 ```sh
 claude plugin update skills@skills
