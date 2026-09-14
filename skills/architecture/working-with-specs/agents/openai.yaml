@@ -1,0 +1,4 @@
+interface:
+  display_name: "Working With Specs"
+  short_description: "Working With Specs skill workflow"
+  default_prompt: "Use $working-with-specs for this task."

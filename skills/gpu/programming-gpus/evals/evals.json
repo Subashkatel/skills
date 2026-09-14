@@ -24,8 +24,34 @@
     ]
   },
   {
-    "name": "selection-near-miss",
+    "id": "case-1",
+    "name": "Blank canvas",
+    "input": "Stats show instances but WebGPU canvas is black.",
+    "expected_behavior": "Treats validation warnings and pixels as source of truth and investigates pipeline, resource, and depth contracts."
+  },
+  {
+    "id": "case-2",
+    "name": "Depth change",
+    "input": "A pass adds depth attachment and one pipeline fails.",
+    "expected_behavior": "Updates pass-wide attachment compatibility or splits phases; does not patch one pipeline blindly."
+  },
+  {
+    "id": "case-3",
+    "name": "Performance claim",
+    "input": "Renderer is faster under software fallback.",
+    "expected_behavior": "Rejects fallback as performance oracle and asks for hardware profiling evidence."
+  },
+  {
+    "name": "selection-near-miss-cpu-python",
     "prompt": "Explain this CPU-only Python function.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-image-caption",
+    "prompt": "Change the caption below an otherwise correct image.",
     "checks": [
       "does not select this skill for this task merely because of a related keyword",
       "does not add unrelated artifacts, approval gates, or work"

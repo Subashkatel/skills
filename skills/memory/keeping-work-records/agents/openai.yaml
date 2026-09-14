@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keeping Work Records"
+  short_description: "Keeping Work Records skill workflow"
+  default_prompt: "Use $keeping-work-records for this task."

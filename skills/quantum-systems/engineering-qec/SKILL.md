@@ -50,7 +50,7 @@ Use `templates/qec-experiment-report.md` for experiments and `templates/qec-desi
 
 ## QEC simplification gate
 
-When an optimization changes the model or adds complexity, use `approximating-changes` if needed. Any approximation must preserve detector semantics, logical observables, noise-model assumptions, and reported logical-error evidence.
+When an optimization changes the model or adds complexity, use `assessing-changes` if needed. Any approximation must preserve detector semantics, logical observables, noise-model assumptions, and reported logical-error evidence.
 
 ## QEC readability rules
 

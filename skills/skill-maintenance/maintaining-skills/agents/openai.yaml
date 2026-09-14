@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintaining Skills"
+  short_description: "Maintaining Skills skill workflow"
+  default_prompt: "Use $maintaining-skills for this task."

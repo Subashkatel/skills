@@ -59,4 +59,4 @@ Peer-agent use is complete when every finding or diff has been independently ver
 
 ## Dynamic workflow use
 
-When many peer checks are needed, call `running-task-harnesses` instead of manually managing a pile of ad hoc reviews. Use one verifier per rule, claim, hypothesis, or independent slice when that reduces self-preferential bias. Keep the orchestrator responsible for synthesis, edits, state updates, and final claims.
+When many peer checks are needed, use the task-harness section of `verifying-scientific-code` instead of manually managing a pile of ad hoc reviews. Use one verifier per rule, claim, hypothesis, or independent slice when that reduces self-preferential bias. Keep the orchestrator responsible for synthesis, edits, state updates, and final claims.

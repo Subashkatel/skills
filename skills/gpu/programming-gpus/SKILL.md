@@ -1,6 +1,6 @@
 ---
 name: programming-gpus
-description: "Implement or optimize GPU kernels and data movement with correctness and hardware measurements."
+description: "Implement or optimize GPU kernels, data movement, and renderers with correctness and hardware measurements. Not for CPU-only code."
 ---
 
 # Programming GPUs
@@ -59,9 +59,45 @@ Use available local tools only. If a profiler or GPU stack is unavailable, say s
 - `scripts/gpu_env_probe.py` prints available GPU/profiler commands.
 - `scripts/repeat_command.py` can run a command repeatedly and report simple timing statistics.
 
+## Renderer debugging
+
+Use this section when correctness depends on GPU resource ownership, pass orchestration, shader contracts, depth semantics, or visual output. See `reference/renderer-checklist.md` for the detailed checks.
+
+1. **Inspect current owners.** Find device setup, pass graph, pipeline layouts, bind groups, shader contracts, camera/projection owner, depth convention, capability handling, and validation routes before changing anything.
+2. **Define resources first.** Buffers, textures, uniforms, storage layouts, bind groups, update frequency, read/write access, lifetime, alignment, and ownership should be explicit before code changes.
+3. **Choose the phase deliberately.** Use compute for parallel preparation, simulation, reductions, compaction, and work lists. Use render passes for rasterized output. Split phases when visibility or depth semantics differ.
+4. **Single-source shared contracts.** Camera layouts, projection helpers, depth modes, frame phases, vertex strides, bind-group schemas, and semantic roles should have one owner consumed by renderers, shaders, and verifiers.
+5. **Make validation visual and semantic.** Route stats, instance counts, or command success are not proof that pixels are right. Inspect actual captures and pair them with semantic probes; `reviewing-rendered-output` covers the visual acceptance pass.
+6. **Profile separately from correctness.** Software fallback renderers or headless paths can be correctness proxies but are not performance oracles.
+7. **Record evidence.** Save commands, captures, crops, profiler output, warnings, device info, and acceptance notes in the active spec or verification report.
+
+### Renderer rules
+
+- Depth is a contract: compare mode, clear value, attachment format, pass order, and pipeline state move together.
+- All pipelines in one render pass must be compatible with its attachments.
+- Do not mix translucent overlays into depth-writing opaque geometry unless the phase explicitly owns that policy.
+- Uniform and storage structs must respect alignment. Prefer obvious packing when it reduces ambiguity.
+- WGSL or shader validation warnings are failed renders until explained.
+- Stats that count submitted instances are not proof that content reached the frame.
+- If a visual change touches camera, lighting, model geometry, resource layout, and pass order at once, split it so cause is observable.
+- Frozen snapshots require owned time and seeded randomness; unowned clocks create flaky gates.
+- Capability fallbacks must match product requirements. Do not silently route production visuals through unrelated fallback code to hide missing GPU behavior.
+
+### Renderer failure smells
+
+- Canvas is black or blank while app state looks healthy.
+- A private projection helper appears beside a shared one.
+- Verifier copies renderer constants by hand.
+- A screenshot is mostly empty while counts are healthy.
+- Labels, overlays, or world-space markers use screen-space hacks instead of semantic anchors.
+- A baseline changed but nobody inspected the candidate image.
+- Performance improved on fallback or tiny fixtures only.
+
+A renderer change is done when resource contracts have one owner, validation warnings are resolved, actual captures are inspected, semantic probes agree with pixels, and performance claims use real hardware evidence when performance is claimed.
+
 ## Performance simplification gate
 
-When kernel or runtime complexity grows, consider `approximating-changes`: remove work first, do setup once, reduce launches or transfers, constrain shapes/layouts, and only approximate with an explicit tolerance plus benchmark and correctness evidence.
+When kernel or runtime complexity grows, consider `assessing-changes`: remove work first, do setup once, reduce launches or transfers, constrain shapes/layouts, and only approximate with an explicit tolerance plus benchmark and correctness evidence.
 
 ## GPU readability rules
 

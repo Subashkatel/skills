@@ -1,0 +1,94 @@
+[
+  {
+    "id": "case-1",
+    "name": "New QEC skill",
+    "input": "User asks to create a QEC decoder-review skill.",
+    "expected_behavior": "Produces a concise SKILL.md with trigger-rich description, domain workflow, support files, and evals."
+  },
+  {
+    "id": "case-2",
+    "name": "Bloated skill",
+    "input": "An existing skill has long background and stale file paths.",
+    "expected_behavior": "Prunes to durable operational rules and moves supporting detail out of SKILL.md."
+  },
+  {
+    "id": "case-3",
+    "name": "Overtriggering",
+    "input": "A skill fires on every coding task.",
+    "expected_behavior": "Narrows description triggers and boundaries rather than adding body-only caveats."
+  },
+  {
+    "prompt": "Modernize all skills, using these repository documents as read-only references.",
+    "checks": [
+      "resolves symlinks and preserves divergent clone additions",
+      "changes only skill package files",
+      "preserves owner constraints while narrowing triggers"
+    ]
+  },
+  {
+    "prompt": "Audit this GPU skill.",
+    "checks": [
+      "checks trigger",
+      "checks profiling requirement",
+      "checks hidden-reasoning wording"
+    ]
+  },
+  {
+    "prompt": "Audit a QEC skill pack.",
+    "checks": [
+      "checks assumptions/algebra/decoder",
+      "checks evals",
+      "checks source grounding"
+    ]
+  },
+  {
+    "prompt": "Migrate old agent skills.",
+    "checks": [
+      "removes overprompting",
+      "keeps concise",
+      "validates structure"
+    ]
+  },
+  {
+    "id": "case-4",
+    "name": "Missing bar",
+    "input": "User says improve this skill but gives no cases.",
+    "expected_behavior": "Finds the target skill and drafts cases and criteria from its intended behavior; asks only if a consequential ambiguity remains."
+  },
+  {
+    "id": "case-5",
+    "name": "Judgment eval",
+    "input": "A slicing skill must be evaluated for good granularity.",
+    "expected_behavior": "Uses a qualitative bar and a separate judge without showing expected slices to the runner."
+  },
+  {
+    "id": "case-6",
+    "name": "Regression risk",
+    "input": "A skill edit fixes one case.",
+    "expected_behavior": "Checks affected behavior and selection boundaries; reports which runs actually occurred and repeats only when variance or failures warrant it."
+  },
+  {
+    "name": "selection-near-miss-explain-decoder",
+    "prompt": "Explain what a decoder is without creating a skill.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-app-uses-codex",
+    "prompt": "Implement a function in an application that happens to use Codex.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "section-boundary-yaml-quoting",
+    "prompt": "Fix YAML quoting in a skill description; do not run model evaluations.",
+    "checks": [
+      "fixes the metadata without running blind behavior evaluations",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "prompt": "Plan the GPU port.",
+    "checks": [
+      "leads with data layout",
+      "includes correctness/benchmark",
+      "identifies portability"
+    ]
+  },
+  {
+    "prompt": "Plan QEC simulation implementation.",
+    "checks": [
+      "leads with code/noise/decoder",
+      "includes validation",
+      "states assumptions"
+    ]
+  },
+  {
+    "prompt": "Plan architecture refactor.",
+    "checks": [
+      "leads with interfaces",
+      "includes migration",
+      "defines tests"
+    ]
+  },
+  {
+    "id": "case-1",
+    "name": "GPU decoder plan",
+    "input": "User asks for a GPU-accelerated LDPC decoder rewrite with vague speed goals.",
+    "expected_behavior": "Creates slices for oracle, baseline, kernel seams, memory layout, benchmark gates, and correctness evidence before implementation."
+  },
+  {
+    "id": "case-2",
+    "name": "Quantum runtime refactor",
+    "input": "User asks to refactor a circuit runtime across transpiler, scheduler, and backend target layers.",
+    "expected_behavior": "Slices by ownership seams and verification gates rather than producing a monolithic refactor plan."
+  },
+  {
+    "id": "case-3",
+    "name": "Small bug",
+    "input": "User asks for a one-line typo or doc fix.",
+    "expected_behavior": "Does not force a spec folder; explains that a simple direct change is enough."
+  },
+  {
+    "id": "case-4",
+    "name": "Multi-slice implementation",
+    "input": "A spec has five slices, two independent and one red gate.",
+    "expected_behavior": "Chooses independent work safely, verifies each pass, updates handoff, and does not stop after the first green slice."
+  },
+  {
+    "id": "case-5",
+    "name": "QEC slice discovers bad assumption",
+    "input": "During implementation the detector semantics differ from the plan.",
+    "expected_behavior": "Stops broadening the patch, updates and reslices the spec, records the deviation, and verifies with QEC evidence."
+  },
+  {
+    "id": "case-6",
+    "name": "Scratch leak",
+    "input": "After a GPU pass, debug scripts and profiling dumps remain in the tree.",
+    "expected_behavior": "Identifies task-created scratch artifacts, preserves user files, retains useful evidence, and keeps the commit focused."
+  },
+  {
+    "id": "case-7",
+    "name": "Closed GPU spec",
+    "input": "A GPU optimization spec has shipped with benchmark evidence.",
+    "expected_behavior": "Rewrites build steps into rationale, preserves profiler and benchmark provenance, and points to code and tests."
+  },
+  {
+    "id": "case-8",
+    "name": "QEC experiment spec",
+    "input": "A QEC decoder experiment changed assumptions during implementation.",
+    "expected_behavior": "Records final assumptions, logical observables, detector semantics, evidence, and dropped alternatives."
+  },
+  {
+    "id": "case-9",
+    "name": "Unfinished spec",
+    "input": "Some slices remain red or unverified.",
+    "expected_behavior": "Refuses to close as done and identifies the remaining gates or decisions."
+  },
+  {
+    "name": "selection-near-miss-exact-heading",
+    "prompt": "Replace this heading with the exact supplied text.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-doc-typo",
+    "prompt": "Fix this one-line documentation typo.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "section-boundary-review-only",
+    "prompt": "Review a spec for omissions; do not implement it.",
+    "checks": [
+      "reviews the spec for omissions without starting implementation",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "section-boundary-open-slices",
+    "prompt": "Implement the first of five still-open slices.",
+    "checks": [
+      "implements the named slice and does not run the closing section while slices remain open",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  }
+]

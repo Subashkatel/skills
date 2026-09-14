@@ -41,7 +41,7 @@ For code edits, apply the local style; use `writing-readable-code` when the owne
 - Use `programming-qpus` when decoder inputs come from QPU measurement results or runtime jobs.
 - Use `programming-gpus` when implementing decoder kernels or accelerating batch decoding.
 - Use `verifying-scientific-code` for experiment rigor, confidence intervals, and reproducibility.
-- Use `designing-classical-architectures` when the decoder must fit into a larger service, simulator, or runtime architecture.
+- Use `designing-architectures` when the decoder must fit into a larger service, simulator, or runtime architecture.
 
 ## Output
 

@@ -39,7 +39,7 @@ Help the coding agent reason about quantum architecture as a layered system, not
 - Do not fabricate current hardware capabilities, error rates, thresholds, or roadmaps.
 - Mark preprint-derived or vendor-specific claims clearly.
 - When source docs or papers are provided, extract assumptions before proposing architecture.
-- For implementation tasks, hand off to `programming-qpus`, `engineering-qec`, `engineering-qec-decoders`, `programming-gpus`, `designing-classical-architectures`, or `designing-architectures` as appropriate.
+- For implementation tasks, hand off to `programming-qpus`, `engineering-qec`, `engineering-qec-decoders`, `programming-gpus`, or `designing-architectures` as appropriate.
 
 ## Quantum architecture readability rules
 

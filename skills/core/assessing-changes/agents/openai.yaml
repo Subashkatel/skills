@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assessing Changes"
+  short_description: "Assessing Changes skill workflow"
+  default_prompt: "Use $assessing-changes for this task."

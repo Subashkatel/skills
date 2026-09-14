@@ -1,0 +1,118 @@
+[
+  {
+    "prompt": "Keep track of this GPU optimization.",
+    "checks": [
+      "updates the existing task record and performance log",
+      "records deviations",
+      "records benchmark evidence"
+    ]
+  },
+  {
+    "prompt": "Long QEC simulation task.",
+    "checks": [
+      "records the experiment evidence in the existing suitable ledger",
+      "records seeds/results",
+      "updates current state"
+    ]
+  },
+  {
+    "prompt": "Architecture refactor over multiple sessions.",
+    "checks": [
+      "records ADRs",
+      "updates next action",
+      "tracks tests and handoff"
+    ]
+  },
+  {
+    "prompt": "Resume a half-finished GPU optimization after compaction.",
+    "checks": [
+      "reads state and git notes",
+      "reconciles stale memory with files",
+      "sets next action and verification gate"
+    ]
+  },
+  {
+    "prompt": "Long QEC decoder task with simulations still running.",
+    "checks": [
+      "records current action",
+      "tracks simulations and seeds",
+      "separates verified facts from assumptions"
+    ]
+  },
+  {
+    "prompt": "Agent says implementation is done.",
+    "checks": [
+      "checks evidence ledger",
+      "ensures remaining work is empty or explained",
+      "updates final status before reporting"
+    ]
+  },
+  {
+    "prompt": "Start a new Codex session in a repo and prepare to continue prior GPU work.",
+    "expected": "Reads relevant existing handoff and history, uses a session ID if available, and avoids creating an ID-only startup file."
+  },
+  {
+    "prompt": "After a nontrivial QEC commit, record why a decoder design changed.",
+    "expected": "Adds a git notes context entry with rationale, alternatives, evidence, and open hypotheses without restating the diff."
+  },
+  {
+    "prompt": "After compaction, resume a long architecture task.",
+    "expected": "Reloads recent commits, git notes, and progress files, then grounds next steps in durable evidence."
+  },
+  {
+    "prompt": "Remember that this QEC library orders detectors by round then stabilizer.",
+    "checks": [
+      "verifies source",
+      "updates or creates one lesson",
+      "adds revalidation condition"
+    ]
+  },
+  {
+    "prompt": "We keep correcting the agent for abbreviations in code.",
+    "checks": [
+      "mines repeated correction",
+      "distills rule into AGENTS or lesson",
+      "does not store raw chat"
+    ]
+  },
+  {
+    "prompt": "A previous benchmark lesson was invalidated by a new GPU.",
+    "checks": [
+      "updates or marks obsolete",
+      "does not duplicate",
+      "records replacement evidence"
+    ]
+  },
+  {
+    "name": "section-boundary-status-not-lesson",
+    "prompt": "Report the current command status; do not save a lesson.",
+    "checks": [
+      "reports status without writing a durable lesson file",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-typo-no-tracking",
+    "prompt": "Fix a one-line typo without creating tracking files.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-single-typo-finish",
+    "prompt": "Make a single known typo correction and finish.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  },
+  {
+    "name": "selection-near-miss-answer-only",
+    "prompt": "Answer a simple code question without editing files or git metadata.",
+    "checks": [
+      "does not select this skill for this task merely because of a related keyword",
+      "does not add unrelated artifacts, approval gates, or work"
+    ]
+  }
+]
