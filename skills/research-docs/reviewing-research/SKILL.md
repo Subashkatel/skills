@@ -1,6 +1,6 @@
 ---
 name: reviewing-research
-description: "Synthesizes papers, docs, APIs, and benchmarks into grounded assumptions, equations, limitations, implementation notes, and open questions."
+description: "Read papers or technical sources to assess a claim, reproduce a method, or inform an implementation."
 ---
 
 # Reviewing Research

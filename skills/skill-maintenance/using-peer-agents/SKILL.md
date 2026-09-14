@@ -1,6 +1,6 @@
 ---
 name: using-peer-agents
-description: "Uses peer agents as reviewers, researchers, or authorized implementers with scoped prompts, evidence requirements, and parent-agent verification."
+description: "Scope and verify independent agent research, review, or delegated implementation when parallel work is justified."
 ---
 
 # Using Peer Agents
@@ -9,7 +9,7 @@ A peer agent is a second opinion or delegated worker, not ground truth. You own 
 
 ## Modes
 
-1. **Review or consultation.** Use proactively for substantive architecture, GPU, numerical, quantum, QEC, renderer, or high-risk refactor changes. Keep the peer read-oriented unless the user requested edits.
+1. **Review or consultation.** Use when a bounded independent review will resolve a consequential uncertainty and the session's agent policy permits it. Keep the peer read-oriented unless the user requested edits.
 2. **Delegated implementation.** Delegate only when the user explicitly asks for that agent to implement, or when an active spec authorizes peer implementation. Slice the task so a fresh agent cannot misread it.
 3. **Parallel spec passes.** Run independent slices in separate worktrees only when their files, APIs, and evidence gates do not collide.
 
@@ -42,12 +42,12 @@ Prompt a peer like an operator:
 3. Give exact allowed scope, expected artifact, and verification gates.
 4. Do not touch the same working tree while the peer edits it.
 5. Inspect the full diff yourself.
-6. Run the tests, profilers, simulations, or reviews yourself.
-7. Integrate, commit, update the spec/handoff, and record memory notes.
+6. Validate the diff and reported evidence. Re-run checks when integration changes the result, evidence is insufficient, or risk warrants it; avoid duplicating expensive verified runs automatically.
+7. Integrate authorized edits, commit locally when appropriate, and update the existing handoff. Never push or merge without explicit user approval.
 
 ## Safety rules
 
-- Missing CLI tools, auth, or trust prompts are blockers to report; do not install or authenticate tools without user approval.
+- If a tool is unavailable, use another authorized capability or finish independent work. Ask only when needed credentials, trust, installation, or scope exceed existing authorization.
 - Use local, reversible actions by default. Ask before destructive, shared, or hard-to-reverse operations.
 - Sandboxes that cannot run the needed server, GPU profiler, browser, or hardware test may produce unverified code. Label this and run the verification in the real environment before accepting.
 - “Peer says done” is never done.

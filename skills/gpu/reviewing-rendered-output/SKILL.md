@@ -1,6 +1,6 @@
 ---
 name: reviewing-rendered-output
-description: "Reviews rendered scientific visuals, plots, circuit diagrams, QEC lattices, GPU images, and screenshots with visual evidence instead of vibes."
+description: "Review rendered figures, plots, circuits, or screenshots against their intended visual and scientific meaning."
 ---
 
 # Reviewing Rendered Output

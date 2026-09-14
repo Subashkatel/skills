@@ -1,18 +1,18 @@
 ---
 name: mapping-unknowns
-description: "Maps knowns, known unknowns, hidden assumptions, and blindspots before complex coding, architecture, GPU, QPU, quantum, QEC, or decoder work."
+description: "Identify unresolved assumptions that could change a complex design, experiment, or implementation."
 ---
 
 # Mapping Unknowns
 
 ## Use this skill when
 
-Use this skill before serious technical work where wrong assumptions could affect architecture, performance, correctness, or research interpretation. It is especially relevant for codebase refactors, GPU kernels, quantum architecture, and QEC.
+Use this skill when unresolved assumptions could change the solution or validity of results. Resolve what the prompt and available evidence already answer before asking. It is especially relevant for codebase refactors, GPU kernels, quantum architecture, and QEC.
 
 ## Workflow
 
 1. Restate the user's goal and current starting point.
-2. Build an unknowns inventory:
+2. Identify material uncertainty, using these categories only when useful:
    - Known knowns: explicit facts from the prompt, files, papers, or tool output.
    - Known unknowns: questions the user already knows are open.
    - Hidden knowns: assumptions the user may know but did not say, such as hardware, precision, expected scale, or preferred library.

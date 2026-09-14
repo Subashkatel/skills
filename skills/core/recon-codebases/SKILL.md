@@ -1,6 +1,6 @@
 ---
 name: recon-codebases
-description: "Inspects repositories before codebase claims or edits. Use when work depends on existing files, tests, build scripts, APIs, architecture, or conventions."
+description: "Inspect unfamiliar code paths and conventions needed to answer a repository question or make a change."
 ---
 
 # Recon Codebases
@@ -14,7 +14,7 @@ Do not make confident claims about code that has not been inspected. Before arch
 1. Identify the requested change or question.
 2. Locate relevant files using directory listing, search, imports, tests, build scripts, and docs.
 3. Read the files that determine behavior, not only files whose names look relevant.
-4. Map:
+4. Map only the parts needed for this question or change:
    - Entry points.
    - Core modules and ownership boundaries.
    - Runtime/data flow.
@@ -23,7 +23,7 @@ Do not make confident claims about code that has not been inspected. Before arch
    - Existing architecture decisions and conventions.
 5. For GPU code, also map kernels, launch sites, memory allocation/transfer sites, precision handling, and profiling tools.
 6. For quantum/QEC code, also map circuit construction, stabilizer/code definitions, noise models, decoder configuration, simulation loops, metrics, seeds, and result aggregation.
-7. Produce a grounded recon report before proposing changes.
+7. Stop inspection when the relevant behavior, constraints, and verification path are clear. Use a report for substantial recon; a small fix needs only its local context.
 
 ## Output
 

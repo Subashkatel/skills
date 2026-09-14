@@ -1,6 +1,6 @@
 ---
 name: refactoring-cleanly
-description: "Refactors by moving ownership to one clear concept, removing copy-paste and compatibility sediment, and preserving behavior. Use for cleanup or redesign."
+description: "Simplify existing ownership and duplicated concepts while preserving required behavior and external contracts."
 ---
 
 # Refactoring Cleanly
@@ -20,8 +20,8 @@ Replace the old shape with the simpler shape the codebase would want if it were 
 ## Rules
 
 - Do not preserve unshipped compatibility by default.
-- Do not size the refactor by line count alone. Agentic edits make large ownership moves cheap; judge by end-state clarity and verification cost.
-- A checker that re-derives a value the code already computes can drift. Prefer exporting the owner’s computed value into verifiers when the goal is to verify what was actually produced.
+- Do not size the refactor by line count alone. Judge by end-state clarity, migration risk, and verification cost; prefer small reviewable checkpoints.
+- A checker that re-derives a value the code already computes can drift. Expose the produced value when checking plumbing, but keep a correctness oracle independent of the production calculation.
 - Symmetric placeholders hide orientation, coordinate, and ordering bugs. Re-verify with asymmetric or hostile fixtures before accepting the refactor.
 - Reuse is not automatic. Existing code may be wrong or genuinely different. The point is to decide after inspection, not duplicate in ignorance.
 - If the refactor widens into unrelated behavior, slice it: land the shared contract first, then port consumers in reviewable passes.

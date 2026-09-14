@@ -1,6 +1,6 @@
 ---
 name: engineering-qec-decoders
-description: "Designs, implements, reviews, and benchmarks QEC decoders: MWPM, union-find, belief propagation, neural/custom decoders, detector events, and logical predictions."
+description: "Implement or assess QEC decoding, detector mappings, logical predictions, confidence, and runtime performance."
 ---
 
 # Engineering QEC Decoders
@@ -33,7 +33,7 @@ Use this skill when implementing, refactoring, optimizing, benchmarking, or revi
 
 ## QEC decoder readability rules
 
-Use `writing-readable-code` with this skill. Prefer names such as `detector_event_matrix`, `syndrome_bit_index`, `decoder_graph`, `edge_error_probability`, `edge_weight`, `boundary_detector_index`, `predicted_logical_observables`, `actual_logical_observables`, `logical_failure_count`, `decoder_latency_seconds`, and `shot_count`. Avoid names like `s`, `e`, `p`, `w`, `m`, `pred`, and `obs` except in tiny scopes directly matching a displayed equation.
+For code edits, apply the local style; use `writing-readable-code` when the owner-specific rules are needed. Prefer names such as `detector_event_matrix`, `syndrome_bit_index`, `decoder_graph`, `edge_error_probability`, `edge_weight`, `boundary_detector_index`, `predicted_logical_observables`, `actual_logical_observables`, `logical_failure_count`, `decoder_latency_seconds`, and `shot_count`. Avoid names like `s`, `e`, `p`, `w`, `m`, `pred`, and `obs` except in tiny scopes directly matching a displayed equation.
 
 ## Handoffs
 

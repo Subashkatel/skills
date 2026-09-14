@@ -1,6 +1,6 @@
 ---
 name: recording-repo-memory
-description: "Records durable repo memory with session IDs, git notes, progress files, tests, experiments, benchmarks, and handoff state for long coding sessions."
+description: "Attach non-obvious rationale and evidence to local commits or a repository handoff."
 ---
 
 ## Purpose
@@ -9,9 +9,9 @@ Use this skill to make long coding sessions resumable across Claude, Codex, cont
 
 ## Startup protocol
 
-Run once per session and again after automatic compaction when the repository is available:
+When recovering a handoff or recording nontrivial commit context, use the applicable steps:
 
-1. Resolve a session ID. Prefer `CODEX_THREAD_ID` for Codex. Prefer `CLAUDE_SESSION_ID` for Claude Code when available. Otherwise use the helper script or create a stable temporary ID.
+1. Resolve a session ID. Prefer `CODEX_THREAD_ID` for Codex. Prefer `CLAUDE_SESSION_ID` for Claude Code when available. If neither exists, omit the identifier unless the repository requires one; no startup file is needed just to obtain it.
 2. Review recent history with git notes: `git log --notes=context -10 --format="=== %h %s ===%n%N"`.
 3. Review local state files when present: `progress.md`, `implementation-notes.md`, `tests.json`, `qec-experiments.json`, `performance-log.md`, and architecture decision records.
 4. Continue from evidence. Do not assume chat history is complete after compaction.
@@ -45,7 +45,7 @@ Use the scripts in `scripts/` when available:
 - `recent_context.sh` prints the last ten commits plus `git notes --ref=context`.
 - `add_context_note.sh HEAD "message"` appends a context note to a commit.
 
-Only append notes by default. Ask before rewriting, deleting, force-pushing, rebasing published commits, or changing shared repository state.
+Preserve existing notes and append only when useful and within the authorized scope. Commit coherent changes locally. Never push or merge without explicit user approval; do not infer permission for history rewriting. Keep owner commit messages free of attribution trailers.
 
 ## Handoff output
 

@@ -1,6 +1,6 @@
 ---
 name: engineering-qec
-description: "Designs, implements, reviews, and verifies QEC systems: codes, stabilizers, syndrome schedules, detector error models, logical observables, and simulations."
+description: "Construct or verify QEC codes, logical operators, syndrome schedules, noise models, and simulations."
 ---
 
 # Engineering QEC
@@ -50,7 +50,7 @@ Use `templates/qec-experiment-report.md` for experiments and `templates/qec-desi
 
 ## QEC simplification gate
 
-Before optimizing a QEC simulator, decoder, or syndrome pipeline, apply `approximating-changes`. Any approximation must preserve detector semantics, logical observables, noise-model assumptions, and reported logical-error evidence.
+When an optimization changes the model or adds complexity, use `approximating-changes` if needed. Any approximation must preserve detector semantics, logical observables, noise-model assumptions, and reported logical-error evidence.
 
 ## QEC readability rules
 

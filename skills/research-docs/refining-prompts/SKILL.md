@@ -1,6 +1,6 @@
 ---
 name: refining-prompts
-description: "Turns rough prompts into clear agent prompts for Claude Code, Codex, or similar coding agents with context, constraints, unknowns, and verification criteria."
+description: "Rewrite a coding-agent prompt with scope and completion criteria. Use claude-prompt-refiner for Claude-specific requests."
 ---
 
 # Refining Prompts
@@ -21,14 +21,14 @@ Turn rough prompts into precise prompts for Claude Code, Codex, or another codin
 4. Add an unknowns step before implementation when ambiguity could change the solution.
 5. Require evidence: files read, tests, profiler output, algebra checks, simulations, citations, or benchmark logs.
 6. Specify whether the target agent should only advise, inspect files, edit code, or run experiments.
-7. Avoid instructions that request hidden reasoning. Ask for concise rationale, assumptions, checks, and evidence instead.
+7. Preserve the user's chosen model, authorization, and completion boundary. Do not add mandatory document stacks or stop-for-review gates. Avoid instructions that request hidden reasoning. Ask for concise rationale, assumptions, checks, and evidence instead.
 
 ## Output
 
-Use `templates/refined-prompt-package.md`. Include:
+Return the paste-ready prompt first. Use `templates/refined-prompt-package.md` only when a full package is requested. Include only useful items:
 
 - Recommended skills.
-- Recommended effort level or working mode.
+- Model or effort settings only if requested and supported by the target environment.
 - Final prompt.
 - Assumptions.
 - Questions only if the prompt cannot be made safe without answers.

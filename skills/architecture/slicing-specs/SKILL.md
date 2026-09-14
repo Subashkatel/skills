@@ -1,6 +1,6 @@
 ---
 name: slicing-specs
-description: "Breaks large scientific goals into independently verifiable specs and slices with contracts, evidence gates, and next-agent handoffs."
+description: "Split a large implementation into specs with independently verifiable contracts and dependencies."
 ---
 
 # Slicing Specs
@@ -13,10 +13,10 @@ Turn a large technical goal into a ladder of small contracts. Each slice should 
 2. **Name the scientific contract.** State the invariant, API seam, algorithmic property, benchmark target, numerical tolerance, decoder behavior, or hardware constraint the slice proves.
 3. **Slice at seams.** Prefer module boundaries, typed interfaces, kernel or pass boundaries, test oracles, experiment harnesses, decoder interfaces, transpiler stages, and data contracts. A slice that needs unrelated systems to be accepted is too broad.
 4. **Add a runnable artifact per slice.** Examples: focused unit test, benchmark harness, profiler trace, small kernel, QEC circuit/noise fixture, detector-error-model sample, simulator probe, reproducibility script, or architecture decision record.
-5. **Research the fog.** If a slice depends on a paper, vendor API, architecture standard, QEC construction, decoder, GPU feature, or reference implementation, add a research or replication spike before the implementation slice.
+5. **Resolve unsupported assumptions.** Add a research or replication spike only where existing evidence does not establish the needed contract.
 6. **Draft more than once for high-risk work.** For major redesigns, ask independent agents or passes to propose slice graphs from the same brief, then synthesize. Agreement means stable ground; disagreement marks where to inspect harder.
 7. **Run the minimization gate.** Use `approximating-changes` and `refactoring-cleanly` to remove fake flexibility, duplicated concepts, dev-only compatibility layers, or unneeded abstractions before freezing the spec.
-8. **Materialize the spec.** For multi-slice work, create `specs/<feature>/README.md` plus `specs/<feature>/slices/<nn>-<name>.md`. Keep evidence, fixtures, benchmark baselines, and references under the spec folder when they define acceptance.
+8. **Materialize the spec.** Reuse the repository convention. If none exists, use `specs/<feature>/README.md` plus `specs/<feature>/slices/<nn>-<name>.md`. Keep evidence, fixtures, benchmark baselines, and references under the spec folder when they define acceptance.
 9. **Write the handoff.** The README needs a current pickup point, dependency graph, global TODOs, verification gates, and a direct “Next Agent Prompt” a fresh agent can follow without chat history.
 
 ## Slice contract

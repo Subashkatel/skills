@@ -1,6 +1,6 @@
 ---
 name: explaining-changes
-description: "Produces reviewer-ready summaries, evidence, risks, and comprehension checks for architecture, GPU, QPU, quantum, QEC, decoder, or scientific-code changes."
+description: "Write a reviewer handoff for substantial technical changes, connecting behavior, rationale, and validation."
 ---
 
 # Explaining Changes
@@ -21,7 +21,7 @@ Package technical work so a reviewer can understand what changed, why it changed
    - QEC simulations and confidence notes.
    - Source citations for research-based claims.
 5. State risks, limitations, and unverified assumptions.
-6. Provide reviewer guidance or a quiz when the user needs to understand before merging or presenting.
+6. Give reviewer guidance when useful. Include a quiz only if the user requests one.
 
 ## Domain outputs
 
@@ -33,4 +33,4 @@ Quantum/QEC: code/noise/decoder assumptions, logical observables, results, confi
 
 ## Templates
 
-Use `templates/reviewer-package.md` or `templates/quiz.md`.
+Use `templates/reviewer-package.md` for a substantial handoff; use `templates/quiz.md` only for a requested comprehension exercise. Keep ordinary summaries short and use no em dashes.

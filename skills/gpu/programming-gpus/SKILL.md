@@ -1,6 +1,6 @@
 ---
 name: programming-gpus
-description: "Guides GPU programming and optimization for CUDA, HIP, SYCL, Triton, OpenCL, renderers, and scientific kernels with profiling and correctness evidence."
+description: "Implement or optimize GPU kernels and data movement with correctness and hardware measurements."
 ---
 
 # Programming GPUs
@@ -50,7 +50,7 @@ Use `reference/gpu-optimization-checklist.md` for detailed checks. Common catego
 
 Use available local tools only. If a profiler or GPU stack is unavailable, say so and provide the exact commands the user can run.
 
-- CUDA: Nsight Compute, Nsight Systems, nvprof legacy, cuda events, nvidia-smi.
+- CUDA: available supported Nsight tools, CUDA events, and nvidia-smi; use legacy tooling only for a matching legacy stack.
 - ROCm/HIP: rocprofv3, ROCprof Compute Viewer, rocm-smi.
 - General: build logs, compiler resource usage, benchmark scripts.
 
@@ -61,7 +61,7 @@ Use available local tools only. If a profiler or GPU stack is unavailable, say s
 
 ## Performance simplification gate
 
-Before adding a new kernel, abstraction, cache, or runtime path, apply `approximating-changes`: remove work first, do setup once, reduce launches or transfers, constrain shapes/layouts, and only approximate with an explicit tolerance plus benchmark and correctness evidence.
+When kernel or runtime complexity grows, consider `approximating-changes`: remove work first, do setup once, reduce launches or transfers, constrain shapes/layouts, and only approximate with an explicit tolerance plus benchmark and correctness evidence.
 
 ## GPU readability rules
 

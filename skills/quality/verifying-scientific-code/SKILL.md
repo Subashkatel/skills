@@ -1,11 +1,11 @@
 ---
 name: verifying-scientific-code
-description: "Verifies scientific code with tests, numerical tolerances, invariants, reproducibility, benchmarks, profiling, statistics, and evidence reports."
+description: "Verify numerical, performance, QPU, or QEC claims with appropriate oracles, uncertainty, and reproducible evidence."
 ---
 
 # Verifying Scientific Code
 
-Use this skill whenever correctness, performance, numerical accuracy, hardware validity, or scientific interpretation matters. The output is evidence, not confidence language.
+Use this skill to substantiate a scientific or hardware claim whose validity needs more than routine software checks. The output is evidence, not confidence language.
 
 ## Workflow
 
@@ -14,7 +14,7 @@ Use this skill whenever correctness, performance, numerical accuracy, hardware v
 3. Run checks or provide exact commands when tools are unavailable.
 4. Separate verified facts, failed checks, plausible hypotheses, skipped checks, and unverified assumptions.
 5. Record reproducibility: command, seed, hardware, backend target, dependency versions, compiler flags, data, precision, simulator, and environment. For Slurm, keep launch scripts on a shared filesystem and verify headers, libraries, and ABI inside the compute allocation; login-node availability is not evidence of compute-node availability.
-6. Update `tests.json`, `agent-state.json`, and domain logs when the verification result changes status or plan.
+6. Record results in the existing evidence ledger; update task status when the outcome changes the plan. Do not require parallel state files.
 7. Produce a short verification report that leads with the outcome and then gives evidence.
 
 ## Domain checks

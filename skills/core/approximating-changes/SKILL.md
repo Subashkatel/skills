@@ -1,11 +1,11 @@
 ---
 name: approximating-changes
-description: "Runs a simplification and approximation gate for architecture, GPU, numerical, quantum, QPU, QEC, and decoder work. Use before or after changes that may add complexity."
+description: "Assess simpler or bounded approximations when a proposed design or optimization adds complexity."
 ---
 
 ## Purpose
 
-Use this skill as a quality gate before implementing a change, after implementing a change, or when optimization work starts to grow. Prefer the smallest correct intervention that preserves the required semantics, evidence, and scientific constraints.
+Use this skill when a design or optimization has a meaningful complexity tradeoff. Prefer the smallest correct intervention that preserves the required semantics, evidence, and scientific constraints.
 
 ## Required first step
 
@@ -13,7 +13,7 @@ State the objective and the invariant that must not be broken. For scientific co
 
 ## The approximation pass
 
-For the proposed change or completed task, evaluate these questions in order:
+Consider the applicable alternatives; this is a menu, not seven mandatory stages:
 
 1. Can we not do this at all?
 2. Can we do this only once?
@@ -33,7 +33,7 @@ For the proposed change or completed task, evaluate these questions in order:
 
 ## Output format
 
-Return:
+For a substantial decision, summarize only the applicable items:
 
 - Verdict: do nothing, simplify, approximate, constrain, or proceed as planned.
 - Recommended change: the smallest correct action.

@@ -1,6 +1,6 @@
 ---
 name: tracking-work-state
-description: "Tracks active work state in agent-state, progress notes, tests, deviations, benchmarks, QEC experiments, and handoff records."
+description: "Update an existing long-task record when milestones, evidence, blockers, or the next action change."
 ---
 
 # Tracking Work State
@@ -21,7 +21,7 @@ Use only what the task needs:
 
 ## Workflow
 
-1. Initialize or refresh `agent-state.json` for long work.
+1. Update the existing task record. Use `maintaining-agent-state` only if it needs initialization or reconciliation.
 2. Write the current goal, scope, non-goals, plan, next action, blockers, and verification gates.
 3. Log deviations when implementation discovers a new unknown or invalidates the plan.
 4. Record evidence, not intentions. For TDD, record red, green, refactor, and final gate results.
@@ -32,10 +32,10 @@ Use only what the task needs:
 
 ## Consistency checks
 
-- If a task is not complete or blocked, `agent-state.json` must name a next action.
+- If a task is not complete or blocked, the current task record must name a next action.
 - If a test or benchmark is claimed, `tests.json` or the verification report must contain the command and result.
-- If a plan changes, `implementation-notes.md` must record the deviation and reason.
-- If a commit carries important rationale, add a `git notes --ref=context` note with `recording-repo-memory`.
+- If a plan changes, the current task record must record the material deviation and reason.
+- If a commit carries important rationale, retain it in the existing record or use `recording-repo-memory` when a separate commit note is useful.
 
 ## Templates
 

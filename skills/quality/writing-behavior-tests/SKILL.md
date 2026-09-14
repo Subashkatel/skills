@@ -1,6 +1,6 @@
 ---
 name: writing-behavior-tests
-description: "Writes behavior tests that pin real contracts, invariants, tolerances, stochastic claims, QEC semantics, GPU behavior, and edge cases without overfitting."
+description: "Add or revise tests for observable contracts, regressions, invariants, and scientific uncertainty."
 ---
 
 # Writing Behavior Tests
@@ -10,12 +10,12 @@ A good test fails when real behavior breaks and survives refactors that preserve
 ## Workflow
 
 1. Write one tracer test at a time. Assert the contract, see it fail when possible, make the code earn green, then choose the next test from what you learned.
-2. Use the fastest focused runner first. Run broader suites as final gates.
+2. Use the focused runner, then required repository gates. Broaden or repeat checks when changes, failures, or unresolved risk justify it.
 3. Assert observable behavior through the outermost practical surface: return values, persisted state, command output, CPU/GPU oracle comparison, circuit output, syndrome stream, detector model, logical outcome, or benchmark metric.
 4. Control variables: seed, data size, device, precision mode, noise model, circuit, decoder, and configuration unless that variable is the subject.
 5. Treat stochastic claims statistically. Use repeated seeds, bands, confidence intervals, and recorded random seeds.
 6. Mock at edges: network, clock, filesystem, GPU availability, external service, hardware backend, or config lookup. Avoid mocking internal collaborators when an observable layer can exercise them.
-7. Falsify important tests. For a regression test written after a fix, break or revert the production path once and confirm red for the expected reason, then restore and confirm green.
+7. Falsify important regression tests against the original defect or a controlled mutation in an isolated copy. Confirm the expected failure and preserve the working tree.
 8. Promote useful probes. Delete scratch probes after use or turn them into durable tests when they guard real behavior.
 
 ## Clocked RTL protocols
@@ -42,4 +42,4 @@ Tests must be as readable as production code. Name fixtures, seeds, tolerances, 
 
 ## State integration
 
-For TDD, pair with `practicing-tdd`. Record red, green, refactor, final gate, seeds, tolerances, skipped checks, and blockers in `tests.json`. Update `agent-state.json` when test results change the plan.
+For TDD, pair with `practicing-tdd`. Record the evidence in the existing task record or report; update the plan only when results change it.

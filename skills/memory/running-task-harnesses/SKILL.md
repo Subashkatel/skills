@@ -1,6 +1,6 @@
 ---
 name: running-task-harnesses
-description: "Builds dynamic task harnesses for flaky tests, large refactors, deep verification, rule checks, root-cause work, skill evals, and parallel scientific tasks."
+description: "Coordinate repeated experiments, flaky-test investigations, or multi-case verification needing explicit run state."
 ---
 
 # Running Task Harnesses
@@ -19,8 +19,8 @@ Before running, define:
 4. Agent roles: classifier, worker, verifier, synthesizer, or judge.
 5. Isolation: worktrees, read-only reviews, sandbox limits, and who may edit.
 6. Verification rubric and evidence required.
-7. Stop condition: no red tests, no new findings, all rules checked, confidence threshold met, or budget exhausted.
-8. Token, time, hardware, and command budgets.
+7. Completion condition tied to the requested contract. A budget limit stops execution but does not establish completion.
+8. Honor user-specified budgets and resource limits. Do not invent a token limit or require one before useful work.
 
 ## Patterns
 
@@ -35,7 +35,7 @@ Before running, define:
 
 For rule adherence, create one verifier per important rule in `AGENTS.md` or the active spec. For flaky tests, run independent hypothesis agents over logs, code paths, seeds, and environment. For QEC/GPU/QPU experiments, split by seed ranges, devices, distances, noise models, circuits, or benchmarks only when they do not share mutable state.
 
-Record every harness in `harness-runs/<timestamp>-<topic>/` with the plan, sub-results, synthesis, evidence, and changes applied. Update `agent-state.json` before and after the harness.
+Keep run evidence in the existing task record or an allowed temporary directory. Use a separate harness folder only when multiple runs need it; do not duplicate the current plan.
 
 ## Safety
 

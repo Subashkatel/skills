@@ -1,6 +1,6 @@
 ---
 name: managing-agent-memory
-description: "Creates and curates durable agent memory: reusable lessons, repo notes, state links, evidence, stale-memory cleanup, and session mining."
+description: "Create or revise durable, evidence-backed lessons for future sessions. Excludes active task status."
 ---
 
 # Managing Agent Memory
@@ -36,7 +36,7 @@ Do not save secrets, raw chat summaries, vague todos, restatements of diffs, gue
 
 ## Session mining
 
-When the user asks to improve rules from past failures, use `running-task-harnesses`: mine sessions or review comments, cluster recurring corrections, adversarially verify whether each rule would have prevented a real mistake, then distill survivors into `AGENTS.md`, `CLAUDE.md`, or lessons.
+When many past failures need systematic comparison, consider `running-task-harnesses`: mine sessions or review comments, cluster recurring corrections, adversarially verify whether each rule would have prevented a real mistake, then distill survivors into the user-authorized skill or memory location. Do not widen the permitted file scope.
 
 ## Done
 

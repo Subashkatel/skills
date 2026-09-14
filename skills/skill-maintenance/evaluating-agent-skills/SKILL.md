@@ -1,6 +1,6 @@
 ---
 name: evaluating-agent-skills
-description: "Evaluates skills with golden cases, blind fresh runs, separate judging, and gap-driven edits. Use when a skill overtriggers, undertriggers, or misses behavior."
+description: "Evaluate skill selection and behavior using realistic cases, blind runs, and separate judging."
 ---
 
 # Evaluating Agent Skills
@@ -9,7 +9,7 @@ Treat a skill like a function under test. Feed it realistic inputs in a clean ro
 
 ## Required inputs
 
-Stop and ask if any are missing:
+Find these in the request and skill package; draft missing cases and criteria when the intended behavior is clear. Ask only for a consequential ambiguity that the evidence cannot resolve:
 
 - Target skill: an actual `SKILL.md`.
 - Golden cases: concrete inputs the skill might receive.
@@ -24,7 +24,7 @@ Stop and ask if any are missing:
 5. **Account for variance.** Re-run important or borderline cases multiple times and report pass rate or failure pattern.
 6. **Diagnose defects.** Map misses to authoring failures: vague done condition, missing rule, premature completion, overtrigger, undertrigger, duplication, sediment, no-op, or bad case.
 7. **Revise with restraint.** Fix the named defect using `authoring-agent-skills`; do not add bulk unrelated to the observed failure.
-8. **Re-evaluate all cases.** A fix can regress a previously passing case.
+8. **Check regressions.** Re-run affected cases and selection boundaries. Repeat expensive or stochastic runs only when failures or variance warrant it.
 
 ## Rules
 

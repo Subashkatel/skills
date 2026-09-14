@@ -1,6 +1,6 @@
 ---
 name: maintaining-agent-state
-description: "Maintains active execution state: current goal, plan, todo list, blockers, evidence, tests, next action, and resume status for long coding work."
+description: "Initialize or reconcile a resumable task record for long work, handoff, or context recovery."
 ---
 
 # Maintaining Agent State
@@ -9,7 +9,7 @@ Use this skill when work spans many steps, tools, agents, context compaction, or
 
 ## Files
 
-Use `agent-state.json` as the canonical current state for long tasks. Use `progress.md` for human-readable notes, `implementation-notes.md` for decisions and deviations, `tests.json` for test evidence, and domain logs for GPU, QPU, QEC, decoder, or benchmark evidence.
+Reuse one existing task record, such as a spec handoff or `agent-state.json`. Create companion logs only when they hold evidence the main record cannot usefully contain. A request limited to code or skills does not authorize unrelated state files; use permitted temporary storage when needed.
 
 When creating or replacing `agent-state.json`, follow `templates/agent-state.json` exactly and run `scripts/check_agent_state.py`. Plan statuses are `pending`, `in-progress`, `blocked`, `done`, or `skipped`; the checker requires `current_status`, `current_action`, and each step's `description`.
 
@@ -19,11 +19,11 @@ When creating or replacing `agent-state.json`, follow `templates/agent-state.jso
 2. Check `git status`, recent commits, and `git log --notes=context -10` when available.
 3. Load only relevant lessons from `agent-memory/lessons/`.
 4. Reconcile state against the real repository. If memory says one thing and files say another, trust the files and update memory.
-5. Before editing, write or refresh `agent-state.json` with the current goal, scope, plan, next action, blockers, tests, and evidence ledger.
+5. Reconcile the current record with the goal, scope, next action, blockers, and evidence; do not initialize a second competing plan.
 
 ## Update cadence
 
-Update active state at task start, after any plan change, after each red/green/refactor cycle, after each implemented slice, after a failed command that changes direction, before context compaction, and before the final response.
+Update at meaningful milestones, changes of direction, and handoff or compaction boundaries. Avoid rewriting state after every routine command.
 
 ## State rules
 

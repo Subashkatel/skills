@@ -1,6 +1,6 @@
 ---
 name: designing-classical-architectures
-description: "Designs maintainable classical software architecture for simulators, compilers, runtimes, QEC tools, decoders, services, and experiment pipelines."
+description: "Design or review software ownership, interfaces, and runtime data flow in simulators, services, and scientific tools."
 ---
 
 # Designing Classical Architectures
@@ -40,7 +40,7 @@ This skill is separate from `modeling-quantum-architectures`. Use this skill for
 
 ## Readability rules
 
-Use `writing-readable-code` with this skill. Architecture code should use names that reveal domain ownership and intent. Prefer `decoder_experiment_runner`, `detector_event_batch`, `hardware_backend_target`, `benchmark_result_store`, and `simulation_configuration` over vague names like `manager`, `handler`, `processor`, `utils`, `data`, or `result` when the exact role is known.
+For code edits, use `writing-readable-code` when its owner-specific conventions are needed. Architecture code should use names that reveal domain ownership and intent. Prefer `decoder_experiment_runner`, `detector_event_batch`, `hardware_backend_target`, `benchmark_result_store`, and `simulation_configuration` over vague names like `manager`, `handler`, `processor`, `utils`, `data`, or `result` when the exact role is known.
 
 ## Handoffs
 

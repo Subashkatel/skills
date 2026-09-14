@@ -1,6 +1,6 @@
 ---
 name: auditing-skills
-description: "Audits agent skills for trigger quality, YAML validity, progressive disclosure, safety, concision, and scientific-domain usefulness. Use when reviewing or migrating SKILL.md files."
+description: "Audit skill triggers, instructions, references, and evals for relevance, correctness, and unnecessary overhead."
 ---
 
 # Auditing Skills
@@ -14,9 +14,9 @@ Review skills as operational instructions. A good skill should trigger at the ri
 1. Validate frontmatter:
    - Name is lowercase letters/numbers/hyphens.
    - Description says what the skill does and when to use it.
-   - Description is specific and not vague.
+   - Description names the actual task, with no broad keyword triggers or redundant urgency.
 2. Check SKILL.md body:
-   - Under 500 lines.
+   - Concise enough for its purpose; the 500-line structural cap is not a target.
    - Clear workflow.
    - No over-prescriptive or outdated anti-laziness instructions.
    - No instructions asking the model to expose hidden reasoning.
@@ -24,15 +24,16 @@ Review skills as operational instructions. A good skill should trigger at the ri
 3. Check progressive disclosure:
    - Support files are useful.
    - References are one level deep.
-   - Scripts solve concrete tasks and have safe error handling.
+   - Scripts solve concrete tasks, state coverage limits, and have safe error handling.
+   - References do not reintroduce conflicting defaults, unavailable-file claims, or mandatory reading stacks.
 4. Check domain fit:
    - Architecture skills produce decisions and tradeoffs.
    - GPU skills require profiling and correctness evidence.
    - Quantum/QEC skills require assumptions, algebra, simulator/decoder config, and uncertainty labels.
 5. Check evals:
-   - At least three realistic prompts.
+   - Positive cases, near-misses, and consequential boundaries.
    - Expected behavior is testable.
-6. Produce an audit report using `templates/skill-audit-report.md`.
+6. Report changed scope, preserved constraints, checks actually run, and remaining limits. Use `templates/skill-audit-report.md` only when a saved report is useful and allowed.
 
 ## Script
 

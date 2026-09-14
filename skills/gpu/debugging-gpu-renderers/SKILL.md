@@ -1,6 +1,6 @@
 ---
 name: debugging-gpu-renderers
-description: "Debugs GPU renderers and scientific visualizations with shader, resource-layout, pass-order, depth, capability, and rendered-output evidence."
+description: "Diagnose incorrect GPU rendering through shader, resource, pass, depth, and captured-image evidence."
 ---
 
 # Debugging GPU Renderers

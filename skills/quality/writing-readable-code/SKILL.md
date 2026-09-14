@@ -1,6 +1,6 @@
 ---
 name: writing-readable-code
-description: "Enforces clean readable code for new work and refactors: descriptive names, no abbreviations, one clear action per line, useful comments, and low bloat."
+description: "Apply the owner's naming, one-action, comment, and simplicity rules when writing or reviewing code."
 ---
 
 # Writing Readable Code

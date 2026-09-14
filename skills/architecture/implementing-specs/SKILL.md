@@ -1,6 +1,6 @@
 ---
 name: implementing-specs
-description: "Implements an existing scientific spec slice by slice with verification, cleanup, state updates, and handoff notes. Use for multi-pass specs under specs/."
+description: "Implement an existing multi-slice spec through its acceptance gates and remaining authorized work."
 ---
 
 # Implementing Specs
@@ -9,12 +9,12 @@ Build the active spec to completion one reviewable pass at a time. The spec is t
 
 ## Workflow
 
-1. **Load the map.** Read the repo instructions, spec README, active slice, evidence ledger, and current handoff. Load domain skills named by the spec.
+1. **Load the map.** Read the repo instructions, spec README, active slice, evidence ledger, and current handoff. Load a named domain skill only when the active slice needs its guidance.
 2. **Reconcile with reality.** Inspect current code and tests before editing. If the slice preserves a duplicated owner, dev-only shim, obsolete path, or weak wrapper, update the plan toward the cleaner architecture.
-3. **Pick the next pass.** A pass is usually one slice, one vertical checkpoint, one benchmark gate, one QEC experiment, or one architecture correction. Independent passes may run in parallel through peer agents or worktrees when their files and seams do not collide.
+3. **Pick the next pass.** A pass is usually one slice, one vertical checkpoint, one benchmark gate, one QEC experiment, or one architecture correction. Delegate independent passes only under the session's agent policy and when their files and seams do not collide.
 4. **Implement narrowly.** Keep the diff scoped to the contract. No drive-by cleanup, feature creep, or speculative compatibility layers.
 5. **Verify the contract.** Run the focused tests, numerical checks, profiler runs, QEC simulations, or architecture review named by the slice. Never weaken a gate to claim progress.
-6. **Clean the pass.** Review `git status` and `git diff` path by path. Delete scratch probes, stray outputs, debug scripts, and logs unless they are promoted into spec evidence or real tests.
+6. **Clean the pass.** Review `git status` and `git diff` path by path. Remove only task-created scratch outputs that are no longer needed; preserve user files and useful evidence.
 7. **Run quality gates.** Use `refactoring-cleanly`, `writing-behavior-tests`, and `verifying-scientific-code` where they apply. Fix accepted findings in the same pass.
 8. **Record state.** Update the spec README handoff, slice status, evidence ledger, and `recording-repo-memory` notes when the pass changes rationale, assumptions, or next steps.
 9. **Commit clean checkpoints when working in a repo.** A green commit is a checkpoint, not a reason to hand back if slices remain.
@@ -34,7 +34,7 @@ Run a maintenance checkpoint after red gates, every few slice commits, after com
 
 ## Done
 
-The implementation is done when every slice and global TODO is closed, required gates are green or honestly documented as accepted limitations, evidence is recorded, handoff has no remaining pickup point, and `closing-specs` has archived the spec into durable rationale.
+The implementation is done when every slice and global TODO is closed, required gates are green or honestly documented as accepted limitations, evidence is recorded, and the handoff has no required work remaining. Use `closing-specs` when archival is part of the repository workflow.
 
 ## Readability gate
 

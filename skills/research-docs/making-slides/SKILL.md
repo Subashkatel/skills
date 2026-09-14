@@ -1,6 +1,6 @@
 ---
 name: making-slides
-description: Build presentation slides (pptx decks, talk figures) in the owner's preferred style; minimal one-idea-per-slide layout with Bringhurst/Proportional Web typography, native vector pptx text, and numbers taken from real runs. Use whenever asked to create, redo, or fix slides, a deck, a presentation, or talk figures. Not for papers, posters, or web dashboards.
+description: "Create or revise research slides and pptx decks using the owner's typography and one-idea layout. Excludes standalone plots."
 ---
 
 # Making Slides

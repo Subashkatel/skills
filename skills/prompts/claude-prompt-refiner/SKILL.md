@@ -1,6 +1,6 @@
 ---
 name: claude-prompt-refiner
-description: "Refines rough, vague, incomplete, or overloaded prompts into clear Claude-ready prompt packages with role, context, task, constraints, examples, output format, tool policy, and verification criteria."
+description: "Rewrite a prompt explicitly intended for Claude. Preserve its requested scope, tools, and completion criteria."
 ---
 
 # Claude Prompt Refiner
@@ -31,41 +31,15 @@ Produce a refined prompt that:
 5. Add safety boundaries for destructive, public, shared-system, or hard-to-reverse actions.
 6. Add verification criteria that match the domain.
 
-## Default output
+## Output and settings
 
-Unless the user requests another format, return:
-
-```xml
-<refined_prompt_package>
-  <recommended_model_settings>
-    <target_model>Claude model specified by the user, or the user's default Claude model</target_model>
-    <effort>low | medium | high | xhigh</effort>
-    <why_this_effort>Brief reason</why_this_effort>
-  </recommended_model_settings>
-
-  <ready_to_paste_prompt>
-    <!-- Final refined prompt. -->
-  </ready_to_paste_prompt>
-
-  <changes_made>
-    <change>What improved and why</change>
-  </changes_made>
-
-  <questions_or_assumptions>
-    <assumption>Only include material assumptions.</assumption>
-    <question>Only include blockers.</question>
-  </questions_or_assumptions>
-</refined_prompt_package>
-```
-
-For users who only need a paste-ready prompt, put the prompt first and keep explanation short.
-
-## Effort guidance
-
-- `low`: routine rewriting, simple emails, formatting, low-risk tasks.
-- `medium`: default for prompt rewrites, analysis, business writing, light coding, and summaries.
-- `high`: complex reasoning, coding, long-context analysis, research, tool-heavy tasks, or correctness-sensitive work.
-- `xhigh`: high-stakes, ambiguous, multi-agent, long-running, or end-to-end tasks where extra verification is worth the cost.
+Return the ready-to-paste prompt first, with only material assumptions afterward.
+Use `references/prompt-template.md` for an explicitly requested full package.
+Preserve the requested model and effort. Suggest settings only when asked and
+when supported by the target interface; do not invent cross-provider effort names.
+Define completion through the requested artifact and useful checks. Do not add
+mandatory document stacks, generic role play, or extra approval gates. Existing
+authorization remains valid throughout the work.
 
 ## Prompt skeletons
 

@@ -1,6 +1,6 @@
 ---
 name: programming-qpus
-description: "Guides QPU programming and hybrid execution with Qiskit, Cirq, CUDA-Q, OpenQASM, QIR, backend targets, transpilation, shots, and runtime jobs."
+description: "Build or verify quantum circuits, transpilation, hybrid execution, and QPU job/result handling."
 ---
 
 # Programming QPUs
@@ -9,7 +9,7 @@ description: "Guides QPU programming and hybrid execution with Qiskit, Cirq, CUD
 
 Help the agent write, review, or refactor QPU-facing code without confusing abstract algorithms, simulator behavior, and hardware execution. The goal is clear, verified quantum programs with explicit qubit order, measurement semantics, backend target assumptions, and result interpretation.
 
-Use this skill for QPU programming, quantum SDK code, circuit generation, transpilation, quantum runtime jobs, OpenQASM/QIR handling, hybrid quantum-classical loops, and hardware-aware execution paths. For fault-tolerant or syndrome-extraction work, pair this with `engineering-qec` and `engineering-qec-decoders`.
+Use this skill for QPU programming, quantum SDK code, circuit generation, transpilation, quantum runtime jobs, OpenQASM/QIR handling, hybrid quantum-classical loops, and hardware-aware execution paths. Use `engineering-qec` for syndrome-construction questions and `engineering-qec-decoders` for decoding questions only when they arise.
 
 ## QPU programming workflow
 
@@ -33,7 +33,7 @@ Use this skill for QPU programming, quantum SDK code, circuit generation, transp
 
 ## QPU code readability rules
 
-Use `writing-readable-code` with this skill. Prefer names such as `logical_qubit_register`, `physical_qubit_index`, `measurement_bit_index`, `backend_target`, `transpiled_circuit`, `runtime_job_identifier`, `shot_count`, and `measurement_counts`. Avoid `qc`, `qr`, `cr`, `circ`, `res`, and `job` outside very small examples or direct library tutorial snippets. Use short inline comments for endianness, bit order, coordinate frames, timing assumptions, and hardware limitations.
+For code edits, apply local style; use `writing-readable-code` when the owner-specific rules are needed. Prefer names such as `logical_qubit_register`, `physical_qubit_index`, `measurement_bit_index`, `backend_target`, `transpiled_circuit`, `runtime_job_identifier`, `shot_count`, and `measurement_counts`. Avoid `qc`, `qr`, `cr`, `circ`, `res`, and `job` outside very small examples or direct library tutorial snippets. Use short inline comments for endianness, bit order, coordinate frames, timing assumptions, and hardware limitations.
 
 ## Handoffs
 

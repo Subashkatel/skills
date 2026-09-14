@@ -1,22 +1,22 @@
 ---
 name: authoring-agent-skills
-description: "Creates or revises agent skills with concise triggers, operational steps, support-file boundaries, and eval cases. Use when adding or pruning skills for Claude Code or Codex."
+description: "Create or revise a skill with a specific trigger, essential guidance, supporting resources, and behavior cases."
 ---
 
 # Authoring Agent Skills
 
-A skill is operational memory for an agent. It should make the agent take a better process every time it triggers.
+A skill supplies task-specific knowledge the agent would otherwise lack. Keep constraints and useful evidence, and remove instructions that add no value.
 
 ## Workflow
 
 1. **Define the job.** Name the concrete behavior the skill should change and the failure it prevents.
-2. **Write the trigger first.** The description is what the agent sees before loading the skill. Front-load use cases, boundaries, and domain words that should trigger it.
-3. **Keep the body procedural.** Use steps, decision points, checks, failure smells, and done conditions. Avoid essays and generic advice.
+2. **Write the trigger first.** The description is what the agent sees before loading the skill. Name the actual task and a useful exclusion in as few words as possible. Avoid keyword lists and broad activation language.
+3. **Keep essential guidance.** State constraints, decision points, and completion criteria. Prescribe order only where there is a dependency or demonstrated failure; avoid generic coaching and elaborate itineraries.
 4. **Use progressive disclosure.** Keep `SKILL.md` short. Move long examples, schemas, provider notes, rubrics, and templates into support files the skill explicitly names when needed.
 5. **Prefer durable principles.** Avoid current file paths, line numbers, constants, one bug’s play-by-play, or implementation mechanics unless the skill is a navigation runbook.
 6. **Name completion criteria.** Each workflow should make it clear when the step and whole skill are done.
-7. **Add eval cases.** Include at least three realistic inputs that test when the skill should trigger and what good behavior means.
-8. **Validate structure.** Run the pack validator, then read the skill as a fresh agent with no conversation history.
+7. **Add eval cases.** Include realistic positive cases, a near-miss that must not trigger, and a boundary case. Preserve substantive regression cases; do not test exact wording or mandatory skill chains.
+8. **Validate the change.** Check metadata and support links, then evaluate the affected behavior. Distinguish structural checks, manual review, and actual fresh-agent runs.
 
 ## Description checklist
 
@@ -39,3 +39,15 @@ A skill is operational memory for an agent. It should make the agent take a bett
 ## Done
 
 The skill is done when its description triggers correctly, the body is short enough to read in one pass, support files are loaded only when useful, evals cover realistic cases, and a fresh agent can follow it without knowing why it was written.
+
+## Model migration
+
+Audit one demonstrated gap at a time: shorten triggers, route optional references,
+remove duplicated instructions, and clarify completion within existing authorization.
+Preserve domain invariants, owner preferences, and necessary interface contracts.
+Keep shared instructions model-agnostic and retain guidance that another supported
+agent still needs. Review symlink targets and divergent clones before editing.
+Do not edit reference repositories, manifests, or user configuration during a
+skills-only task. Commit skill changes locally; never push or merge without approval.
+
+Migration rationale: [OpenAI, Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra).

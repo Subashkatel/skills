@@ -1,6 +1,6 @@
 ---
 name: designing-architectures
-description: "Designs scientific system architecture across classical, GPU, QPU, quantum runtime, QEC, and decoder layers. Use for boundaries, ADRs, tradeoffs, and runtime views."
+description: "Design or review boundaries and tradeoffs spanning classical, GPU, QPU, and QEC subsystems."
 ---
 
 # Designing Architectures
@@ -46,4 +46,4 @@ Be explicit about assumptions, rejected alternatives, risks, and validation.
 
 ## Simplification check
 
-Before introducing a new abstraction, service boundary, data model, or subsystem, apply `approximating-changes`. Prefer no new layer, one-time setup, tighter constraints, or a bounded buffer when that solves the current problem with less long-term surface area.
+When a proposed boundary adds complexity, consider whether it earns its cost; use `approximating-changes` for a substantive tradeoff. Prefer no new layer, one-time setup, tighter constraints, or a bounded buffer when that solves the current problem with less long-term surface area.

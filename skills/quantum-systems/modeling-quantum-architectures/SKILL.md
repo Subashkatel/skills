@@ -1,6 +1,6 @@
 ---
 name: modeling-quantum-architectures
-description: "Models quantum architecture across hardware, control, circuit IR, transpilation, runtime, QEC, decoder, and application layers."
+description: "Model quantum hardware, control, compiler, QEC, and decoder boundaries for architecture or resource decisions."
 ---
 
 # Modeling Quantum Architectures

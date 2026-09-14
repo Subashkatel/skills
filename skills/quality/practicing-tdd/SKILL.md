@@ -1,11 +1,11 @@
 ---
 name: practicing-tdd
-description: "Runs TDD for code changes: one failing behavior test, minimal readable implementation, refactor, rerun, and evidence capture."
+description: "Use a red-green-refactor loop when test-first development is requested or chosen for a behavior change."
 ---
 
 # Practicing TDD
 
-Use this skill when the user asks for TDD, test-first work, regression tests, bug fixes, or new behavior with a clear contract. TDD is one small loop at a time.
+Use this skill when test-first work is requested or is the chosen approach for a real behavior change. A typo, prose edit, or formatting-only change does not need a new behavior test. TDD is one small loop at a time.
 
 ## Red-green-refactor loop
 
@@ -15,7 +15,7 @@ Use this skill when the user asks for TDD, test-first work, regression tests, bu
 4. Implement the minimum readable change needed for green. Do not add unrelated cleanup, broad abstractions, feature flags, or speculative flexibility.
 5. Run the narrow test until green, then the nearest broader gate.
 6. Refactor only the touched scope with `writing-readable-code`; rerun affected tests.
-7. Update `tests.json` and `agent-state.json` with red, green, refactor, final gate, skipped checks, seeds, tolerances, and blockers.
+7. Record the meaningful red/green evidence and limitations in the existing task record or final report. Do not create state files solely for a small regression.
 
 ## Test quality rules
 
@@ -41,4 +41,4 @@ For exploratory research, hardware bring-up, unknown scientific behavior, or per
 
 ## Done
 
-Done means red was attempted and explained, green was proven with commands, refactoring preserved green, and evidence was recorded. Pair with `writing-behavior-tests`, `maintaining-agent-state`, and `verifying-scientific-code`.
+Done means red was attempted and explained, green was proven with commands, refactoring preserved green, and evidence was recorded. Load a supporting skill only for a test-design or scientific-evidence question this loop does not answer.
