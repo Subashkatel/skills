@@ -1,4 +1,0 @@
-interface:
-  display_name: "Auditing Skills"
-  short_description: "Auditing Skills skill workflow"
-  default_prompt: "Use $auditing-skills for this task."

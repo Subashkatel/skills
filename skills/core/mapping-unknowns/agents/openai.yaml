@@ -1,4 +1,0 @@
-interface:
-  display_name: "Mapping Unknowns"
-  short_description: "Mapping Unknowns skill workflow"
-  default_prompt: "Use $mapping-unknowns for this task."

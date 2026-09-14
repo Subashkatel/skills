@@ -1,4 +1,0 @@
-interface:
-  display_name: "Claude Prompt Refiner"
-  short_description: "Use Claude Prompt Refiner workflows"
-  default_prompt: "Use $claude-prompt-refiner to help with this task."

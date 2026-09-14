@@ -1,4 +1,0 @@
-interface:
-  display_name: "Slicing Specs"
-  short_description: "Slicing Specs skill workflow"
-  default_prompt: "Use $slicing-specs for this task."
