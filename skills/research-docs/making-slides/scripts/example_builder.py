@@ -58,7 +58,7 @@ from matplotlib.patches import FancyBboxPatch
 def _register_preview_serif():
     """Find a Palatino-class serif for the preview; fall back gracefully.
 
-    The pptx itself just names "Palatino Linotype" — the viewer's machine
+    The pptx itself just names "Palatino Linotype", the viewer's machine
     resolves it. Only the matplotlib preview needs a real local font file.
     """
     for pattern in ("/usr/share/fonts/urw-base35/P052-*.otf",     # Linux URW
@@ -186,7 +186,7 @@ def load_qlx_operations():
     if len(injections) >= 2:
         # the second T may start only after the first T's decoded outcome
         # (QLX's schedule does not mark classical conditioning; the caller
-        # wires it — see qlx_frontend's feedback_candidates contract)
+        # wires it, see qlx_frontend's feedback_candidates contract)
         injections[1].blocked_by = injections[0].id
     blocked = (program.operations[injections[1].blocked_by].name,
                injections[1].name) if len(injections) >= 2 else None
@@ -529,7 +529,7 @@ class SlideCanvas:
 
     def title(self, text_value):
         """Letterspaced capitals in the text weight (2.1.6, 3.5.1: weight
-        decreases as size increases). Pass the string already in capitals —
+        decreases as size increases). Pass the string already in capitals , 
         upper() would corrupt µ."""
         self.text(0.7, 0.5, 11.93, 0.55, text_value, SIZE_STAT, INK,
                   align="center", tracking=CAPS_TRACKING)
@@ -808,7 +808,7 @@ def slide_timeline(c, d):
     summary = (f"The QPU computes for {dur(busy)} of its "
                f"{dur(d['chip_done'])} µs")
     if stall is not None:
-        summary += (f" — the T-gate feedback stall is {dur(stall)} µs of "
+        summary += (f", the T-gate feedback stall is {dur(stall)} µs of "
                     "that schedule.")
     else:
         summary += "."
@@ -880,13 +880,13 @@ def slide_stall(c, d):
     comm = t_do + t_oc + t_cq
     bullets = [
         (f"{dur(wait)} µs",
-         "waiting — the first T’s stream pads its decode window "
+         "waiting, the first T’s stream pads its decode window "
          f"(memory rounds) and queues for a unit"),
         (f"{dur(decode)} µs",
          f"decoding the first T’s final window ({window_rounds} rounds × τ "
          f"{dur(d['tau_us'])} µs)"),
         (f"{dur(comm)} µs",
-         f"communication — publish {dur(t_do)} (t_do) + decision return "
+         f"communication, publish {dur(t_do)} (t_do) + decision return "
          f"{dur(t_oc)} (t_oc) + delivery {dur(t_cq)} (t_cq)"),
     ]
     y = 4.0
@@ -930,7 +930,7 @@ def build():
                     facecolor="white")
         plt.close(fig)
 
-    presentation.core_properties.title = "decsim — simulator example"
+    presentation.core_properties.title = "decsim: simulator example"
     presentation.save(OUT_PPTX)
     print(OUT_PPTX)
     print(PREVIEW_DIR)
